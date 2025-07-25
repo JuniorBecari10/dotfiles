@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Options
+options="⏻ Shutdown\n Reboot\n Suspend\n Logout\n Lock"
+
+# Show rofi menu
+choice=$(echo -e "$options" | rofi -dmenu -i -p "Power")
+
+case "$choice" in
+  "⏻ Shutdown") systemctl poweroff ;;
+  " Reboot") systemctl reboot ;;
+  " Suspend") systemctl suspend ;;
+  " Logout") i3-msg exit ;;  # change if not using i3
+  " Lock") i3lock ;;         # change to your lock program
+esac

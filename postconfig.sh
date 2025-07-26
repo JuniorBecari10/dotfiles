@@ -16,7 +16,6 @@ LSPs=(
   clangd
   tsserver
   lua_ls
-  fsautocomplete
   gopls
   html
   cssls
@@ -31,17 +30,17 @@ TREESITTERS=(
   typescript
   c
   cpp
-  fsharp
   html
   css
 )
 
 # Build the MasonInstall command
-MASON_LSP_CMD="MasonInstall ${LSPs[*]}"
-TREESITTER_CMD="TSInstallSync ${TREESITTERS[*]}"
+LSP_LIST="${LSPs[*]}"
+TS_LIST="${TREESITTERS[*]}"
 
-nvim --headless +"MasonInstallAll" +qa
-nvim --headless +"$MASON_LSP_CMD" +qa
-nvim --headless +"$TREESITTER_CMD" +qa
+nvim --headless +"lua require('lazy').setup()" \
+  +"MasonInstall $LSP_LIST" \
+  +"TSInstall $TS_LIST" \
+  +qa
 
 echo "Mason and Tree-sitter setup complete."

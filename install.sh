@@ -2,8 +2,8 @@
 
 # Ensure the script is run with sudo/root
 if [[ $EUID -ne 0 ]]; then
-  echo "❌ This script must be run with 'sudo' or as root."
-  echo "➡️  Try again with: 'sudo ./install.sh'"
+  echo "This script must be run with 'sudo' or as root."
+  echo "Try again with: 'sudo ./install.sh'"
   exit 1
 fi
 
@@ -37,6 +37,7 @@ PACKAGES=(
     base-devel
     xorg xorg-server
     xorg-xinit
+    yad
     lightdm
     lightdm-gtk-greeter
     lightdm-gtk-greeter-settings
@@ -76,4 +77,5 @@ fi
 
 echo "Done."
 echo "It is recommended to reboot now."
-echo "After reboot, run 'postconfigs.sh' if you have more setup steps."
+echo "After reboot, run 'postconfig.sh' if you have more setup steps."
+echo "If you are in a laptop, run 'laptopconfig.sh' to install more utilities."

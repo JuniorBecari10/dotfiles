@@ -1,12 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 
 # Ensure the script is run with sudo/root
 if [[ $EUID -ne 0 ]]; then
-  echo "This script must be run with 'sudo' or as root."
-  echo " -> Try again with: 'sudo ./install.sh'."
-
+  echo "❌ This script must be run with 'sudo' or as root."
+  echo "➡️  Try again with: 'sudo ./install.sh'"
   exit 1
 fi
+
+# Target user (who called sudo)
+TARGET_USER=${SUDO_USER:-$USER}
+TARGET_HOME=$(eval echo "~$TARGET_USER")
+TARGET_CONFIG="$TARGET_HOME/.config"
 
 # List of packages to install
 PACKAGES=(
@@ -24,44 +28,52 @@ PACKAGES=(
     flameshot
     feh
     xfce4-clipman-plugin
-    network-manager
+    networkmanager
     picom
     python3
-    neovim
     go
     github-cli
     volumeicon
-    pavucontrol
-    git
     base-devel
-    xorg xorg-xinit
-    lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
+    xorg xorg-server
+    xorg-xinit
+    lightdm
+    lightdm-gtk-greeter
+    lightdm-gtk-greeter-settings
 )
 
 echo "==> Installing packages..."
-sudo pacman -Syu --noconfirm "${PACKAGES[@]}"
+pacman -Syu --noconfirm "${PACKAGES[@]}"
 
-echo "==> Copying '.bashrc' and '.xinitrc' to '~'..."
-cp .bashrc ~/
-cp .xinitrc ~/
+echo "==> Enabling services..."
+systemctl enable NetworkManager
+systemctl enable lightdm
+systemctl set-default graphical.target
 
-echo "==> Ensuring ~/.config exists..."
-mkdir -p ~/.config
+echo "==> Copying '.bashrc' and '.xinitrc' to $TARGET_HOME..."
+cp .bashrc "$TARGET_HOME/"
+cp .xinitrc "$TARGET_HOME/"
+chown $TARGET_USER:$TARGET_USER "$TARGET_HOME/.bashrc" "$TARGET_HOME/.xinitrc"
 
-# Copy all folders to '~/.config/'
+echo "==> Ensuring $TARGET_CONFIG exists..."
+mkdir -p "$TARGET_CONFIG"
+chown $TARGET_USER:$TARGET_USER "$TARGET_CONFIG"
+
+# Copy all folders inside .config to ~/.config
 if [ -d ".config" ]; then
-    echo "==> Copying config directories to '~/.config/'..."
+    echo "==> Copying config directories to '$TARGET_CONFIG/'..."
     for dir in .config/*; do
         if [ -d "$dir" ]; then
             base=$(basename "$dir")
             echo "  -> $base"
-            
-            cp -r "$dir" ~/.config/
+            cp -r "$dir" "$TARGET_CONFIG/"
+            chown -R $TARGET_USER:$TARGET_USER "$TARGET_CONFIG/$base"
         fi
     done
 else
     echo "No '.config' directory found in dotfiles!"
 fi
 
-echo "Done. It is recommended to reboot after this installation."
-echo "Then, run 'postconfigs.sh'."
+echo "Done."
+echo "It is recommended to reboot now."
+echo "After reboot, run 'postconfigs.sh' if you have more setup steps."

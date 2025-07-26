@@ -41,6 +41,9 @@ PACKAGES=(
     lightdm
     lightdm-gtk-greeter
     lightdm-gtk-greeter-settings
+    unzip
+    npm
+    dotnet
 )
 
 echo "==> Installing packages..."

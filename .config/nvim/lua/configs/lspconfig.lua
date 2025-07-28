@@ -1,6 +1,16 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "html", "cssls", "lua_language_server", "clangd", "gopls", "pyright", "fsautocomplete", "bashls" }
-vim.lsp.enable(servers)
+local servers = {
+    "html",
+    "cssls",
+    "lua_language_server",
+    "clangd",
+    "gopls",
+    "pyright",
+    "fsautocomplete",
+    "bashls",
+    "lua_ls",
+    "ts_ls",
+}
 
--- read :h vim.lsp.config for changing options of lsp servers 
+vim.lsp.enable(servers)

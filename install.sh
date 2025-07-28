@@ -3,7 +3,7 @@
 # Ensure the script is run with sudo/root
 if [[ $EUID -ne 0 ]]; then
   echo "This script must be run with 'sudo' or as root."
-  echo "Try again with: 'sudo ./install.sh'"
+  echo "Try again with: 'sudo ./install.sh'."
   exit 1
 fi
 
@@ -34,7 +34,6 @@ PACKAGES=(
     go
     github-cli
     volumeicon
-    base-devel
     xorg xorg-server
     xorg-xinit
     yad
@@ -43,23 +42,36 @@ PACKAGES=(
     lightdm-gtk-greeter-settings
     unzip
     npm
-    dotnet
+    arandr
+    xorg-xrandr
+    pipewire pipewire-audio pipewire-pulse pipewire-alsa wireplumber
+    xclip
+    dotnet-sdk dotnet-runtime
+    thunar
+    reflector
 )
 
 echo "==> Installing packages..."
 pacman -Syu --noconfirm "${PACKAGES[@]}"
 
 echo "==> Enabling services..."
+
 systemctl enable NetworkManager
 systemctl enable lightdm
+
 systemctl set-default graphical.target
 
+systemctl --user enable pipewire.service
+systemctl --user enable pipewire-pulse.service
+
 echo "==> Copying '.bashrc' and '.xinitrc' to $TARGET_HOME..."
+
 cp .bashrc "$TARGET_HOME/"
 cp .xinitrc "$TARGET_HOME/"
 chown $TARGET_USER:$TARGET_USER "$TARGET_HOME/.bashrc" "$TARGET_HOME/.xinitrc"
 
 echo "==> Ensuring $TARGET_CONFIG exists..."
+
 mkdir -p "$TARGET_CONFIG"
 chown $TARGET_USER:$TARGET_USER "$TARGET_CONFIG"
 
@@ -79,6 +91,7 @@ else
 fi
 
 echo "Done."
+
 echo "It is recommended to reboot now."
 echo "After reboot, run 'postconfig.sh' if you have more setup steps."
 echo "If you are in a laptop, run 'laptopconfig.sh' to install more utilities."

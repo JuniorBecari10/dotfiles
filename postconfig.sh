@@ -1,46 +1,27 @@
 #!/bin/sh
 
-# Ensure the script is run as the user, not root
-if [[ $EUID -eq 0 ]]; then
-  echo "Please run this script as your regular user, NOT with sudo."
-  echo " Just run: ./postconfigs.sh"
-  exit 1
-fi
+# A set of LSPs were written to be used in the 'lspconfig.lua' file, if you one day will use it, just install it.
+# There's no need to write it in there.
 
-echo "==> Running post-setup configuration with Neovim..."
+echo "==> Setting up Neovim's clipboard..."
 
-# Define LSPs and Tree-sitter parsers you want to install
-LSPs=(
-  bashls
-  pyright
-  clangd
-  tsserver
-  lua_ls
-  gopls
-  html
-  cssls
-)
-
-TREESITTERS=(
-  bash
-  lua
-  go
-  python
-  javascript
-  typescript
-  c
-  cpp
-  html
-  css
-)
-
-# Build the MasonInstall command
-LSP_LIST="${LSPs[*]}"
-TS_LIST="${TREESITTERS[*]}"
-
-nvim --headless +"lua require('lazy').setup()" \
-  +"MasonInstall $LSP_LIST" \
-  +"TSInstall $TS_LIST" \
+nvim --headless \
+  +"set clipboard+=unnamedplus" \
   +qa
 
-echo "Mason and Tree-sitter setup complete."
+echo "==> Setting up git..."
+
+git config --global user.name "Antônio Carlos"
+git config --global user.email "antonioocarlos@proton.me"
+
+echo "==> Setting up GitHub CLI..."
+gh auth login
+
+echo "==> Installing AUR helper 'yay'"
+
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+
+cd ..
+rm -rf yay

@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Ensure the script is run with sudo/root
+# Ensure the script is run with sudo
+# Do not run this as root, since this will be applied to it, not your user.
 if [[ $EUID -ne 0 ]]; then
-  echo "This script must be run with 'sudo' or as root."
+  echo "This script must be run with 'sudo'."
   echo "Try again with: 'sudo ./install.sh'."
   exit 1
 fi
@@ -51,10 +52,11 @@ PACKAGES=(
     reflector
 )
 
-echo "==> Installing packages..."
+# Install packages
 pacman -Syu --noconfirm "${PACKAGES[@]}"
 
-echo "==> Enabling services..."
+# Enable networkmanager and lightdm services
+# (the 'archinstall.sh' also does this, but this runs it again to ensure it's running)
 
 systemctl enable NetworkManager
 systemctl enable lightdm
@@ -64,34 +66,26 @@ systemctl set-default graphical.target
 systemctl --user enable pipewire.service
 systemctl --user enable pipewire-pulse.service
 
-echo "==> Copying '.bashrc' and '.xinitrc' to $TARGET_HOME..."
-
+# Copy '.bashrc' and '.xinitrc' to '~'
 cp .bashrc "$TARGET_HOME/"
 cp .xinitrc "$TARGET_HOME/"
 chown $TARGET_USER:$TARGET_USER "$TARGET_HOME/.bashrc" "$TARGET_HOME/.xinitrc"
 
-echo "==> Ensuring $TARGET_CONFIG exists..."
 
 mkdir -p "$TARGET_CONFIG"
 chown $TARGET_USER:$TARGET_USER "$TARGET_CONFIG"
 
-# Copy all folders inside .config to ~/.config
+# Copy all folders inside '.config' to '~/.config'
 if [ -d ".config" ]; then
-    echo "==> Copying config directories to '$TARGET_CONFIG/'..."
     for dir in .config/*; do
         if [ -d "$dir" ]; then
             base=$(basename "$dir")
-            echo "  -> $base"
             cp -r "$dir" "$TARGET_CONFIG/"
             chown -R $TARGET_USER:$TARGET_USER "$TARGET_CONFIG/$base"
         fi
     done
 else
-    echo "No '.config' directory found in dotfiles!"
+    echo "ERROR: No '.config' directory found in dotfiles!"
 fi
 
 echo "Done."
-
-echo "It is recommended to reboot now."
-echo "After reboot, run 'postconfig.sh' if you have more setup steps."
-echo "If you are in a laptop, run 'laptopconfig.sh' to install more utilities."

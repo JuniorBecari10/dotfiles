@@ -3,22 +3,19 @@
 # A set of LSPs were written to be used in the 'lspconfig.lua' file, if you one day will use it, just install it.
 # There's no need to write it in there.
 
-echo "==> Setting up Neovim's clipboard..."
-
+# Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)
 nvim --headless \
   +"set clipboard+=unnamedplus" \
   +qa
 
-echo "==> Setting up git..."
-
+# Set up git configurations
 git config --global user.name "Antônio Carlos"
 git config --global user.email "antonioocarlos@proton.me"
 
-echo "==> Setting up GitHub CLI..."
+# Set up GitHub CLI to link git to your GitHub account
 gh auth login
 
-echo "==> Installing AUR helper 'yay'"
-
+# Install 'yay'
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si

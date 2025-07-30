@@ -21,24 +21,26 @@ ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 
 # Set locale
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo "pt_BR.UTF-8 UTF-8" >> /etc/locale.gen
 
-echo "en_US.UTF-8 UTF-8\npt_BR.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 
-echo "LANG=pt_BR.UTF-8" >> /etc/locale.conf
+echo "LANG=pt_BR.UTF-8" > /etc/locale.conf
 
 # Set keymap to Brazilian ABNT2 keyboard
-echo "KEYMAP=br-latin1-abnt2" >> /etc/vconsole.conf
+echo "KEYMAP=br-latin1-abnt2" > /etc/vconsole.conf
 
 # Set up hostname and root password
 
-echo $HOSTNAME >> /etc/hostname
-echo "$ROOT_PASS" | passwd --stdin
+echo "$HOSTNAME" > /etc/hostname
+echo "root:$ROOT_PASS" | chpasswd
 
 # Set up user
-useradd -m -G wheel -s /bin/bash $USERNAME
-echo "$USER_PASS" | passwd $USERNAME --stdin
+useradd -m -G wheel -s /bin/bash "$USERNAME"
+echo "$USERNAME:$USER_PASS" | chpasswd
 
+# Enable sudo for wheel group
 echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/99-wheel
 chmod 440 /etc/sudoers.d/99-wheel
 
@@ -49,5 +51,5 @@ systemctl enable NetworkManager
 grub-install $GRUB_DRIVE
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# we could set up dual booting here, but let's leave it to the user to decide.
-# this includes enabling OS prober, actually probing, and then writing to the GRUB configuration file.
+# We could set up dual booting here, but let's leave it to the user to decide.
+# This includes enabling OS prober, actually probing, and then writing to the GRUB configuration file.

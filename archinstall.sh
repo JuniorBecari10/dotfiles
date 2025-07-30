@@ -21,10 +21,11 @@
 
 # Partitions and drives
 
-GRUB_DRIVE="/dev/sda"
 BOOT_PART="/dev/sda1"
 SWAP_PART="/dev/sda2"
 MAIN_PART="/dev/sda3"
+
+GRUB_DRIVE="/dev/sda"
 
 # --- Script ---
 
@@ -36,40 +37,35 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Set up filesystems
-
-mkfs.fat -F 32 $BOOT_PART
-mkswap $SWAP_PART
-mkfs.ext4 $MAIN_PART
+mkfs.fat -F 32 "$BOOT_PART"
+mkswap "$SWAP_PART"
+mkfs.ext4 "$MAIN_PART"
 
 # Mount them
-
-mount $MAIN_PART /mnt
-
+mount "$MAIN_PART" /mnt
 mkdir -p /mnt/boot/efi
-mount $BOOT_PART /mnt/boot/efi
 
-swapon $SWAP_PART
+mount "$BOOT_PART" /mnt/boot/efi
+swapon "$SWAP_PART"
 
 # Perform installation
-
 pacstrap /mnt base linux linux-firmware sof-firmware base-devel grub efibootmgr networkmanager vim
 
 # Generate fstab
-
-genfstab /mnt # do we need this?
+mkdir -p /mnt/etc
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # Copy chroot script file into the root of the new system
-cp archinstall-chroot.sh /mnt/
-chmod +x /mnt/archinstall-chroot.sh
+cp chroot.sh /mnt/
+chmod +x /mnt/chroot.sh
 
 # Chroot into the system and run the proper commands
-arch-chroot /mnt ./archinstall-chroot.sh
+arch-chroot /mnt ./chroot.sh
 
 # Remove the script file
-rm -rf /mnt/archinstall-chroot.sh
+rm -rf /mnt/chroot.sh
 
-# Unmount all the drives
-umount -a
+# Unmount all the drives under '/mnt'
+umount -R /mnt
 
 echo "Done."

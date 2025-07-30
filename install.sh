@@ -66,11 +66,12 @@ systemctl set-default graphical.target
 systemctl --user enable pipewire.service
 systemctl --user enable pipewire-pulse.service
 
-# Copy '.bashrc' and '.xinitrc' to '~'
+# Copy '.bashrc', '.sl.sh' and '.xinitrc' to '~'
 cp .bashrc "$TARGET_HOME/"
+cp .sl.sh "$TARGET_HOME/"
 cp .xinitrc "$TARGET_HOME/"
-chown $TARGET_USER:$TARGET_USER "$TARGET_HOME/.bashrc" "$TARGET_HOME/.xinitrc"
 
+chown $TARGET_USER:$TARGET_USER "$TARGET_HOME/.bashrc" "$TARGET_HOME/.sl.sh" "$TARGET_HOME/.xinitrc"
 
 mkdir -p "$TARGET_CONFIG"
 chown $TARGET_USER:$TARGET_USER "$TARGET_CONFIG"

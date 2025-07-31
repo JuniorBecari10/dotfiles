@@ -12,8 +12,6 @@ ROOT_PASS=""
 USERNAME="antonio"
 USER_PASS=""
 
-GRUB_DRIVE="/dev/sda"
-
 # --- Script ---
 
 # Sync date (São Paulo, Brazil: UTC-3)
@@ -23,8 +21,8 @@ ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 
 # Set locale
-echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-echo "pt_BR.UTF-8 UTF-8" >> /etc/locale.gen
+sed -i 's/^#\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen
+sed -i 's/^#\(pt_BR.UTF-8 UTF-8\)/\1/' /etc/locale.gen
 
 locale-gen
 
@@ -46,12 +44,9 @@ echo "$USERNAME:$USER_PASS" | chpasswd
 echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/99-wheel
 chmod 440 /etc/sudoers.d/99-wheel
 
-# Enable core systemd services
+# Enable services
 systemctl enable NetworkManager
 
-# Set up grub bootloader
-grub-install $GRUB_DRIVE
+# Set up GRUB bootloader for UEFI
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
-
-# We could set up dual booting here, but let's leave it to the user to decide.
-# This includes enabling OS prober, actually probing, and then writing to the GRUB configuration file.

@@ -12,6 +12,8 @@ ROOT_PASS=""
 USERNAME="antonio"
 USER_PASS=""
 
+GRUB_DRIVE="/dev/sda"
+
 # --- Script ---
 
 # Sync date (São Paulo, Brazil: UTC-3)

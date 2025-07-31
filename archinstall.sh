@@ -47,7 +47,7 @@ mount "$BOOT_PART" /mnt/boot/efi
 swapon "$SWAP_PART"
 
 # Perform installation
-pacstrap /mnt base linux linux-firmware sof-firmware base-devel grub efibootmgr networkmanager vim
+pacstrap /mnt base linux linux-firmware sof-firmware base-devel grub efibootmgr networkmanager vim git
 
 # Generate fstab
 mkdir -p /mnt/etc

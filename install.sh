@@ -56,15 +56,10 @@ PACKAGES=(
 pacman -Syu --noconfirm "${PACKAGES[@]}"
 
 # Enable networkmanager and lightdm services
-# (the 'archinstall.sh' also does this, but this runs it again to ensure it's running)
-
 systemctl enable NetworkManager
 systemctl enable lightdm
 
 systemctl set-default graphical.target
-
-systemctl --user enable pipewire.service
-systemctl --user enable pipewire-pulse.service
 
 # Copy '.bashrc', '.sl.sh' and '.xinitrc' to '~'
 cp .bashrc "$TARGET_HOME/"
@@ -76,15 +71,10 @@ chown $TARGET_USER:$TARGET_USER "$TARGET_HOME/.bashrc" "$TARGET_HOME/.sl.sh" "$T
 mkdir -p "$TARGET_CONFIG"
 chown $TARGET_USER:$TARGET_USER "$TARGET_CONFIG"
 
-# Copy all folders inside '.config' to '~/.config'
+# Copy everything inside '.config' to '~/.config'
 if [ -d ".config" ]; then
-    for dir in .config/*; do
-        if [ -d "$dir" ]; then
-            base=$(basename "$dir")
-            cp -r "$dir" "$TARGET_CONFIG/"
-            chown -R $TARGET_USER:$TARGET_USER "$TARGET_CONFIG/$base"
-        fi
-    done
+    cp -r .config/* "$TARGET_CONFIG/"
+    chown -R "$TARGET_USER:$TARGET_USER" "$TARGET_CONFIG"
 else
     echo "ERROR: No '.config' directory found in dotfiles!"
 fi

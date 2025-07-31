@@ -10,17 +10,24 @@ nvim --headless \
   +"set clipboard+=unnamedplus" \
   +qa
 
-# Set up git configurations
-git config --global user.name "Antônio Carlos"
-git config --global user.email "antonioocarlos@proton.me"
+# Set up audio services
+systemctl --user enable pipewire.service
+systemctl --user enable pipewire-pulse.service
 
-# Set up GitHub CLI to link git to your GitHub account
-gh auth login
+# Start system tray volume icon in background
+volumeicon &
 
-# Install 'yay'
+# Install AUR helper 'yay'
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
 cd ..
 rm -rf yay
+
+# Set up git configurations
+git config --global user.name "Antônio Carlos"
+git config --global user.email "antonioocarlos@proton.me"
+
+# Set up GitHub CLI to link git to your GitHub account
+gh auth login

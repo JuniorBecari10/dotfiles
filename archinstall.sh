@@ -13,7 +13,7 @@
 # This script won't reboot automatically, so after running this, type 'reboot' to reboot your computer.
 # Don't forget to change the boot priority order in your BIOS/UEFI configuration to your new installation.
 
-# After that, log into your account, get the 'instal.sh' script file, run it with sudo and then reboot again.
+# After that, log into your account, get the 'install.sh' script file, run it with sudo and then reboot again.
 # After rebooting again and logging into i3, run the 'postconfig.sh' script and you're good to go.
 # If you are in a laptop, run the 'laptopconfig.sh' script as well.
 
@@ -35,29 +35,28 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Set up filesystems
-mkfs.fat -F 32 "$BOOT_PART"
+mkfs.fat -F32 "$BOOT_PART"
 mkswap "$SWAP_PART"
 mkfs.ext4 "$MAIN_PART"
 
-# Mount them
+# Mount partitions
 mount "$MAIN_PART" /mnt
 mkdir -p /mnt/boot/efi
 
 mount "$BOOT_PART" /mnt/boot/efi
 swapon "$SWAP_PART"
 
-# Perform installation
+# Perform base system installation
 pacstrap /mnt base linux linux-firmware sof-firmware base-devel grub efibootmgr networkmanager vim git
 
 # Generate fstab
-mkdir -p /mnt/etc
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # Copy chroot script file into the root of the new system
 cp chroot.sh /mnt/
 chmod +x /mnt/chroot.sh
 
-# Chroot into the system and run the proper commands
+# Chroot into the system and run the the configuration commands
 arch-chroot /mnt ./chroot.sh
 
 # Remove the script file
@@ -66,4 +65,5 @@ rm -rf /mnt/chroot.sh
 # Unmount all the drives under '/mnt'
 umount -R /mnt
 
-echo "Done."
+echo "Done, you may reboot now."
+

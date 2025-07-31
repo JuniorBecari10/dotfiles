@@ -25,8 +25,6 @@ BOOT_PART="/dev/sda1"
 SWAP_PART="/dev/sda2"
 MAIN_PART="/dev/sda3"
 
-GRUB_DRIVE="/dev/sda"
-
 # --- Script ---
 
 # Ensure the script is run with sudo/root

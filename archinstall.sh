@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# This is a script to perform a minimal and opinionated Arch Linux installation, designed for my needs.
+# This is a script that performs a minimal and opinionated Arch Linux installation, designed for my needs.
 # Taken from this video: youtu.be/oeDbo-HRaZo
 
 # It's recommended to run this script inside the Arch Linux live CD.
@@ -66,4 +66,3 @@ rm -rf /mnt/chroot.sh
 umount -R /mnt
 
 echo "Done, you may reboot now."
-

@@ -29,12 +29,6 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
-# start a terminal
-bindsym $mod+Return exec kitty
-
-# kill focused window
-bindsym $mod+Shift+q kill
-
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
 
@@ -199,10 +193,17 @@ bindsym $mod+b exec xfce4-clipman-history
 for_window [class="firefox"] move to workspace $ws1
 for_window [class="kitty"] move to workspace $ws2
 for_window [class="Yad"] floating enable
+
 # Compositor
 exec --no-startup-id picom -c
 
 # - Bindings -
+
+# Mod + Enter: Terminal (kitty)
+bindsym $mod+Return exec kitty
+
+# Mod + Q: Close Window (original config requires Shift)
+bindsym $mod+q kill
 
 # PrintScr: flameshot
 bindsym Print exec --no-startup-id flameshot gui

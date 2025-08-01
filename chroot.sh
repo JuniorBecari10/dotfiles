@@ -5,6 +5,7 @@
 # --- Configurations ---
 
 # Users and passwords (passwords are omitted for security purposes)
+# Fill the passwords accordingly.
 
 HOSTNAME="antonio-pc"
 ROOT_PASS=""
@@ -21,8 +22,8 @@ ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 
 # Set locale
-sed -i 's/^#\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen
-sed -i 's/^#\(pt_BR.UTF-8 UTF-8\)/\1/' /etc/locale.gen
+sed -i "s/^#\(en_US.UTF-8 UTF-8\)/\1/" /etc/locale.gen
+sed -i "s/^#\(pt_BR.UTF-8 UTF-8\)/\1/" /etc/locale.gen
 
 locale-gen
 
@@ -47,6 +48,6 @@ chmod 440 /etc/sudoers.d/99-wheel
 # Enable services
 systemctl enable NetworkManager
 
-# Set up GRUB bootloader for UEFI
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --removable
+# Set up GRUB bootloader for UEFI (uncomment '--removable' if necessary)
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB # --removable
 grub-mkconfig -o /boot/grub/grub.cfg

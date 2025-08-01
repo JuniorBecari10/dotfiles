@@ -1,9 +1,9 @@
 #!/bin/sh
 
+# This must be run after rebooting, when the WM is running.
+
 # A set of LSPs were written to be used in the 'lspconfig.lua' file, if you one day will use it, just install it.
 # There's no need to write it in there.
-
-# This must be run after rebooting, when the WM is running.
 
 # Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)
 nvim --headless \

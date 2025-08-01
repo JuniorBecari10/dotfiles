@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Ensure the script is run with sudo
 # Do not run this as root, since this will be applied to it, not your user.
@@ -50,6 +50,7 @@ PACKAGES=(
     dotnet-sdk dotnet-runtime
     thunar
     reflector
+    fastfetch
 )
 
 # Install packages

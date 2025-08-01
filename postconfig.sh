@@ -29,9 +29,9 @@ rm -rf yay
 git config --global user.name "Antônio Carlos"
 git config --global user.email "antonioocarlos@proton.me"
 
-# Run Firefox and wait for the user to do the proper configurations before closing it.
-firefox
+# Run Firefox in background, while the command below opens a tab in it
+firefox &
 
 # Set up GitHub CLI to link git to your GitHub account
-# (requires Firefox to be the default browser - this is set if you run it at least once)
+# (requires Firefox to be the default browser - this is set if you run it at least once before this)
 gh auth login

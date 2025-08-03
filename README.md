@@ -3,12 +3,20 @@
 The dotfiles that I use in my personal Linux PC, along with some scripts to install them. <br />
 The configurations in this repository are highly opinionated for my personal use, and may not fit the best for your needs.
 
-You are free to edit the files yourself to fit better your needs.
+You are free to edit the files yourself to better fit your needs.
+
+The scripts this repository has can replicate exactly my personal Arch Linux installation and configuration on any PC that runs Arch Linux.
+
+This means that the Arch Linux installation _itself_ is also installed through scripts;
+they use the same commands used when performing a manual installation (without `archinstall`).
+
+The Arch Linux installation itself is very minimal, installing roughly 190 packages, with no Window Manager or Display Manager. <br />
+When the WM and the programs are installed, the number of packages goes up to roughly 580.
 
 ## Specification
 
 - **Distro**: Arch Linux
-- **WM**: i3
+- **Window Manager**: i3
 - **Bar**: i3blocks with custom blocks
 - **Lock Screen**: i3lock
 - **Display Manager**: LightDM GTK Greeter
@@ -27,12 +35,19 @@ _This is the default wallpaper on Archcraft._
 - volumeicon
 - XFCE Clipman
 
+### i3blocks' blocks I use
+
+All of them are from [here](https://github.com/vivien/i3blocks-contrib).
+
+- `calendar` (original: `time`, modified)
+- `brightness` (laptop-specific, modified)
+  
+  > This block, in the original repository, requires you to compile the helper program, `brightness`, from its source code in C.
+  > This repository contains both the (modified) source code with its original Makefile,
+  > along with an extra script to move the binary to the right place.
+- `battery` (laptop-specific)
+
 ## How to Install
-
-This repository has enough scripts to exactly replicate my Arch installation on any PC.
-
-This means that the Arch installation is also installed through scripts,
-the same used when performing a manual installation (without `archinstall`).
 
 1. Boot up the Arch Linux live CD;
 2. Set up the partitions using `cfdisk` according to this table (the script already handles the formatting):

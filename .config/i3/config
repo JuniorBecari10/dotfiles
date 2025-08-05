@@ -194,10 +194,10 @@ exec --no-startup-id redshift
 exec_always --no-startup-id xfce4-clipman
 bindsym $mod+b exec xfce4-clipman-history
 
-# Assign Firefox to second monitor (workspace 1) and Kitty (terminal) to the first one (workspace 2)
+# Assign Firefox to second monitor (workspace 1)
 # And yad (calendar) to be floating
 for_window [class="firefox"] move to workspace $ws1
-for_window [class="kitty"] move to workspace $ws2
+# for_window [class="kitty"] move to workspace $ws2 # remove terminal assignment
 for_window [class="Yad"] floating enable
 
 # Compositor

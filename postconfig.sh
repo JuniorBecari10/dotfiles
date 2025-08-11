@@ -28,6 +28,7 @@ rm -rf yay
 # Set up git configurations
 git config --global user.name "Antônio Carlos"
 git config --global user.email "antonioocarlos@proton.me"
+git config --global init.defaultBranch main
 
 # Run Firefox in background, while the command below opens a tab in it
 firefox &

@@ -45,6 +45,7 @@ All of them are from [here](https://github.com/vivien/i3blocks-contrib).
   > This block, in the original repository, requires you to compile the helper program, `brightness`, from its source code in C.
   > This repository contains both the (modified) source code with its original Makefile,
   > along with an extra script to move the binary to the right place.
+  > A compiled version of it is already in place.
 - `battery` (laptop-specific)
 
 ## How to Install

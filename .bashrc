@@ -9,6 +9,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 alias ll='ls -la'
+alias ff='fastfetch'
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
 # (user) folder $

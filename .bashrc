@@ -10,6 +10,7 @@ alias grep='grep --color=auto'
 
 alias ll='ls -la'
 alias ff='fastfetch'
+alias fsi='dotnet fsi'
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
 # (user) folder $

@@ -128,6 +128,10 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+# move workspace to monitors
+bindsym $mod+Shift+z move workspace to output left
+bindsym $mod+Shift+x move workspace to output right
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -194,9 +198,10 @@ exec --no-startup-id redshift
 exec_always --no-startup-id xfce4-clipman
 bindsym $mod+b exec xfce4-clipman-history
 
-# Assign Firefox to second monitor (workspace 1) and yad (calendar) to be floating
+# Assign Firefox to second monitor (workspace 1) and Kitty (terminal) to the first one (workspace 2)
+# And yad (calendar) to be floating
 for_window [class="firefox"] move to workspace $ws1
-# for_window [class="kitty"] move to workspace $ws2 # remove terminal assignment to a workspace
+for_window [class="kitty"] move to workspace $ws2
 for_window [class="Yad"] floating enable
 
 # Compositor

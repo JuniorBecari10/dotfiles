@@ -88,7 +88,7 @@ All of them are from [here](https://github.com/vivien/i3blocks-contrib).
 21. Open a terminal window using Windows + Enter. This will open kitty.
 22. Enter the _dotfiles_ folder by typing `cd dotfiles`;
 23. Run `./postconfig.sh` (you don't need to run it with `sudo`) and do what the commands tell you to do;
-24. If you are in a laptop, run `./laptopconfig.sh` as well and uncomment the laptop-specific blocks in i3blocks' configuration file (in `~/.config/i3blocks/i3blocks.conf`).
+24. If you are in a laptop, run `./laptopconfig.sh` as well and uncomment the laptop-specific blocks in i3blocks' configuration file (in `~/.config/i3blocks/i3blocks.conf`), and also in i3's configuration file (in `~/.config/i3/config`).
 25. Restart i3 by pressing Windows + Shift + R. You don't need to reboot again.
 26. **OPTIONAL**: If you have a NVIDIA video card, consider running `drivers.sh` to install them as well; after running it, reboot your computer.
 

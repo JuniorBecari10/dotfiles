@@ -51,6 +51,7 @@ PACKAGES=(
     thunar
     reflector
     fastfetch
+    tree
 )
 
 # Install packages

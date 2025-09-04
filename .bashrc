@@ -13,6 +13,22 @@ alias ff='fastfetch'
 alias fsi='dotnet fsi'
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
+gacp() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: gacp <commit message>"
+        return 1
+    fi
+
+    if git diff --quiet && git diff --cached --quiet; then
+        echo "No changes to commit."
+        return 0
+    fi
+
+    git add .
+    git commit -m "$*"
+    git push -u origin main
+}
+
 # (user) folder $
 
 PATH=$PATH:~/go/bin/

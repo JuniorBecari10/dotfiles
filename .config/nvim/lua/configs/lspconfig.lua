@@ -11,6 +11,8 @@ local servers = {
     "bashls",
     "lua_ls",
     "ts_ls",
+    "sqls",
+    "asm_lsp"
 }
 
 vim.lsp.enable(servers)

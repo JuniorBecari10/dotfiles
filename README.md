@@ -58,7 +58,7 @@ Modifier: `Win`
 - `Mod` + `Space`: Toggle focus between tiling and floating windows
 
 - `Mod` + `A`: Focus parent container
-- ~`Mod` + `D`: Focus child container~ (disabled)
+- ~`Mod` + `D`: Focus child container~ _(disabled)_
 
 - `Mod` + [`1`-`0`]: Focus workspace from 1 to 10
 - `Mod` + `Shift` + [`1`-`0`]: Move focused window to workspace from 1 to 10
@@ -72,12 +72,16 @@ Modifier: `Win`
 
 - `Mod` + `R`: Toggle resize mode
 
+---
+
 While in resize mode:
 - `J` or `Left`: Shrink width by 10px
 - `;` or `Up`: Grow width by 10px
 
 - `K` or `Down`: Grow height 10px
 - `L` or `Up`: Shrink height 10px
+
+---
 
 - `Mod` + `Enter`: Open `kitty` terminal
 - `Mod` + `Q`: Close current window

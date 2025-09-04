@@ -31,6 +31,7 @@ git config --global user.email "antonioocarlos@proton.me"
 git config --global init.defaultBranch main
 
 # Run Firefox in background, while the command below opens a tab in it
+# Meanwhile you can log into your account
 firefox &
 
 # Set up GitHub CLI to link git to your GitHub account

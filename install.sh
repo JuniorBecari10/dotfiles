@@ -52,6 +52,7 @@ PACKAGES=(
     reflector
     fastfetch
     tree
+    ripgrep
 )
 
 # Install packages

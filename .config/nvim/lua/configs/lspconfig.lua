@@ -11,6 +11,7 @@ local servers = {
     "bashls",
     "lua_ls",
     "ts_ls",
+    "vue_ls",
     "sqls",
     "asm_lsp"
 }

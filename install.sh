@@ -53,10 +53,14 @@ PACKAGES=(
     fastfetch
     tree
     ripgrep
+    noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
 )
 
 # Install packages
 pacman -Syu --noconfirm "${PACKAGES[@]}"
+
+# Refresh font cache
+fc-cache -fv
 
 # Enable networkmanager and lightdm services
 systemctl enable NetworkManager

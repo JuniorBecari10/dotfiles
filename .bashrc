@@ -7,6 +7,7 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias cgrep='grep --color=always -e "^" -e'
 
 alias ll='ls -la'
 alias ff='fastfetch'

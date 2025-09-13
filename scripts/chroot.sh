@@ -1,20 +1,5 @@
 #!/bin/sh
 
-# Please don't call this script manually. 'archinstall.sh' will execute it inside chroot.
-
-# --- Configurations ---
-
-# Users and passwords (passwords are omitted for security purposes)
-# Fill the passwords accordingly.
-
-HOSTNAME="antonio-pc"
-ROOT_PASS=""
-
-USERNAME="antonio"
-USER_PASS=""
-
-# --- Script ---
-
 # Sync date (São Paulo, Brazil: UTC-3)
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
@@ -37,11 +22,11 @@ echo "KEYMAP=br-latin1-abnt2" > /etc/vconsole.conf
 echo "$HOSTNAME" > /etc/hostname
 echo "root:$ROOT_PASS" | chpasswd
 
-# Set up user
+# Set up user, adding it to the 'wheel' group
 useradd -m -G wheel -s /bin/bash "$USERNAME"
 echo "$USERNAME:$USER_PASS" | chpasswd
 
-# Enable sudo for wheel group
+# Enable sudo for 'wheel' group
 echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/99-wheel
 chmod 440 /etc/sudoers.d/99-wheel
 

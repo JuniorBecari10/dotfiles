@@ -13,6 +13,8 @@ they use the same commands used when performing a manual installation (without `
 The Arch Linux installation itself is very minimal, installing roughly 190 packages, with no Window Manager or Display Manager. <br />
 When the WM and the programs are installed, the number of packages goes up to roughly 580.
 
+Instructions taken from this video: [youtu.be/oeDbo-HRaZo]
+
 ## Specification
 
 - **Distro**: Arch Linux

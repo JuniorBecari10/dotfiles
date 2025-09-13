@@ -28,7 +28,7 @@ Instructions taken from this video: [youtu.be/oeDbo-HRaZo]
 
 ### My wallpaper:
 
-<img src=".config/wallpaper.jpg" width=500 /> <br />
+<img src="files/.config/wallpaper.jpg" width=500 /> <br />
 _This is the default wallpaper on Archcraft._
 
 ### Keybinds

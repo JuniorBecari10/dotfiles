@@ -67,23 +67,3 @@ systemctl enable NetworkManager
 systemctl enable lightdm
 
 systemctl set-default graphical.target
-
-# Copy '.bashrc', '.sl.sh' and '.xinitrc' to '~'
-cp .bashrc "$TARGET_HOME/"
-cp .sl.sh "$TARGET_HOME/"
-cp .xinitrc "$TARGET_HOME/"
-
-chown $TARGET_USER:$TARGET_USER "$TARGET_HOME/.bashrc" "$TARGET_HOME/.sl.sh" "$TARGET_HOME/.xinitrc"
-
-mkdir -p "$TARGET_CONFIG"
-chown $TARGET_USER:$TARGET_USER "$TARGET_CONFIG"
-
-# Copy everything inside '.config' to '~/.config'
-if [ -d ".config" ]; then
-    cp -r .config/* "$TARGET_CONFIG/"
-    chown -R "$TARGET_USER:$TARGET_USER" "$TARGET_CONFIG"
-else
-    echo "ERROR: No '.config' directory found in dotfiles!"
-fi
-
-echo "Done."

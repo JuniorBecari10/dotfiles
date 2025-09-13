@@ -14,6 +14,7 @@ alias ff='fastfetch'
 alias fsi='dotnet fsi'
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
+# git add, commit, push
 gacp() {
     if [ $# -eq 0 ]; then
         echo "Usage: gacp <commit message>"
@@ -25,9 +26,11 @@ gacp() {
         return 0
     fi
 
+    branch=$(git rev-parse --abbrev-ref HEAD)
+
     git add .
     git commit -m "$*"
-    git push
+    git push -u origin "$branch"
 }
 
 # (user) folder $

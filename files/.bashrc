@@ -33,6 +33,17 @@ gacp() {
     git push -u origin "$branch"
 }
 
+# mkdir and cd
+mkcd() {
+    if [ $# -eq 0 ]; then
+        echo "Error: Please specify at least one directory name."
+        return 1
+    fi
+
+    mkdir -p "$@"
+    cd "$_"
+}
+
 # (user) folder $
 
 PATH=$PATH:~/go/bin/

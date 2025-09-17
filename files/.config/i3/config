@@ -194,7 +194,7 @@ exec_always feh --bg-fill ~/.config/wallpaper.jpg
 # Setup Night Light
 exec --no-startup-id redshift
 
-# Setup Clipboard and shortcurt Mod + B
+# Setup Clipboard and shortcut Mod + B
 exec_always --no-startup-id xfce4-clipman
 bindsym $mod+b exec xfce4-clipman-history
 
@@ -205,6 +205,10 @@ bindsym $mod+b exec xfce4-clipman-history
 for_window [class="firefox"] move to workspace $ws1
 # for_window [class="kitty"] move to workspace $ws2 # This option messes up more than helps.
 for_window [class="Yad"] floating enable
+for_window [class="Xfce4-clipman-history"] floating enable, resize set 500 600, move position center
+for_window [class="Thunar"] floating enable, resize set 900 600, move position center
+for_window [class="pavucontrol"] floating enable, resize set 900 600, move position center
+for_window [class="Arandr"] floating enable, resize set 900 600, move position center
 
 # Compositor
 exec --no-startup-id picom -c

@@ -54,6 +54,8 @@ PACKAGES=(
     tree
     ripgrep
     noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
+    adw-gtk-theme
+    # lxappearance # disabled, may not be needed
 )
 
 # Install packages

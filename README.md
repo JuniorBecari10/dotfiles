@@ -72,6 +72,8 @@ Modifier: `Win`
 - `Mod` + `Shift` + `R`: Restart i3
 - `Mod` + `Shift` + `E`: Exit i3, logging you out from the X Session
 
+- `Mod` + `B`: Open Clipman clipboard tool
+
 - `Mod` + `R`: Toggle resize mode
 
 ---

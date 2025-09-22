@@ -9,7 +9,9 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias cgrep='grep --color=always -e "^" -e'
 
-alias ll='ls -la'
+alias ll='ls -l'
+alias la='ls -la'
+
 alias ff='fastfetch'
 alias fsi='dotnet fsi'
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
@@ -46,7 +48,7 @@ mkcd() {
 
 # (user) folder $
 
-PATH=$PATH:~/go/bin/
+PATH=~/go/bin/:$PATH
 
 # Disable Ctrl-Z binding
 stty susp undef

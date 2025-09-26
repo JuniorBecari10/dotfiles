@@ -5,21 +5,50 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias cgrep='grep --color=always -e "^" -e'
 
+alias feh='feh --geometry 1100x700'
+alias fehe='feh --edit'
+
+alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ls -la'
 
 alias ff='fastfetch'
 alias fsi='dotnet fsi'
+
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
 # git add, commit, push
+# Args:
+# -b <branch> - override branch to be pushed to. If not defined it is set to the current branch.
 gacp() {
-    if [ $# -eq 0 ]; then
-        echo "Usage: gacp <commit message>"
+    local branch=""
+    local msg=()
+    
+    # check if inside a git repo
+    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "Error: not a git repository (run this inside a repo)."
+        return 1
+    fi
+    
+    # parse args
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -b|--branch)
+                shift
+                branch="$1"
+                ;;
+            *)
+                msg+=("$1")
+                ;;
+        esac
+        shift
+    done
+
+    if [ ${#msg[@]} -eq 0 ]; then
+        echo "Usage: gacp [-b branch] <commit message>"
         return 1
     fi
 
@@ -28,25 +57,26 @@ gacp() {
         return 0
     fi
 
-    branch=$(git rev-parse --abbrev-ref HEAD)
+    # default branch if not overridden
+    if [ -z "$branch" ]; then
+        branch=$(git rev-parse --abbrev-ref HEAD)
+    fi
 
     git add .
-    git commit -m "$*"
+    git commit -m "${msg[*]}"
     git push -u origin "$branch"
 }
 
 # mkdir and cd
 mkcd() {
     if [ $# -eq 0 ]; then
-        echo "Error: Please specify at least one directory name."
+        echo "Usage: mkcd <directory name>"
         return 1
     fi
 
     mkdir -p "$@"
     cd "$_"
 }
-
-# (user) folder $
 
 PATH=~/go/bin/:$PATH
 
@@ -56,6 +86,7 @@ stty susp undef
 # To return it:
 # stty susp ^Z
 
-# Example:
-# (antonio) ~ $
+# Define prompt.
+# (user) folder $
+# Example: (antonio) ~ $
 PS1='\[\e[1;36m\](\u)\[\e[0m\] \[\e[1;32m\]\w\[\e[0m\] \$ '

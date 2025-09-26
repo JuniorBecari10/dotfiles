@@ -29,7 +29,7 @@ gacp() {
     
     # check if inside a git repo
     if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        echo "Error: not a git repository (run this inside a repo)."
+        echo "Error: not a git repository."
         return 1
     fi
     

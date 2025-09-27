@@ -118,6 +118,22 @@ All of them are from [here](https://github.com/vivien/i3blocks-contrib).
   > A compiled version of it is already in place.
 - `battery` (laptop-specific)
 
+## My Neovim extensions
+
+- bash-language-server
+- clangd
+- css-lsp
+- emmet-language-server
+- fsautocomplete
+- gopls
+- html-lsp
+- lua-language-server
+- pyright
+- sqls
+- tailwindcss-language-server
+- typescript-language-server
+- vue-language-server
+
 ## How to Install
 
 1. Boot up the Arch Linux live CD;

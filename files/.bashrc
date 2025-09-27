@@ -20,6 +20,28 @@ alias fsi='dotnet fsi'
 
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
+# git add, commit
+gac() {
+    # check if inside a git repo
+    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "Error: not a git repository." >&2
+        return 1
+    fi
+    
+    if [ $# -eq 0 ]; then
+        echo "Usage: gac <commit message>" >&2
+        return 1
+    fi
+
+    if git diff --quiet && git diff --cached --quiet; then
+        echo "No changes to commit."
+        return 0
+    fi
+
+    git add .
+    git commit -m "$@"
+}
+
 # git add, commit, push
 # Args:
 # -b <branch> - override branch to be pushed to. If not defined it is set to the current branch.
@@ -29,7 +51,7 @@ gacp() {
     
     # check if inside a git repo
     if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        echo "Error: not a git repository."
+        echo "Error: not a git repository." >&2
         return 1
     fi
     
@@ -48,7 +70,7 @@ gacp() {
     done
 
     if [ ${#msg[@]} -eq 0 ]; then
-        echo "Usage: gacp [-b branch] <commit message>"
+        echo "Usage: gacp [-b branch] <commit message>" >&2
         return 1
     fi
 
@@ -63,7 +85,7 @@ gacp() {
     fi
 
     git add .
-    git commit -m "${msg[*]}"
+    git commit -m "${msg[@]}"
     git push -u origin "$branch"
 }
 
@@ -78,7 +100,7 @@ mkcd() {
     cd "$_"
 }
 
-PATH=~/go/bin/:$PATH
+PATH=~/go/bin/:~/.bun/bin/:$PATH
 
 # Disable Ctrl-Z binding
 stty susp undef

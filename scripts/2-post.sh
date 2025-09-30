@@ -1,9 +1,7 @@
 #!/bin/sh
 
-# This must be run after rebooting, when the WM is running.
-
-# A set of LSPs were written to be used in the 'lspconfig.lua' file, if you one day will use it, just install it.
-# There's no need to write it in there.
+# Source settings
+. ../settings/general.sh
 
 # Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)
 nvim --headless \
@@ -17,21 +15,13 @@ systemctl --user enable pipewire-pulse.service
 # Start system tray volume icon in background
 volumeicon &
 
-# Install AUR helper 'yay'
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-
-cd ..
-rm -rf yay
-
 # Set up git configurations
-git config --global user.name "Antônio Carlos"
-git config --global user.email "antonioocarlos@proton.me"
+git config --global user.name "$GIT_USERNAME"
+git config --global user.email "$GIT_EMAIL"
 git config --global init.defaultBranch main
 
 # Run Firefox in background, while the command below opens a tab in it
-# Meanwhile you can log into your account
+# Meanwhile you can log into your account.
 firefox &
 
 # Set up GitHub CLI to link git to your GitHub account

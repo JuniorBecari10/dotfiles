@@ -18,7 +18,7 @@ alias la='ls -la'
 alias ff='fastfetch'
 alias fsi='dotnet fsi'
 
-alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # git add, commit
 gac() {

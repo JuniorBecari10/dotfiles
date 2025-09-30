@@ -1,7 +1,8 @@
 #!/bin/sh
 
-# Source configuration file
-source ../configs.sh
+# Source settings
+. ../settings/general.sh
+. ../settings/passwords.sh
 
 # Set up filesystems
 mkfs.fat -F32 "$BOOT_PART"
@@ -21,15 +22,13 @@ pacstrap /mnt base linux linux-firmware sof-firmware base-devel grub efibootmgr 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-# Copy chroot script file into the root of the new system
-cp chroot.sh /mnt/
-chmod +x /mnt/chroot.sh
+# Copy the general settings file into the installation
+# The chroot script automatically deletes it.
+cp ../settings/general.sh /mnt
+chmod +x /mnt/general.sh
 
 # Chroot into the system and run the the configuration commands
-arch-chroot /mnt ./chroot.sh
-
-# Remove the script file
-rm -rf /mnt/chroot.sh
+cat ../settings/general.sh ../settings/passwords.sh 1b-chroot.sh | arch-chroot /mnt /bin/bash -s
 
 # Unmount all the drives under '/mnt'
 umount -R /mnt

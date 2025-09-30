@@ -1,5 +1,4 @@
 #!/bin/sh
-# Must be run with sudo.
 
 # List of packages to install
 PACKAGES=(
@@ -10,7 +9,7 @@ PACKAGES=(
 
 # Install packages
 pacman -Syu --noconfirm "${PACKAGES[@]}"
-echo "Done."
 
 # Uncomment laptop-specific blocks in i3blocks
 sed -i 's|##||g' ~/.config/i3blocks/i3blocks.conf
+sed -i 's|##||g' ~/.config/i3/config

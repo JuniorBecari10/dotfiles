@@ -1,5 +1,4 @@
 #!/bin/bash
-# This must be run with sudo.
 
 # List of packages to install
 PACKAGES=(

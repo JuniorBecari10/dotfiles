@@ -13,7 +13,7 @@ they use the same commands used when performing a manual installation (without `
 The Arch Linux installation itself is very minimal, installing roughly 190 packages, with no WM or DE. <br />
 When the WM and the programs are installed, the number of packages goes up to roughly 580 (Xorg has many dependencies).
 
-Instructions taken from this video: [How to Install Arch Linux (2026 Edition) | Full Guide by tony](youtu.be/oeDbo-HRaZo)
+Instructions taken from this video: [How to Install Arch Linux (2026 Edition) | Full Guide by tony](https://youtu.be/oeDbo-HRaZo)
 
 ## Specification
 

@@ -23,7 +23,7 @@ set $refresh_i3status killall -SIGUSR1 i3status
 exec --no-startup-id volumeicon
 
 # Brightness control using brightnessctl (uncomment if you're in a laptop)
-# Ensure you have 'brightnessctl' installed (run 'laptopconfig.sh' to install it)
+# Ensure you have 'brightnessctl' installed (run 'od-laptop.sh', through the IS_LAPTOP flag to install it)
 
 ##bindsym XF86MonBrightnessUp exec brightnessctl s +10%
 ##bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
@@ -34,9 +34,6 @@ floating_modifier $mod
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
-
-# start dmenu (a program launcher)
-# bindsym $mod+d exec --no-startup-id dmenu_run
 
 # change focus
 bindsym $mod+j focus left
@@ -244,4 +241,4 @@ bindsym $mod+p exec ~/.config/i3/powermenu
 bindsym $mod+d exec rofi -show run
 
 # Mod + Shift + D: Launch rofi Flatpak menu
-bindsym $mod+Shift+d exec APP=$(flatpak list --app --columns=application | rofi -dmenu -p "Launch Flatpak") [ -n "$APP" ] && flatpak run "$APP"
+bindsym $mod+Shift+d exec ./flatpak

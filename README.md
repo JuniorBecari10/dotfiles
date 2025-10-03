@@ -37,6 +37,7 @@ _This is the default wallpaper on Archcraft._
 Modifier: `Win`
 
 - `Mod` + `D`: Run `rofi`
+- `Mod` + `Shift` + `D`: Run `rofi` for Flatpak apps
 
 - `Mod` + `J` or `Mod` + `Left`: Move focus left
 - `Mod` + `K` or `Mod` + `Down`: Move focus down

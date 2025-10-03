@@ -1,5 +1,5 @@
 #!/bin/sh
-# Used to commit the configuration files that are on the computer to the repository, so they can be committed to the repository.
+# Used to commit the configuration files that are on the computer to the local repository, so they can be committed to the remote one.
 # This is essentially the opposite of 'patch.sh'.
 
 # Source configs

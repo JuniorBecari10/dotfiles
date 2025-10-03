@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Source settings
-. ../settings/general.sh
+. ./settings/general.sh
 
 # Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)
 nvim --headless \

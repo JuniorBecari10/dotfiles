@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Source settings
-. ../settings/general.sh
-. ../settings/passwords.sh
+. ./settings/general.sh
+. ./settings/passwords.sh
 
 # Set up filesystems
 mkfs.fat -F32 "$BOOT_PART"

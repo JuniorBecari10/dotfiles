@@ -38,9 +38,6 @@ tiling_drag modifier titlebar
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
 
-# Display rofi instead
-bindsym $mod+d exec rofi -show run
-
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -242,3 +239,9 @@ bindsym $mod+x exec firefox
 
 # Mod + P: Power Menu
 bindsym $mod+p exec ~/.config/i3/powermenu
+
+# Mod + D: Run rofi
+bindsym $mod+d exec rofi -show run
+
+# Mod + Shift + D: Launch rofi Flatpak menu
+bindsym $mod+Shift+d exec APP=$(flatpak list --app --columns=application | rofi -dmenu -p "Launch Flatpak") [ -n "$APP" ] && flatpak run "$APP"

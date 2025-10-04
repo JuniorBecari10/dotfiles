@@ -242,3 +242,6 @@ bindsym $mod+d exec rofi -show run
 
 # Mod + Shift + D: Launch rofi Flatpak menu
 bindsym $mod+Shift+d exec ~/.config/i3/flatpak
+
+# Mod + Ctrl + D: Launch rofi Calculator menu
+bindsym $mod+Ctrl+d exec rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip -selection clipboard"

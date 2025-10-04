@@ -3,6 +3,9 @@
 # Source settings
 . ./settings/general.sh
 
+# Install Flatpak apps
+./scripts/2b-flatpak.sh
+
 # Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)
 nvim --headless \
   +"set clipboard+=unnamedplus" \

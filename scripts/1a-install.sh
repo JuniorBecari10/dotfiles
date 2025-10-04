@@ -24,11 +24,11 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 # Copy the general settings file into the installation
 # The chroot script automatically deletes it.
-cp ../settings/general.sh /mnt
+cp ./settings/general.sh /mnt
 chmod +x /mnt/general.sh
 
 # Chroot into the system and run the the configuration commands
-cat ../settings/general.sh ../settings/passwords.sh 1b-chroot.sh | arch-chroot /mnt /bin/bash -s
+cat ./settings/general.sh ./settings/passwords.sh 1b-chroot.sh | arch-chroot /mnt /bin/sh -s
 
 # Unmount all the drives under '/mnt'
 umount -R /mnt

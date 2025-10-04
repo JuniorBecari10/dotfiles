@@ -47,14 +47,5 @@ PACKAGES=(
     # mpg123 # maybe pavucontrol needs it
 )
 
-# Install packages
+# Install pacman packages
 pacman -Syu --noconfirm "${PACKAGES[@]}"
-
-# Refresh font cache
-fc-cache -fv
-
-# Enable networkmanager and lightdm services
-systemctl enable NetworkManager
-systemctl enable lightdm
-
-systemctl set-default graphical.target

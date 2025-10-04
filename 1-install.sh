@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 # This should be run in the live CD.
 
 ./scripts/1a-install.sh

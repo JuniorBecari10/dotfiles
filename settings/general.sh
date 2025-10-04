@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 # --- Configurations ---
 
@@ -12,10 +12,10 @@ HOSTNAME="antonio-pc"
 USERNAME="antonio"
 
 # Optional Installations
-INSTALL_YAY=true
-IS_LAPTOP=false
-IS_DUAL_BOOT=false
 INSTALL_NVIDIA_DRIVERS=true
+INSTALL_YAY=true
+IS_DUAL_BOOT=false
+IS_LAPTOP=false
 
 # For "Is Dual Boot"
 OTHER_EFI_PART="/dev/sda4"

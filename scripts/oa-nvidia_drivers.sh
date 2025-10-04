@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # List of packages to install
 PACKAGES=(

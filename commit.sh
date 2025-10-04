@@ -12,13 +12,13 @@ CONFIG="$DOTFILES/.config"
 # Make sure the destination exists
 mkdir -p "$CONFIG"
 
-# Move dotfiles from home to dotfiles
-mv "$HOME/.bashrc" "$DOTFILES/"
-mv "$HOME/.sl.sh" "$DOTFILES/"
-mv "$HOME/.xinitrc" "$DOTFILES/"
+# Copy dotfiles from home to dotfiles
+cp -f "$HOME/.bashrc" "$DOTFILES/"
+cp -f "$HOME/.sl.sh" "$DOTFILES/"
+cp -f "$HOME/.xinitrc" "$DOTFILES/"
 
 # Move contents of ~/.config to dotfiles/.config
-mv "$HOME/.config/"* "$CONFIG/"
+cp -f "$HOME/.config/"* "$CONFIG/"
 
 # Fix ownership
 chown -R "$USERNAME:$USERNAME" "$DOTFILES"

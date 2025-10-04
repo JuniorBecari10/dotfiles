@@ -50,8 +50,9 @@ cp -f /general.sh "$HOME/dotfiles/settings/general.sh"
 rm -rf /general.sh
 
 # Set up config files
-"$HOME/dotfiles/scripts/1c-user.sh"
-"$HOME/dotfiles/scripts/1d-patch.sh"
+"$HOME/dotfiles/scripts/1c-pacman.sh"
+"$HOME/dotfiles/scripts/1d-services.sh"
+"$HOME/dotfiles/scripts/1e-patch.sh"
 
 # Optional Installations
 
@@ -66,11 +67,11 @@ if [ "$INSTALL_YAY" = true ]; then
 fi
 
 # c. Dual Boot
-if [ "$INSTALL_YAY" = true ]; then
+if [ "$IS_DUAL_BOOT" = true ]; then
     "$HOME/dotfiles/scripts/oc-dual_boot.sh"
 fi
 
 # d. Laptop
-if [ "$INSTALL_YAY" = true ]; then
+if [ "$IS_LAPTOP" = true ]; then
     "$HOME/dotfiles/scripts/od-laptop.sh"
 fi

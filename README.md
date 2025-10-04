@@ -166,11 +166,11 @@ You're good to go.
 
 This script allows you to perform optional installations as well. Here's what they are, and what they do.
 
+### Install NVIDIA drivers
+Installs NVIDIA drivers into your system.
+
 ### Install Yay
 Install the AUR helper yay into your computer.
-
-### Is Laptop
-Installs and configures laptop-specific stuff, such as brightness control, extra blocks in i3blocks, such as charging and brightness state.
 
 ### Is Dual Boot
 Enables `os-prober` and runs it during the GRUB configuration, so that your other OSs can also be booted up. <br />
@@ -179,8 +179,8 @@ This configuration has an extra variable, OTHER_EFI_PART, which is the EFI parti
 If you haven't checked this option that variable has no use, and therefore it won't hrm your installation. <br />
 In the future this might be an array.
 
-### Install NVIDIA drivers
-Installs NVIDIA drivers into your system.
+### Is Laptop
+Installs and configures laptop-specific stuff, such as brightness control, extra blocks in i3blocks, such as charging and brightness state.
 
 ## Common Problems
 

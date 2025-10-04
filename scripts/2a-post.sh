@@ -6,6 +6,11 @@
 # Install Flatpak apps
 ./scripts/2b-flatpak.sh
 
+# Create convenience folders
+mkdir -p ~/dev
+mkdir -p ~/docs
+mkdir -p ~/Downloads # Because of Firefox
+
 # Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)
 nvim --headless \
   +"set clipboard+=unnamedplus" \

@@ -226,7 +226,7 @@ bindsym Shift+Print exec --no-startup-id flameshot full -c
 bindsym Ctrl+Print exec --no-startup-id flameshot full -p ~/Pictures
 
 # Mod + N: Lock Screen
-bindsym $mod+n exec i3lock
+bindsym $mod+n exec --no-startup-id i3lock
 
 # Mod + G: File Explorer (Thunar)
 bindsym $mod+g exec thunar

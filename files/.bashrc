@@ -18,6 +18,8 @@ alias la='ls -la'
 alias ff='fastfetch'
 alias fsi='dotnet fsi'
 
+alias vlc='flatpak run org.videolan.VLC'
+
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # git add, commit

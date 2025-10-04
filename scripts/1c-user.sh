@@ -44,6 +44,7 @@ PACKAGES=(
     adw-gtk-theme
     flatpak
     # lxappearance # disabled, may not be needed
+    # mpg123 # maybe pavucontrol needs it
 )
 
 # Install packages

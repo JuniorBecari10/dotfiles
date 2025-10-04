@@ -241,4 +241,4 @@ bindsym $mod+p exec ~/.config/i3/powermenu
 bindsym $mod+d exec rofi -show run
 
 # Mod + Shift + D: Launch rofi Flatpak menu
-bindsym $mod+Shift+d exec ./flatpak
+bindsym $mod+Shift+d exec ~/.config/i3/flatpak

@@ -7,9 +7,9 @@ HOME="/home/$USERNAME"
 CONFIG="$HOME/.config"
 
 # Copy '.bashrc', '.sl.sh' and '.xinitrc' to '~'
-cp -r ./files/.bashrc "$HOME"
-cp -r ./files/.sl.sh "$HOME"
-cp -r ./files/.xinitrc "$HOME"
+cp ./files/.bashrc "$HOME"
+cp -n ./files/.sl.sh "$HOME"
+cp ./files/.xinitrc "$HOME"
 
 chown $USER:$USER ~/.bashrc ~/.sl.sh ~/.xinitrc
 

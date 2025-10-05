@@ -73,5 +73,6 @@ fi
 
 # d. Laptop
 if [ "$IS_LAPTOP" = true ]; then
-    "$HOME/dotfiles/scripts/od-laptop.sh"
+    "$HOME/dotfiles/scripts/oda-laptop_install.sh"
+    "$HOME/dotfiles/scripts/odb-laptop_config.sh"
 fi

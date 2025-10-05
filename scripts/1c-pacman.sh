@@ -7,7 +7,7 @@ PACKAGES=(
     i3lock
     kitty
     neovim
-    rofi
+    rofi rofi-calc
     redshift
     git
     pavucontrol

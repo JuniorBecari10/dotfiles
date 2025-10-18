@@ -7,6 +7,7 @@ HOME="/home/$USERNAME"
 CONFIG="$HOME/.config"
 
 # Copy '.bashrc', '.sl.sh' and '.xinitrc' to '~'
+# Only copy '.sl.sh' if it's not there to avoid overriding the settings
 cp -f ./files/.bashrc "$HOME"
 cp -n ./files/.sl.sh "$HOME"
 cp -f ./files/.xinitrc "$HOME"

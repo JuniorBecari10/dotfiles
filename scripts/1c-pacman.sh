@@ -63,11 +63,11 @@ if [ ! -f "$GDK_PKG" ]; then
 fi
 
 # Install the legacy package
-sudo pacman -U --noconfirm "$GDK_PKG"
+pacman -U --noconfirm "$GDK_PKG"
 
 # Prevent future updates from breaking volumeicon
 if ! grep -q "^IgnorePkg.*gdk-pixbuf2" /etc/pacman.conf; then
-    sudo sed -i '/\[options\]/a IgnorePkg = gdk-pixbuf2' /etc/pacman.conf
+    sed -i '/\[options\]/a IgnorePkg = gdk-pixbuf2' /etc/pacman.conf
 fi
 
 # Clean up downloaded package

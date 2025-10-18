@@ -21,6 +21,7 @@ alias fsi='dotnet fsi'
 alias vlc='flatpak run org.videolan.VLC'
 
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias updateall='sudo ~/dotfiles/scripts/1c-pacman.sh'
 
 # git add, commit
 gac() {

@@ -139,6 +139,11 @@ All of them are from [here](https://github.com/vivien/i3blocks-contrib).
 - typescript-language-server
 - vue-language-server
 
+## Notes
+
+- Because of recent updates that break compatibility, the package `gdk-pixbuf2` is pinned to the `2.42.12-2` version;
+- Also because of this and other reasons (such as sync with newer packages I may add here), the `.bashrc` file has an alias called `updateall`, which installs those packages, updates the system and doesn't update `gdk-pixbuf2`, ensuring compatibility (with at least known packages). So, when updating your system, run `updateall` (no `sudo`, it already calls the script as such), instead of plain `sudo pacman -Syu`.
+
 ## How to Install
 
 Before installing, make sure you have a stable internet connection. If you're using Wi-Fi, consider setupping it first using `iwctl`.
@@ -187,7 +192,7 @@ Installs and configures laptop-specific stuff, such as brightness control, extra
 
 ## Common Problems
 
-During installations, especially in Arch Linux ones, can occur problems. Here's the list of the most common one and, also, their troubleshooting steps.
+During installations, especially in Arch Linux ones, can occur many problems. Here's the list of the most common one and, also, their troubleshooting steps.
 
 ### BIOS doesn't recognize my Arch installation
 

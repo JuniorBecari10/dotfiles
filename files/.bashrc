@@ -116,16 +116,18 @@ stty susp undef
 # Example: (antonio) ~ $
 
 parse_git_branch() {
-    # Get current branch, or return nothing if not a repo
-    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-    if [ -n "$branch" ]; then
+    # Only proceed if in a git repo
+    git rev-parse --abbrev-ref HEAD 2>/dev/null | grep -v "HEAD" >/dev/null && {
+        branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
         dirty=""
-        # Check if there are staged or unstaged changes
+        
+        # Check for unstaged or staged changes quietly
         if ! git diff --quiet 2>/dev/null || ! git diff --cached --quiet 2>/dev/null; then
             dirty="*"
         fi
+
         echo " $branch$dirty"
-    fi
+    }
 }
 
 PS1='\[\e[1;36m\](\u)\[\e[0m\] \[\e[1;32m\]\w\[\e[0m\]\[\e[1;31m\]$(parse_git_branch)\[\e[0m\] \$ '

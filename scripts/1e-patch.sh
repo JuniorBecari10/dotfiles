@@ -6,21 +6,26 @@
 HOME="/home/$USERNAME"
 CONFIG="$HOME/.config"
 
-# Copy '.bashrc', '.sl.sh' and '.xinitrc' to '~'
-cp -f ./files/.bashrc "$HOME"
-cp -n ./files/.sl.sh "$HOME"
-cp -f ./files/.xinitrc "$HOME"
+# Symlink '.bashrc', '.sl.sh' and '.xinitrc' to '~'
+ln -sf ./files/.bashrc "$HOME"
+ln -sf ./files/.sl.sh "$HOME"
+ln -sf ./files/.xinitrc "$HOME"
 
-chown $USER:$USER ~/.bashrc ~/.sl.sh ~/.xinitrc
-
+# Ensure ~/.config exists
 mkdir -p "$CONFIG"
-chown $USER:$USER "$CONFIG"
 
-# Copy everything inside '.config' to '~/.config'
-cp -rf ./files/.config/* "$CONFIG/"
-chown -R "$USERNAME:$USERNAME" "$CONFIG"
+# Recursively symlink .config contents
+cd "$DOTFILES/.config" || exit 1
+find . -type d -exec mkdir -p "$CONFIG/{}" \;
 
-# Perform again the laptop changes if enabled
+find . -type f | while read -r file; do
+    target="$CONFIG/$file"
+    src="$DOTFILES/.config/$file"
+    
+    ln -sf "$src" "$target"
+done
+
+# Perform laptop-specific changes if enabled
 if [ "$IS_LAPTOP" = true ]; then
     ./scripts/odb-laptop_config.sh
 fi

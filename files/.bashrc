@@ -14,6 +14,7 @@ alias fehe='feh --edit'
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ls -la'
+alias nv='nvim'
 
 alias ff='fastfetch'
 alias fsi='dotnet fsi'
@@ -128,4 +129,4 @@ parse_git_branch() {
     fi
 }
 
-PS1='\[\e[1;36m\](\u)\[\e[0m\] \[\e[1;32m\]\w\[\e[0m\]\[\e[1;31m\]$(parse_git_branch)\[\e[0m\] \$ '
+PS1='\[\e[1;32m\]\w\[\e[0m\]\[\e[1;31m\]$(parse_git_branch)\[\e[0m\] \$ '

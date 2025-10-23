@@ -15,7 +15,7 @@ USERNAME="antonio"
 INSTALL_NVIDIA_DRIVERS=true
 INSTALL_YAY=true
 IS_DUAL_BOOT=false
-IS_LAPTOP=false
+IS_LAPTOP=true
 
 # For "Is Dual Boot"
 OTHER_EFI_PART="/dev/sda4"

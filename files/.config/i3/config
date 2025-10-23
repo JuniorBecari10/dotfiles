@@ -184,10 +184,10 @@ exec_always feh --bg-fill ~/.config/wallpaper.jpg
 # Setup Night Light
 exec --no-startup-id redshift
 
-# Assign Firefox to second monitor (workspace 1)
-# And yad (calendar) to be floating (because of a bug)
+# Assign Firefox to workspace 1
+# yad (calendar) to be floating (because of a bug)
+# and some others to floating for convenience
 
-# If you're in a laptop you may consider flipping those options' workspaces.
 # for_window [class="kitty"] move to workspace $ws2 # This option messes up more than helps.
 for_window [class="firefox"] move to workspace $ws1
 for_window [class="Yad"] floating enable

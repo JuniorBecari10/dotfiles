@@ -124,7 +124,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec ~/.config/i3/exit
+bindsym $mod+Shift+e exec ~/.config/i3/scripts/exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -205,6 +205,9 @@ exec --no-startup-id picom -c
 # Mod + Enter: Terminal (kitty)
 bindsym $mod+Return exec kitty
 
+# Mod + Shift + Enter: Clone Terminal
+bindsym $mod+Shift+Enter exec ~/.config/i3/scripts/kitty
+
 # Mod + Q: Close Window (original config requires Shift)
 bindsym $mod+q kill
 
@@ -227,7 +230,7 @@ bindsym $mod+g exec thunar
 bindsym $mod+x exec firefox
 
 # Mod + P: Power Menu
-bindsym $mod+p exec ~/.config/i3/powermenu
+bindsym $mod+p exec ~/.config/i3/scripts/powermenu
 
 # Mod + B: Clipman history
 bindsym $mod+b exec xfce4-clipman-history
@@ -236,7 +239,7 @@ bindsym $mod+b exec xfce4-clipman-history
 bindsym $mod+d exec rofi -show run
 
 # Mod + Shift + D: Launch rofi Flatpak menu
-bindsym $mod+Shift+d exec ~/.config/i3/flatpak
+bindsym $mod+Shift+d exec ~/.config/i3/scripts/flatpak
 
 # Mod + Ctrl + D: Launch rofi Calculator menu
 bindsym $mod+Ctrl+d exec rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip -selection clipboard"

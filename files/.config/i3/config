@@ -205,9 +205,6 @@ exec --no-startup-id picom -c
 # Mod + Enter: Terminal (kitty)
 bindsym $mod+Return exec kitty
 
-# Mod + Shift + Enter: Clone Terminal
-bindsym $mod+Shift+Enter exec ~/.config/i3/scripts/kitty
-
 # Mod + Q: Close Window (original config requires Shift)
 bindsym $mod+q kill
 

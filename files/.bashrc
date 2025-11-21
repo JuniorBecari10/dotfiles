@@ -18,6 +18,7 @@ alias nv='nvim'
 
 alias ff='fastfetch'
 alias fsi='dotnet fsi'
+alias fsx='fsi'
 
 alias vlc='flatpak run org.videolan.VLC'
 

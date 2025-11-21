@@ -26,6 +26,14 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
+# Adjust Touchpad
+##set $touchpad "DELL083F:00 04F3:3088 Touchpad"
+
+##exec xinput set-prop $touchpad "libinput Tapping Enabled" 1
+##exec xinput set-prop $touchpad "libinput Natural Scrolling Enabled" 1
+##exec xinput set-prop $touchpad "libinput Accel Profile Enabled" 0, 1
+##exec xinput set-prop $touchpad "libinput Accel Speed" 0.2
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down

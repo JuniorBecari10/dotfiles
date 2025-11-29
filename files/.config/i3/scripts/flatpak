@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# List Flatpak apps as "App Name package.name"
+# Show in rofi, get the last word (the package name)
+# Sorted alphabetically
+APP=$(flatpak list --app --columns=name,application \
+    | awk -F'\t' '{print $1 " " $2}' \
+    | sort \
+    | rofi -dmenu -p "Flatpak" \
+    | awk '{print $NF}')
+
+# If a selection was made, run it
+if [ -n "$APP" ]; then
+    flatpak run "$APP"
+fi

@@ -7,6 +7,7 @@
 
 alias grep='grep --color=auto'
 alias cgrep='grep --color=always -e "^" -e'
+alias rngrep='grep -rn'
 
 alias feh='feh --geometry 1100x700'
 alias fehe='feh --edit'
@@ -19,9 +20,6 @@ alias nv='nvim'
 alias ff='fastfetch'
 alias fsi='dotnet fsi'
 alias fsx='fsi'
-
-alias vlc='flatpak run org.videolan.VLC'
-alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # git add, commit
 gac() {
@@ -103,6 +101,60 @@ mkcd() {
     cd "$_"
 }
 
+# Copy to clipboard
+xcopy() {
+    # If text is piped: cb < file or echo "txt" | cb
+    if [ -t 0 ]; then
+        # No piped input → treat arguments as text
+        printf "%s" "$*" | xclip -selection clipboard
+    else
+        # Piped input
+        xclip -selection clipboard
+    fi
+}
+
+# Paste from clipboard
+xpaste() {
+    xclip -selection clipboard -o
+}
+
+# Enable a runit service
+sv-enable() {
+    local svc="$1"
+
+    if [ -z "$svc" ]; then
+        echo "Usage: sv-enable <service>"
+        return 1
+    fi
+
+    if [ ! -d "/etc/sv/$svc" ]; then
+        echo "Service '$svc' does not exist in /etc/sv/"
+        return 1
+    fi
+
+    sudo ln -sf "/etc/sv/$svc" /var/service/
+    echo "Enabled: $svc"
+}
+
+# Disable a runit service
+sv-disable() {
+    local svc="$1"
+
+    if [ -z "$svc" ]; then
+        echo "Usage: sv-disable <service>"
+        return 1
+    fi
+
+    if [ -L "/var/service/$svc" ]; then
+        sudo rm "/var/service/$svc"
+        echo "Disabled: $svc"
+    else
+        echo "Service '$svc' is not enabled."
+    fi
+}
+
+// ----------------------------
+
 # Disable Ctrl-Z binding
 stty susp undef
 
@@ -110,18 +162,21 @@ stty susp undef
 # stty susp ^Z
 
 # Define prompt.
-# (user) folder $
-# Example: (antonio) ~ $
+# folder $
+# Example: ~ $
 
 parse_git_branch() {
     # Get current branch, or return nothing if not a repo
     branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
     if [ -n "$branch" ]; then
         dirty=""
+        
         # Check if there are staged or unstaged changes
         if ! git diff --quiet 2>/dev/null || ! git diff --cached --quiet 2>/dev/null; then
             dirty="*"
         fi
+        
         echo " $branch$dirty"
     fi
 }

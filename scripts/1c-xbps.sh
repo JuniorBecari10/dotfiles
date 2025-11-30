@@ -39,6 +39,7 @@ xorg-fonts
 noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
 adwaita-icon-theme adwaita-qt
 flatpak
+vlc
 "
 
 # Update repo index and install packages

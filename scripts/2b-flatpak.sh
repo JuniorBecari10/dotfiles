@@ -2,7 +2,6 @@
 
 # List of Flatpak packages to install
 FLATPAK_PACKAGES=(
-    org.videolan.VLC
     org.prismlauncher.PrismLauncher
 )
 

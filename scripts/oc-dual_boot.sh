@@ -1,2 +1,6 @@
 #!/bin/sh
-# TODO!
+set -e
+
+xbps-install -Sy os-prober
+os-prober
+update-grub

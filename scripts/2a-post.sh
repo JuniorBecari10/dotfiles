@@ -36,6 +36,11 @@ volumeicon &
 git config --global user.name "$GIT_USERNAME"
 git config --global user.email "$GIT_EMAIL"
 git config --global init.defaultBranch main
+git config --global push.autoSetupRemote true
+git config --global core.editor "nvim"
+git config --global pull.rebase true
+git config --global rebase.autoStash true
+git config --global push.autoSetupRemote true
 
 # Run Firefox in background, while the command below opens a tab in it
 # Meanwhile you can log into your account.

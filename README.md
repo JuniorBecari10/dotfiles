@@ -3,24 +3,19 @@
 The dotfiles that I use in my personal Linux PC, along with some scripts to install them. <br />
 The configurations in this repository are highly opinionated for my personal use, and may not fit the best for your needs.
 
-You are free to edit the files yourself to better fit your needs.
+You are free to edit the files yourself to fit better your needs.
 
-The scripts this repository has can replicate exactly my personal Arch Linux installation and configuration on any PC that can run Arch Linux.
+The scripts this repository has can replicate exactly my personal Void Linux installation and configuration on any PC that can run it.
 
-This means that the Arch Linux installation _itself_ is also installed through scripts;
-they use the same commands used when performing a manual installation (without `archinstall`).
-
-The Arch Linux installation itself is very minimal, installing roughly 190 packages, with no WM or DE. <br />
-When the WM and the programs are installed, the number of packages goes up to roughly 580 (Xorg has many dependencies).
+The Void Linux installation itself is very minimal, installing roughly X packages, with no WM or DE. <br />
+When the WM and the programs are installed, the number of packages goes up to roughly Y (Xorg has many dependencies).
 
 This repository is meant to be kept in your `~` folder even after the installation is complete, because you may want to make changes to it,
 and it's already there for you to sync your configurations.
 
-Instructions taken from this video: [How to Install Arch Linux (2026 Edition) | Full Guide by tony](https://youtu.be/oeDbo-HRaZo)
-
 ## Specification
 
-- **Distro**: Arch Linux
+- **Distro**: Void Linux
 - **Window Manager**: i3
 - **Bar**: i3blocks with custom blocks
 - **Lock Screen**: i3lock
@@ -139,16 +134,11 @@ All of them are from [here](https://github.com/vivien/i3blocks-contrib).
 - typescript-language-server
 - vue-language-server
 
-## Notes
-
-- Because of recent updates that break compatibility, the package `gdk-pixbuf2` is pinned to the `2.42.12-2` version;
-- Also because of this and other reasons (such as sync with newer packages I may add here), the `.bashrc` file has an alias called `updateall`, which installs those packages, updates the system and doesn't update `gdk-pixbuf2`, ensuring compatibility (with at least known packages). So, when updating your system, run `updateall` (no `sudo`, it already calls the script as such), instead of plain `sudo pacman -Syu`.
-
 ## How to Install
 
 Before installing, make sure you have a stable internet connection. If you're using Wi-Fi, consider setupping it first using `iwctl`.
 
-1. Boot up the Arch Linux live CD;
+1. Boot up the Void Linux live CD _with glibc_;
 2. Set up the partitions using `cfdisk` according to this table (the script already handles the formatting):
    Type|Size|Format (FYI)
    ---|---|---

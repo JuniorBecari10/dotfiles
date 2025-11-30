@@ -17,8 +17,17 @@ nvim --headless \
   +qa
 
 # Set up audio services
-systemctl --user enable pipewire.service
-systemctl --user enable pipewire-pulse.service
+if [ -d /etc/sv/pipewire ]; then
+    ln -sf /etc/sv/pipewire /var/service/
+fi
+
+if [ -d /etc/sv/pipewire-pulse ]; then
+    ln -sf /etc/sv/pipewire-pulse /var/service/
+fi
+
+if [ -d /etc/sv/wireplumber ]; then
+    ln -sf /etc/sv/wireplumber /var/service/
+fi
 
 # Start system tray volume icon in background
 volumeicon &

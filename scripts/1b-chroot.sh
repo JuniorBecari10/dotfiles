@@ -46,7 +46,7 @@ cp -f /general.sh "$HOME/dotfiles/settings/general.sh"
 rm -rf /general.sh
 
 # Set up config files
-"$HOME/dotfiles/scripts/1c-pacman.sh"
+"$HOME/dotfiles/scripts/1c-xbps.sh"
 "$HOME/dotfiles/scripts/1d-services.sh"
 "$HOME/dotfiles/scripts/1e-patch.sh"
 

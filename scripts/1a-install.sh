@@ -42,6 +42,8 @@ chmod +x /mnt/general.sh
 # Chroot into the system and run the the configuration commands
 cat ./settings/general.sh ./settings/passwords.sh 1b-chroot.sh | chroot /mnt /bin/sh -s
 
+# Remove the script from there
+rm /mnt/general.sh
+
 # Unmount all the drives under '/mnt'
 umount -R /mnt
-echo "Installation finished."

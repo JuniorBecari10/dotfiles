@@ -1,14 +1,15 @@
 #!/bin/sh
 
-# List of packages to install
-PACKAGES=(
-    nvidia
-    nvidia-utils
-    nvidia-settings
-)
+PACKAGES="
+nvidia
+nvidia-libs
+dkms
+linux-headers
+dracut
+"
 
-# Install packages
-pacman -Syu --noconfirm "${PACKAGES[@]}"
+# Update repo index and install packages
+xbps-install -Sy $PACKAGES
 
 # Rebuild initramfs
-mkinitcpio -P
+dracut --force

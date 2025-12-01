@@ -28,9 +28,6 @@ echo "$USERNAME:$USER_PASS" | chpasswd
 echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/99-wheel
 chmod 440 /etc/sudoers.d/99-wheel
 
-# Enable services
-ln -s /etc/runit/sv/NetworkManager /var/service/
-
 # Set up GRUB bootloader for UEFI
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id="Void"
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -43,14 +40,13 @@ xbps-reconfigure -fa
 # Download dotfiles folder to perform post-installation
 git clone "$REPO_URL" "$HOME/dotfiles"
 
-# Copy it and then delete
-cp -f /general.sh "$HOME/dotfiles/config/general.sh"
-rm -rf /general.sh
-
 # Set up config files
 "$HOME/dotfiles/scripts/1c-xbps.sh"
 "$HOME/dotfiles/scripts/1d-services.sh"
 "$HOME/dotfiles/scripts/1e-patch.sh"
+
+# Move user configs to the installation's dotfiles folder
+mv /general.sh "$HOME/dotfiles/config/general.sh"
 
 # Optional Installations
 

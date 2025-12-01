@@ -1,24 +1,27 @@
 #!/bin/sh
 
-# Source configs
-. ./config/general.sh
+# Source configs from the copied file
+. /general.sh
 
 HOME="/home/$USERNAME"
+DOTFILES="$HOME/dotfiles"
 CONFIG="$HOME/.config"
 
-# Copy '.bashrc', '.sl.sh' and '.xinitrc' to '~'
-cp -f ./files/.bashrc "$HOME"
-cp -n ./files/.sl.sh "$HOME"
-cp -f ./files/.xinitrc "$HOME"
+# Copy '.bashrc', '.sl.sh' and '.xinitrc' to "$HOME"
+cp -f ./files/.bashrc "$HOME/"
+cp -n ./files/.sl.sh "$HOME/"
+cp -f ./files/.xinitrc "$HOME/"
 
-chown $USER:$USER ~/.bashrc ~/.sl.sh ~/.xinitrc
+# Fix ownership
+chown "$USERNAME":"$USERNAME" "$HOME/.bashrc" "$HOME/.sl.sh" "$HOME/.xinitrc"
 
+# Ensure ~/.config exists
 mkdir -p "$CONFIG"
-chown $USER:$USER "$CONFIG"
+chown "$USERNAME":"$USERNAME" "$CONFIG"
 
 # Copy everything inside '.config' to '~/.config'
 cp -rf ./files/.config/* "$CONFIG/"
-chown -R "$USERNAME:$USERNAME" "$CONFIG"
+chown -R "$USERNAME":"$USERNAME" "$CONFIG"
 
 # Perform (again) the laptop changes if enabled
 if [ "$IS_LAPTOP" = true ]; then

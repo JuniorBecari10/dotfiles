@@ -1,6 +1,11 @@
 #!/bin/sh
 set -e
 
+# Source configs from the copied file
+. /general.sh
+
+HOME="/home/$USERNAME"
+
 # List of packages to install
 PACKAGES="
 i3 i3blocks i3lock
@@ -42,26 +47,30 @@ flatpak
 vlc
 "
 
-# Update repo index and install packages
+# Install packages
 xbps-install -Sy $PACKAGES
 
-# Install JetBrains Mono nerd font
+# Font variables
 FONT_DIR="/usr/share/fonts/TTF"
+CACHE_DIR="$HOME/.cache/fonts"
 JETBRAINS_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip"
 
 mkdir -p "$FONT_DIR"
-mkdir -p ~/.cache/fonts
+mkdir -p "$CACHE_DIR"
 
-curl -L "$JETBRAINS_URL" -o ~/.cache/fonts/JetBrainsMono.zip
-unzip -o ~/.cache/fonts/JetBrainsMono.zip -d "$FONT_DIR"
+curl -L "$JETBRAINS_URL" -o "$CACHE_DIR/JetBrainsMono.zip"
+unzip -o "$CACHE_DIR/JetBrainsMono.zip" -d "$FONT_DIR"
 
 fc-cache -fv
 
 # Install latest .NET SDK LTS
+DOTNET_DIR="/usr/share/dotnet"
+DOTNET_BIN="/usr/bin/dotnet"
+
 curl -L https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
 chmod +x dotnet-install.sh
 
-./dotnet-install.sh --channel LTS --install-dir /usr/share/dotnet
+./dotnet-install.sh --channel LTS --install-dir "$DOTNET_DIR"
 
-ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
+ln -sf "$DOTNET_DIR/dotnet" "$DOTNET_BIN"
 rm dotnet-install.sh

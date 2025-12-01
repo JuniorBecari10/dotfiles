@@ -21,7 +21,7 @@ mkdir -p "$CONFIG"
 chown "$USERNAME:$USERNAME" "$CONFIG"
 
 # Copy everything inside '.config' to '~/.config'
-cp -rf "$DOTFILES/files/.config/*" "$CONFIG/"
+cp -rf "$DOTFILES/files/.config/"* "$CONFIG/"
 chown -R "$USERNAME:$USERNAME" "$CONFIG"
 
 # Perform (again) the laptop changes if enabled

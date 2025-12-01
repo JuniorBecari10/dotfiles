@@ -21,7 +21,7 @@ echo "$HOSTNAME" > /etc/hostname
 echo "root:$ROOT_PASS" | chpasswd
 
 # Set up user and user password, adding it to the 'wheel' group
-useradd -mG wheel -s "$USERNAME"
+useradd -m -G wheel,video,audio -s /bin/bash "$USERNAME"
 echo "$USERNAME:$USER_PASS" | chpasswd
 
 # Enable sudo for 'wheel' group

@@ -3,9 +3,8 @@
 REPO_URL="https://github.com/JuniorBecari10/dotfiles"
 HOME="/home/$USERNAME"
 
-# Sync date (São Paulo, Brazil: UTC-3) and also the hardware clock
+# Sync date (São Paulo, Brazil: UTC-3). Hardware clock doesn't need to be set here.
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
-hwclock --systohc
 
 # Set locale
 sed -i 's/^#\(en_US.UTF-8 UTF-8\)/\1/' /etc/default/libc-locales
@@ -21,8 +20,8 @@ echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
 echo "$HOSTNAME" > /etc/hostname
 echo "root:$ROOT_PASS" | chpasswd
 
-# Set up user, adding it to the 'wheel' group
-useradd -m -G wheel,video,audio,network -s /bin/bash "$USERNAME"
+# Set up user and user password, adding it to the 'wheel' group
+useradd -mG wheel -s "$USERNAME"
 echo "$USERNAME:$USER_PASS" | chpasswd
 
 # Enable sudo for 'wheel' group
@@ -33,8 +32,11 @@ chmod 440 /etc/sudoers.d/99-wheel
 ln -s /etc/runit/sv/NetworkManager /var/service/
 
 # Set up GRUB bootloader for UEFI
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Void
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id="Void"
 grub-mkconfig -o /boot/grub/grub.cfg
+
+# Finalize the core installation
+xbps-reconfigure -fa
 
 # ---
 

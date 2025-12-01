@@ -1,52 +1,33 @@
 #!/bin/sh
 
 # Source settings
-. ./config/general.sh
-. ./config/passwords.sh
+. config/general.sh
+. config/passwords.sh
 
 # Set up filesystems
-mkfs.vfat -F32 "$BOOT_PART"
+mkfs.fat -F32 "$BOOT_PART"
 mkswap "$SWAP_PART"
 mkfs.ext4 "$MAIN_PART"
 
 # Mount partitions
 mount "$MAIN_PART" /mnt
-
-mkdir -p /mnt/boot
-mount "$BOOT_PART" /mnt/boot
-
+mount --mkdir "$BOOT_PART" /mnt/boot
 swapon "$SWAP_PART"
 
 # Perform base system installation
 REPO="https://repo-default.voidlinux.org/current"
-
-xbps-install -Sy -R "$REPO" -r /mnt base-system linux linux-firmware
-xbps-install -Sy -r /mnt git vim grub-x86_64-efi efibootmgr
-
-# Add network manager
-xbps-install -Sy -r /mnt NetworkManager
-
-if [ ! -e /mnt/var/service/NetworkManager ]; then
-    ln -s /etc/runit/sv/NetworkManager /mnt/var/service/
-fi
+xbps-install -Sy -R "$REPO" -r /mnt base-system linux linux-firmware git vim grub-x86_64-efi efibootmgr base-devel
 
 # Generate fstab
-cat <<EOF > /mnt/etc/fstab
-$MAIN_PART  /        ext4  defaults  0 1
-$BOOT_PART  /boot    vfat  defaults  0 2
-$SWAP_PART  none     swap  sw        0 0
-EOF
+xgenfstab -U /mnt > /mnt/etc/fstab
 
-# Copy the general settings file into the installation
+# Copy the general settings file into the installation, to keep it there for the user
 # The chroot script automatically deletes it.
-cp ./config/general.sh /mnt
+cp config/general.sh /mnt
 chmod +x /mnt/general.sh
 
 # Chroot into the system and run the the configuration commands
-cat ./config/general.sh ./config/passwords.sh ./1b-chroot.sh | chroot /mnt /bin/sh -s
-
-# Remove the script from there
-rm /mnt/general.sh
+cat config/general.sh config/passwords.sh scripts/1b-chroot.sh | xchroot /mnt /bin/sh -s
 
 # Unmount all the drives under '/mnt'
 umount -R /mnt

@@ -25,7 +25,10 @@ xbps-install -Sy -r /mnt git vim grub-x86_64-efi efibootmgr
 
 # Add network manager
 xbps-install -Sy -r /mnt NetworkManager
-ln -s /etc/runit/sv/NetworkManager /mnt/var/service/
+
+if [ ! -e /mnt/var/service/NetworkManager ]; then
+    ln -s /etc/runit/sv/NetworkManager /mnt/var/service/
+fi
 
 # Generate fstab
 cat <<EOF > /mnt/etc/fstab
@@ -40,7 +43,7 @@ cp ./config/general.sh /mnt
 chmod +x /mnt/general.sh
 
 # Chroot into the system and run the the configuration commands
-cat ./config/general.sh ./config/passwords.sh 1b-chroot.sh | chroot /mnt /bin/sh -s
+cat ./config/general.sh ./config/passwords.sh ./1b-chroot.sh | chroot /mnt /bin/sh -s
 
 # Remove the script from there
 rm /mnt/general.sh

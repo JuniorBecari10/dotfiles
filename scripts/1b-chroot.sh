@@ -46,7 +46,7 @@ git clone "$REPO_URL" "$HOME/dotfiles"
 "$HOME/dotfiles/scripts/1e-patch.sh"
 
 # Move user configs to the installation's dotfiles folder
-mv /general.sh "$HOME/dotfiles/config/general.sh"
+mv -f /general.sh "$HOME/dotfiles/config/general.sh"
 
 # Optional Installations
 

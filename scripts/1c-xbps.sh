@@ -45,6 +45,7 @@ noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
 adwaita-icon-theme adwaita-qt
 flatpak
 vlc
+curl
 "
 
 # Install packages

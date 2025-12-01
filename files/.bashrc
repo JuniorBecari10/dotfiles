@@ -21,6 +21,47 @@ alias ff='fastfetch'
 alias fsi='dotnet fsi'
 alias fsx='fsi'
 
+# xbps aliases
+
+# Install
+alias xbi='sudo xbps-install'
+
+# Install from source
+alias xsrc='sudo xbps-src'
+
+# Remove
+alias xbr='sudo xbps-remove'
+
+# Search package (repo)
+alias xbs='xbps-query -Rs'
+
+# Search installed packages
+alias xbss='xbps-query -l | grep -i'
+
+# Show package info
+alias xbq='xbps-query -R'
+
+# Update repo index
+alias xbup='sudo xbps-install -S'
+
+# Upgrade system
+alias xbug='sudo xbps-install -Su'
+
+# Or do both update+upgrade in one
+alias xbfull='sudo xbps-install -Suv'
+
+# Reconfigure (like dpkg-reconfigure)
+alias xbrec='sudo xbps-reconfigure -f'
+
+# List orphaned packages
+alias xbo='xbps-query -O'
+
+# Remove orphaned packages
+alias xr='sudo xbps-remove -Oo'
+
+# Explain why something is installed
+alias xw='xbps-query -x'
+
 # git add, commit
 gac() {
     # check if inside a git repo
@@ -153,7 +194,7 @@ sv-disable() {
     fi
 }
 
-// ----------------------------
+# ----------------------------
 
 # Disable Ctrl-Z binding
 stty susp undef

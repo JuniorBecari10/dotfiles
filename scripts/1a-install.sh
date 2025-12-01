@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Source settings
-. ./settings/general.sh
-. ./settings/passwords.sh
+. ./config/general.sh
+. ./config/passwords.sh
 
 # Set up filesystems
 mkfs.vfat -F32 "$BOOT_PART"
@@ -36,11 +36,11 @@ EOF
 
 # Copy the general settings file into the installation
 # The chroot script automatically deletes it.
-cp ./settings/general.sh /mnt
+cp ./config/general.sh /mnt
 chmod +x /mnt/general.sh
 
 # Chroot into the system and run the the configuration commands
-cat ./settings/general.sh ./settings/passwords.sh 1b-chroot.sh | chroot /mnt /bin/sh -s
+cat ./config/general.sh ./config/passwords.sh 1b-chroot.sh | chroot /mnt /bin/sh -s
 
 # Remove the script from there
 rm /mnt/general.sh

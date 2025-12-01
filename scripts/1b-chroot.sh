@@ -42,7 +42,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 git clone "$REPO_URL" "$HOME/dotfiles"
 
 # Copy it and then delete
-cp -f /general.sh "$HOME/dotfiles/settings/general.sh"
+cp -f /general.sh "$HOME/dotfiles/config/general.sh"
 rm -rf /general.sh
 
 # Set up config files

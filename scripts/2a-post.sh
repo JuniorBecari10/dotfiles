@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Source settings
-. ./settings/general.sh
+. ./config/general.sh
 
 # Install Flatpak apps
 ./scripts/2b-flatpak.sh

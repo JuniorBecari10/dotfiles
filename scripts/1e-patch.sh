@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Source configs
-. ./settings/general.sh
+. ./config/general.sh
 
 HOME="/home/$USERNAME"
 CONFIG="$HOME/.config"

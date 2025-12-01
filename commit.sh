@@ -3,7 +3,7 @@
 # This is essentially the opposite of 'patch.sh'.
 
 # Source configs
-. ./settings/general.sh
+. ./config/general.sh
 
 HOME="/home/$USERNAME"
 DOTFILES="$HOME/dotfiles/files"

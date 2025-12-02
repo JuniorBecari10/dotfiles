@@ -6,8 +6,8 @@
 [[ $- != *i* ]] && return
 
 alias grep='grep --color=auto'
-alias cgrep='grep --color=always -e "^" -e'
-alias rngrep='grep -rn'
+alias grepc='grep --color=always -e "^" -e'
+alias greprn='grep -rn'
 
 alias feh='feh --geometry 1100x700'
 alias fehe='feh --edit'
@@ -24,40 +24,40 @@ alias fsx='fsi'
 # xbps aliases
 
 # Install
-alias xbi='sudo xbps-install'
+alias xi='sudo xbps-install'
 
 # Install from source
 alias xsrc='sudo xbps-src'
 
 # Remove
-alias xbr='sudo xbps-remove'
+alias xr='sudo xbps-remove'
 
 # Search package (repo)
-alias xbs='xbps-query -Rs'
+alias xs='xbps-query -Rs'
 
 # Search installed packages
-alias xbss='xbps-query -l | grep -i'
+alias xsi='xbps-query -l | grep -i'
 
 # Show package info
-alias xbq='xbps-query -R'
+alias xq='xbps-query -R'
 
 # Update repo index
-alias xbup='sudo xbps-install -S'
+alias xup='sudo xbps-install -S'
 
 # Upgrade system
-alias xbug='sudo xbps-install -Su'
+alias xuall='sudo xbps-install -Su'
 
 # Or do both update+upgrade in one
-alias xbfull='sudo xbps-install -Suv'
+alias xufull='sudo xbps-install -Suv'
 
-# Reconfigure (like dpkg-reconfigure)
-alias xbrec='sudo xbps-reconfigure -f'
+# Reconfigure
+alias xrec='sudo xbps-reconfigure -f'
 
 # List orphaned packages
-alias xbo='xbps-query -O'
+alias xo='xbps-query -O'
 
 # Remove orphaned packages
-alias xr='sudo xbps-remove -Oo'
+alias xro='sudo xbps-remove -Oo'
 
 # Explain why something is installed
 alias xw='xbps-query -x'

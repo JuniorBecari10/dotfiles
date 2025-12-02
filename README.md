@@ -87,8 +87,8 @@ Keybinding|Action
 **Command**|**Alias to**|**Description**
 ---|---|---
 `grep`|`grep --color=auto`|Regular `grep` with color.
-`cgrep`|`grep --color=always -e "^" -e`|Regular `grep`, but only print matching lines.
-`rngrep`|`grep -rn`|Traverses recursively and prints file and line/number info of all matches.
+`grepc`|`grep --color=always -e "^" -e`|Regular `grep`, but only print matching lines.
+`greprn`|`grep -rn`|Traverses recursively and prints file and line/number info of all matches.
 `feh`|`feh --geometry 1100x700`|Regular `feh`, but with set window bounds.
 `fehe`|`feh --edit`|`feh` with image edit mode toggled on.
 `ls`|`ls --color=auto`|Regular `ls` with color.

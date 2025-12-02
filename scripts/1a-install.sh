@@ -11,12 +11,17 @@ mkfs.ext4 "$MAIN_PART"
 
 # Mount partitions
 mount "$MAIN_PART" /mnt
-mount --mkdir "$BOOT_PART" /mnt/boot
+mount --mkdir "$BOOT_PART" /mnt/boot/efi
 swapon "$SWAP_PART"
 
 # Perform base system installation
 REPO="https://repo-default.voidlinux.org/current"
 xbps-install -Sy -R "$REPO" -r /mnt base-system linux linux-firmware git vim grub-x86_64-efi efibootmgr base-devel
+
+# Enable some services (test without them first)
+# ln -s /etc/runit/sv/dbus /mnt/var/service/
+# ln -s /etc/runit/sv/acpid /mnt/var/service/
+# ln -s /etc/runit/sv/udevd /mnt/var/service/
 
 # Generate fstab
 xgenfstab -U /mnt > /mnt/etc/fstab

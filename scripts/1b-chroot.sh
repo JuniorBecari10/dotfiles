@@ -29,7 +29,7 @@ echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/99-wheel
 chmod 440 /etc/sudoers.d/99-wheel
 
 # Set up GRUB bootloader for UEFI
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id="Void"
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void"
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Finalize the core installation

@@ -16,7 +16,7 @@ swapon "$SWAP_PART"
 
 # Perform base system installation
 REPO="https://repo-default.voidlinux.org/current"
-xbps-install -Sy -R "$REPO" -r /mnt base-system linux linux-firmware git vim grub-x86_64-efi efibootmgr base-devel
+xbps-install -Sy -y -R "$REPO" -r /mnt base-system linux linux-firmware git vim grub-x86_64-efi efibootmgr base-devel
 
 # Enable some services (test without them first)
 # ln -s /etc/runit/sv/dbus /mnt/var/service/

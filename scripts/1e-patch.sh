@@ -26,5 +26,5 @@ chown -R "$USERNAME:$USERNAME" "$CONFIG"
 
 # Perform (again) the laptop changes if enabled
 if [ "$IS_LAPTOP" = true ]; then
-    ./scripts/odb-laptop_config.sh
+    "$DOTFILES/scripts/odb-laptop_config.sh"
 fi

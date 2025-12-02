@@ -2,5 +2,5 @@
 set -e
 
 xbps-install -Sy os-prober
-os-prober
-update-grub
+os-prober || true
+grub-mkconfig -o /boot/grub/grub.cfg

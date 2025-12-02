@@ -21,6 +21,8 @@ alias ff='fastfetch'
 alias fsi='dotnet fsi'
 alias fsx='fsi'
 
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+
 # xbps aliases
 
 # Install

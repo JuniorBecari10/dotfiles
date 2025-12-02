@@ -46,6 +46,7 @@ adwaita-icon-theme adwaita-qt
 flatpak
 vlc
 curl
+dracut
 "
 
 # Install packages

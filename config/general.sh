@@ -15,6 +15,7 @@ USERNAME="antonio"
 INSTALL_NVIDIA_DRIVERS=true
 IS_DUAL_BOOT=false
 IS_LAPTOP=false
+USE_GRUB_REMOVABLE=false
 
 # Git Data
 GIT_USERNAME="Antônio Carlos"

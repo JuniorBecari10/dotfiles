@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 # Source settings
 . config/general.sh
@@ -7,11 +8,12 @@
 # Set up filesystems
 mkfs.fat -F32 "$BOOT_PART"
 mkswap "$SWAP_PART"
-yes | mkfs.ext4 "$MAIN_PART"
+mkfs.ext4 -F "$MAIN_PART"
 
 # Mount partitions
 mount "$MAIN_PART" /mnt
-mount --mkdir "$BOOT_PART" /mnt/boot/efi
+mkdir -p /mnt/boot/efi
+mount "$BOOT_PART" /mnt/boot/efi
 swapon "$SWAP_PART"
 
 # Perform base system installation
@@ -22,7 +24,7 @@ yes | xbps-install -Sy -R "$REPO" -r /mnt base-system linux linux-firmware git v
 xgenfstab -U /mnt > /mnt/etc/fstab
 
 # Copy the general settings file into the installation; the chroot script automatically deletes it.
-cp config/general.sh /mnt
+cp config/general.sh /mnt/general.sh
 chmod +x /mnt/general.sh
 
 # Chroot into the system and run the the configuration commands

@@ -5,7 +5,6 @@ nvidia
 nvidia-libs
 dkms
 linux-headers
-dracut
 "
 
 # Update repo index and install packages

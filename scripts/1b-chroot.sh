@@ -1,7 +1,8 @@
 #!/bin/sh
+set -e
 
 REPO_URL="https://github.com/JuniorBecari10/dotfiles"
-HOME="/home/$USERNAME"
+export HOME="/home/$USERNAME"
 
 # Sync date (São Paulo, Brazil: UTC-3). Hardware clock doesn't need to be set here.
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
@@ -29,8 +30,26 @@ echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/99-wheel
 chmod 440 /etc/sudoers.d/99-wheel
 
 # Set up GRUB bootloader for UEFI
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void"
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void" --recheck ${USE_GRUB_REMOVABLE:+--removable}
+
 grub-mkconfig -o /boot/grub/grub.cfg
+
+# Fallback to create an efibootmgr entry
+ESP_DEVICE="$(findmnt /boot/efi -o SOURCE -n)"
+DISK="/dev/$(lsblk -no pkname "$ESP_DEVICE")"
+PART="$(lsblk -no PARTNUM "$ESP_DEVICE")"
+
+if command -v efibootmgr >/dev/null 2>&1; then
+    efibootmgr -c \
+        -d "$DISK" \
+        -p "$PART" \
+        -L "Void" \
+        -l '\EFI\Void\grubx64.efi' || true
+fi
+
+# Absolute fallback for buggy firmware (Boot/bootx64.efi)
+mkdir -p /boot/efi/EFI/Boot
+cp -f /boot/efi/EFI/Void/grubx64.efi /boot/efi/EFI/Boot/bootx64.efi
 
 # Finalize the core installation
 xbps-reconfigure -fa

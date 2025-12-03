@@ -64,6 +64,9 @@ alias xro='sudo xbps-remove -Oo'
 # Explain why something is installed
 alias xw='xbps-query -x'
 
+# Update xbps itself
+alias xix='xbps-install -u xbps'
+
 # git add, commit
 gac() {
     # check if inside a git repo

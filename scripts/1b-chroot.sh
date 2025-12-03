@@ -39,23 +39,6 @@ grub-install \
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Fallback to create an efibootmgr entry
-ESP_DEVICE="$(findmnt /boot -o SOURCE -n)"
-DISK="/dev/$(lsblk -no pkname "$ESP_DEVICE")"
-PART="$(lsblk -no PARTNUM "$ESP_DEVICE")"
-
-if command -v efibootmgr >/dev/null 2>&1; then
-    efibootmgr -c \
-        -d "$DISK" \
-        -p "$PART" \
-        -L "Void" \
-        -l '\EFI\Void\grubx64.efi' || true
-fi
-
-# Absolute fallback for buggy firmware (Boot/bootx64.efi)
-mkdir -p /boot/EFI/Boot
-cp -f /boot/EFI/Void/grubx64.efi /boot/EFI/Boot/bootx64.efi
-
 # Finalize the core installation
 xbps-reconfigure -fa
 

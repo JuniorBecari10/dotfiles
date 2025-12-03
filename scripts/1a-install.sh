@@ -12,8 +12,8 @@ mkfs.ext4 -F "$MAIN_PART"
 
 # Mount partitions
 mount "$MAIN_PART" /mnt
-mkdir -p /mnt/boot/efi
-mount "$BOOT_PART" /mnt/boot/efi
+mkdir -p /mnt/boot
+mount "$BOOT_PART" /mnt/boot
 swapon "$SWAP_PART"
 
 # Perform base system installation

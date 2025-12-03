@@ -21,21 +21,26 @@ echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
 echo "$HOSTNAME" > /etc/hostname
 echo "root:$ROOT_PASS" | chpasswd
 
-# Set up user and user password, adding it to the 'wheel' group
+# Set up user and add it to the 'wheel' group
 useradd -m -G wheel -s /bin/bash "$USERNAME"
 echo "$USERNAME:$USER_PASS" | chpasswd
 
-# Enable sudo for 'wheel' group
+# Enable sudo for wheel
 echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/99-wheel
 chmod 440 /etc/sudoers.d/99-wheel
 
 # Set up GRUB bootloader for UEFI
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void" --recheck ${USE_GRUB_REMOVABLE:+--removable}
+grub-install \
+    --target=x86_64-efi \
+    --efi-directory=/boot \
+    --bootloader-id="Void" \
+    --recheck \
+    ${USE_GRUB_REMOVABLE:+--removable}
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Fallback to create an efibootmgr entry
-ESP_DEVICE="$(findmnt /boot/efi -o SOURCE -n)"
+ESP_DEVICE="$(findmnt /boot -o SOURCE -n)"
 DISK="/dev/$(lsblk -no pkname "$ESP_DEVICE")"
 PART="$(lsblk -no PARTNUM "$ESP_DEVICE")"
 
@@ -48,43 +53,27 @@ if command -v efibootmgr >/dev/null 2>&1; then
 fi
 
 # Absolute fallback for buggy firmware (Boot/bootx64.efi)
-mkdir -p /boot/efi/EFI/Boot
-cp -f /boot/efi/EFI/Void/grubx64.efi /boot/efi/EFI/Boot/bootx64.efi
+mkdir -p /boot/EFI/Boot
+cp -f /boot/EFI/Void/grubx64.efi /boot/EFI/Boot/bootx64.efi
 
 # Finalize the core installation
 xbps-reconfigure -fa
 
-# ---
-
-# Download dotfiles folder to perform post-installation
+# Download dotfiles
 git clone "$REPO_URL" "$HOME/dotfiles"
 
-# Set up config files
+# Run config scripts
 "$HOME/dotfiles/scripts/1c-xbps.sh"
 "$HOME/dotfiles/scripts/1d-services.sh"
 "$HOME/dotfiles/scripts/1e-patch.sh"
 
-# Move user configs to the installation's dotfiles folder
 mv -f /general.sh "$HOME/dotfiles/config/general.sh"
 
-# Optional Installations
+# Optional installs
+[ "$INSTALL_NVIDIA_DRIVERS" = true ] && "$HOME/dotfiles/scripts/oa-nvidia_drivers.sh"
+[ "$INSTALL_YAY" = true ] && "$HOME/dotfiles/scripts/ob-install_yay.sh"
+[ "$IS_DUAL_BOOT" = true ] && "$HOME/dotfiles/scripts/oc-dual_boot.sh"
 
-# a. Install NVIDIA drivers
-if [ "$INSTALL_NVIDIA_DRIVERS" = true ]; then
-    "$HOME/dotfiles/scripts/oa-nvidia_drivers.sh"
-fi
-
-# b. Install Yay
-if [ "$INSTALL_YAY" = true ]; then
-    "$HOME/dotfiles/scripts/ob-install_yay.sh"
-fi
-
-# c. Dual Boot
-if [ "$IS_DUAL_BOOT" = true ]; then
-    "$HOME/dotfiles/scripts/oc-dual_boot.sh"
-fi
-
-# d. Laptop
 if [ "$IS_LAPTOP" = true ]; then
     "$HOME/dotfiles/scripts/oda-laptop_install.sh"
     "$HOME/dotfiles/scripts/odb-laptop_config.sh"

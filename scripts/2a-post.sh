@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 # Source settings
 . ./config/general.sh

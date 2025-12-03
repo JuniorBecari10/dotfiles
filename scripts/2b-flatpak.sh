@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 # List of Flatpak packages to install
 FLATPAK_PACKAGES=(

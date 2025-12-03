@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 # Source configs from the copied file
 . /general.sh

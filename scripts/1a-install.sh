@@ -14,7 +14,7 @@ mkfs.ext4 -F "$MAIN_PART"
 mount "$MAIN_PART" /mnt
 mkdir -p /mnt/boot
 mount "$BOOT_PART" /mnt/boot
-swapon "$SWAP_PART"
+swapon "$SWAP_PART" || true
 
 # Perform base system installation
 REPO="https://repo-default.voidlinux.org/current"

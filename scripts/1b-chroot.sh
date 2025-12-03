@@ -17,14 +17,18 @@ xbps-reconfigure -f glibc-locales
 echo "LANG=pt_BR.UTF-8" > /etc/locale.conf
 echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
 
-# Set up hostname and root password
+# Set up hostname
 echo "$HOSTNAME" > /etc/hostname
-passwd -u root || true
+
+# Set up root password
+passwd -d root 2>/dev/null || true
+passwd -u root 2>/dev/null || true
 printf "root:%s\n" "$ROOT_PASS" | chpasswd
 
 # Set up user and add it to the 'wheel' group
 useradd -m -G wheel -s /bin/bash "$USERNAME" || true
-passwd -u "$USERNAME" || true
+passwd -d "$USERNAME" 2>/dev/null || true
+passwd -u "$USERNAME" 2>/dev/null || true
 printf "%s:%s\n" "$USERNAME" "$USER_PASS" | chpasswd
 
 # Enable sudo for wheel

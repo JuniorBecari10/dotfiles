@@ -22,6 +22,7 @@ and it's already there for you to sync your configurations.
 - **Display Manager**: LightDM GTK Greeter
 - **Bootloader**: GRUB
 - **Code Editor**: Neovim / NVChad
+- **Audio Manager**: PipeWire
 - **Terminal Emulator**: kitty
 - **Compositor**: picom
 - **Init System**: runit
@@ -86,8 +87,8 @@ Keybinding|Action
 
 **Command**|**Alias to**|**Description**
 ---|---|---
-`grep`|`grep --color=auto`|Regular `grep` with color.
-`grepc`|`grep --color=always -e "^" -e`|Regular `grep`, but only print matching lines.
+`grep`|`grep --color=auto`|Regular `grep` with color. It only prints matching lines.
+`grepc`|`grep --color=always -e "^" -e`|Regular `grep`, but print all lines, highlighting the matches.
 `greprn`|`grep -rn`|Traverses recursively and prints file and line/number info of all matches.
 `feh`|`feh --geometry 1100x700`|Regular `feh`, but with set window bounds.
 `fehe`|`feh --edit`|`feh` with image edit mode toggled on.
@@ -110,7 +111,6 @@ Keybinding|Action
 `xpaste`|`xclip -selection clipboard -o`.
 `sv-enable <svc>`|`sudo ln -sf "/etc/sv/<svc>" /var/service/`.
 `sv-disable <svc>`|`sudo rm "/var/service/<svc>"`.
-_(internal)_ `parse_git_branch`|Prints the current branch and `*` in front of it if it's _dirty_.
 
 ### System tray icons
 

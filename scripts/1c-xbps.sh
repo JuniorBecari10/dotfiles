@@ -47,6 +47,7 @@ flatpak
 vlc
 curl
 dracut
+dbus elogind
 "
 
 # Install packages

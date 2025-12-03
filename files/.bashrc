@@ -41,16 +41,16 @@ alias xs='xbps-query -Rs'
 alias xsi='xbps-query -l | grep -i'
 
 # Show package info
-alias xq='xbps-query -R'
-
-# Update repo index
-alias xup='sudo xbps-install -S'
+alias xpi='xbps-query -R'
 
 # Upgrade system
-alias xuall='sudo xbps-install -Su'
+alias xsu='sudo xbps-install -Su'
 
 # Or do both update+upgrade in one
-alias xufull='sudo xbps-install -Suv'
+alias xsuv='sudo xbps-install -Suv'
+
+# Update xbps itself
+alias xix='xbps-install -u xbps'
 
 # Reconfigure
 alias xrec='sudo xbps-reconfigure -f'
@@ -63,9 +63,6 @@ alias xro='sudo xbps-remove -Oo'
 
 # Explain why something is installed
 alias xw='xbps-query -x'
-
-# Update xbps itself
-alias xix='xbps-install -u xbps'
 
 # git add, commit
 gac() {

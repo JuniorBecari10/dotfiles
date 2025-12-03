@@ -19,12 +19,12 @@ echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
 
 # Set up hostname and root password
 echo "$HOSTNAME" > /etc/hostname
-passwd -u root
+passwd -u root || true
 printf "root:%s\n" "$ROOT_PASS" | chpasswd
 
 # Set up user and add it to the 'wheel' group
-useradd -m -G wheel -s /bin/bash "$USERNAME"
-passwd -u "$USERNAME"
+useradd -m -G wheel -s /bin/bash "$USERNAME" || true
+passwd -u "$USERNAME" || true
 printf "%s:%s\n" "$USERNAME" "$USER_PASS" | chpasswd
 
 # Enable sudo for wheel

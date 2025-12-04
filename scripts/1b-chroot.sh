@@ -38,7 +38,7 @@ chmod 440 /etc/sudoers.d/99-wheel
 # Set up GRUB bootloader for UEFI
 grub-install \
     --target=x86_64-efi \
-    --efi-directory=/boot \
+    --efi-directory=/boot/efi \
     --bootloader-id="Void" \
     --recheck \
     ${USE_GRUB_REMOVABLE:+--removable}

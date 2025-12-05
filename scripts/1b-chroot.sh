@@ -22,7 +22,7 @@ echo "$HOSTNAME" > /etc/hostname
 printf "%s\n%s\n" "$ROOT_PASS" "$ROOT_PASS" | passwd
 
 # Set up user and add it to the 'wheel' group
-useradd -m -g users -G wheel,video,audio,input,plugdev -s /bin/bash "$USERNAME"
+useradd -m -g users -G wheel,video,audio,input,plugdev,network -s /bin/bash "$USERNAME"
 printf "%s\n%s\n" "$USER_PASS" "$USER_PASS" | passwd "$USERNAME"
 
 # Enable sudo for wheel

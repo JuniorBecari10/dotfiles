@@ -1,12 +1,22 @@
 #!/bin/sh
 
 options="⏻ Shutdown\n Reboot\n Suspend\n Logout\n Lock"
-choice=$(echo -e "$options" | rofi -dmenu -i -p "Power")
+choice=$(printf "%b" "$options" | rofi -dmenu -i -p "Power")
 
 case "$choice" in
-  "⏻ Shutdown") systemctl poweroff ;;
-  " Reboot") systemctl reboot ;;
-  " Suspend") systemctl suspend ;;
-  " Logout") i3-msg exit ;;
-  " Lock") i3lock ;;
+  "⏻ Shutdown")
+    loginctl poweroff 2>/dev/null || /sbin/poweroff
+    ;;
+  " Reboot")
+    loginctl reboot 2>/dev/null || /sbin/reboot
+    ;;
+  " Suspend")
+    loginctl suspend 2>/dev/null || echo mem > /sys/power/state
+    ;;
+  " Logout")
+    i3-msg exit
+    ;;
+  " Lock")
+    i3lock
+    ;;
 esac

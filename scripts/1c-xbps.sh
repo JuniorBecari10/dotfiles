@@ -34,7 +34,7 @@ unzip
 nodejs
 arandr
 xrandr
-pipewire wireplumber
+pipewire wireplumber alsa-pipewire
 xclip
 Thunar
 fastfetch

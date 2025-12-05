@@ -22,7 +22,7 @@ and it's already there for you to sync your configurations.
 - **Display Manager**: LightDM GTK Greeter
 - **Bootloader**: GRUB
 - **Code Editor**: Neovim / NVChad
-- **Audio Manager**: PipeWire
+- **Audio Server**: PipeWire
 - **Terminal Emulator**: kitty
 - **Compositor**: picom
 - **Init System**: runit

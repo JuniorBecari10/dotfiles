@@ -22,7 +22,7 @@ echo "$HOSTNAME" > /etc/hostname
 printf "%s\n%s\n" "$ROOT_PASS" "$ROOT_PASS" | passwd
 
 # Set up user and add it to the 'wheel' group
-useradd -m -G wheel -s /bin/bash "$USERNAME" || true
+useradd -m -g users -G wheel,video,audio,input,plugdev -s /bin/bash "$USERNAME"
 printf "%s\n%s\n" "$USER_PASS" "$USER_PASS" | passwd "$USERNAME"
 
 # Enable sudo for wheel
@@ -49,9 +49,11 @@ chown -R "$USERNAME:$USERNAME" "$HOME/dotfiles"
 # Run config scripts
 "$HOME/dotfiles/scripts/1c-xbps.sh"
 "$HOME/dotfiles/scripts/1d-services.sh"
-"$HOME/dotfiles/scripts/1e-patch.sh"
+"$HOME/dotfiles/scripts/1e-pipewire.sh"
+"$HOME/dotfiles/scripts/1f-patch.sh"
 
-mv -f /general.sh "$HOME/dotfiles/config/general.sh"
+# Delete config file
+rm -rf /general.sh
 
 # Optional installs
 [ "$INSTALL_NVIDIA_DRIVERS" = true ] && "$HOME/dotfiles/scripts/oa-nvidia_drivers.sh"

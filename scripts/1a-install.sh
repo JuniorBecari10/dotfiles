@@ -32,3 +32,4 @@ cat config/general.sh config/passwords.sh scripts/1b-chroot.sh | xchroot /mnt /b
 
 # Unmount all the drives under '/mnt'
 umount -R /mnt
+swapoff "$SWAP_PART"

@@ -23,46 +23,309 @@ alias fsx='fsi'
 
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
-# xbps aliases
+alias xcopy='x copy'
+alias xpaste='x paste'
 
-# Install
-alias xi='sudo xbps-install'
+# xbps/X11 helper
+# xbps + X11 helper command
+x() {
+    cmd="$1"
+    shift || true
 
-# Install from source
-alias xsrc='sudo xbps-src'
+    case "$cmd" in
+        # --- Core operations ---
+        install|i)
+            sudo xbps-install -S "$@"
+            ;;
+        install-yes|iy)
+            sudo xbps-install -Sy "$@"
+            ;;
+        src)
+            sudo xbps-src "$@"
+            ;;
+        remove|r)
+            sudo xbps-remove "$@"
+            ;;
+        search|s)
+            xbps-query -Rs "$@"
+            ;;
+        search-installed|si)
+            xbps-query -l | grep -i "$@"
+            ;;
+        info|q)
+            xbps-query -R "$@"
+            ;;
+        update|up)
+            sudo xbps-install -S
+            ;;
+        upgrade|u)
+            sudo xbps-install -Su
+            ;;
+        full-upgrade|fu)
+            sudo xbps-install -Suv
+            ;;
+        reconfigure|rec)
+            sudo xbps-reconfigure -f "$@"
+            ;;
 
-# Remove
-alias xr='sudo xbps-remove'
+        # --- Orphans ---
+        orphans|o)
+            xbps-query -O
+            ;;
+        remove-orphans|ro)
+            sudo xbps-remove -Oo
+            ;;
 
-# Search package (repo)
-alias xs='xbps-query -Rs'
+        # --- Dependency tools ---
+        deps|d)
+            xbps-query -d "$@"
+            ;;
+        rdeps|rd)
+            xbps-query -R -x "$@"
+            ;;
 
-# Search installed packages
-alias xsi='xbps-query -l | grep -i'
+        # --- File ownership ---
+        owns|f)
+            xbps-query -o "$@"
+            ;;
+        files|fl)
+            xbps-query -f "$@"
+            ;;
 
-# Show package info
-alias xpi='xbps-query -R'
+        # --- Repo management ---
+        replist|rl)
+            xbps-query -L
+            ;;
+        repadd|ra)
+            sudo xbps-query -A "$@"
+            ;;
+        repremove|rr)
+            sudo xbps-query -Rr "$@"
+            ;;
 
-# Upgrade system
-alias xsu='sudo xbps-install -Su'
+        # --- Updates ---
+        list-updates|lu)
+            xbps-install -nu 2>/dev/null | grep -v "already installed"
+            ;;
+        outdated|od)
+            xbps-install -nu | awk '/updating/'
+            ;;
 
-# Or do both update+upgrade in one
-alias xsuv='sudo xbps-install -Suv'
+        # --- Keyring ---
+        sync-keys|sk)
+            sudo xbps-install -S --sync-keyring
+            ;;
 
-# Update xbps itself
-alias xix='xbps-install -u xbps'
+        # --- Build helpers ---
+        clean-src|cs)
+            sudo xbps-src clean
+            ;;
+        show-template|st)
+            xbps-src show "$@"
+            ;;
 
-# Reconfigure
-alias xrec='sudo xbps-reconfigure -f'
+        # --- Logs ---
+        log|lg)
+            sudo less /var/log/xbps/xbps.log
+            ;;
 
-# List orphaned packages
-alias xo='xbps-query -O'
+        # --- Clipboard: copy / paste ---
+        copy|cp)
+            if [ -t 0 ]; then
+                printf "%s" "$*" | xclip -selection clipboard
+            else
+                xclip -selection clipboard
+            fi
+            ;;
+        paste|pt)
+            xclip -selection clipboard -o
+            ;;
 
-# Remove orphaned packages
-alias xro='sudo xbps-remove -Oo'
+        # --- Help ---
+        *)
+            cat <<EOF
+Usage: x <command> [arguments]
 
-# Explain why something is installed
-alias xw='xbps-query -x'
+===========================
+  XBPS PACKAGE MANAGEMENT
+===========================
+
+Install packages:
+  i, install <pkg>        Install a package (with repo sync)
+  iy, install-yes <pkg>   Install (auto-yes)
+
+Remove:
+  r, remove <pkg>         Remove a package
+
+Update & upgrade:
+  up, update              Update repo index
+  u, upgrade              Upgrade system
+  fu, full-upgrade        Update + upgrade + verbose
+
+Search & info:
+  s, search <name>        Search repo packages
+  si, search-installed    Search among installed pkgs
+  q, info <pkg>           Show package info
+
+Reconfigure:
+  rec, reconfigure <pkg>  Reconfigure a package
+
+===========================
+        ORPHANS
+===========================
+
+  o, orphans              List orphaned packages
+  ro, remove-orphans      Remove orphaned packages
+
+===========================
+     DEPENDENCY TOOLS
+===========================
+
+  d, deps <pkg>           Show dependencies
+  rd, rdeps <pkg>         Show reverse dependencies
+
+===========================
+     FILE OWNERSHIP
+===========================
+
+  f, owns <file>          Which package owns this file?
+  fl, files <pkg>         List files of a package
+
+===========================
+     REPOSITORY MGMT
+===========================
+
+  rl, replist             List repositories
+  ra, repadd <repo>       Add repository
+  rr, repremove <repo>    Remove repository
+
+===========================
+        UPDATES
+===========================
+
+  lu, list-updates        List packages that can update
+  od, outdated            Show outdated packages
+
+===========================
+         KEYRING
+===========================
+
+  sk, sync-keys           Sync keyring with repos
+
+===========================
+       BUILD HELPERS
+===========================
+
+  cs, clean-src           Clean xbps-src build files
+  st, show-template <pkg> Show template for a source pkg
+
+===========================
+          LOGS
+===========================
+
+  lg, log                 View XBPS log
+
+  CLIPBOARD TOOLS
+
+  cp, copy <text>         Copy text or piped input to clipboard
+  pt, paste               Paste from clipboard
+
+EOF
+            ;;
+    esac
+}
+
+
+sv() {
+    action="$1"
+    shift || true
+    svc="$1"
+
+    case "$action" in
+        # --- Enable / Disable services ---
+        enable)
+            [ -z "$svc" ] && echo "Usage: sv enable <service>" && return 1
+            [ ! -d "/etc/sv/$svc" ] && echo "Service '$svc' not found in /etc/sv/" && return 1
+            
+            sudo ln -sf "/etc/sv/$svc" /var/service/
+            echo "Enabled: $svc"
+            ;;
+
+        disable)
+            [ -z "$svc" ] && echo "Usage: sv disable <service>" && return 1
+            if [ -L "/var/service/$svc" ]; then
+                sudo rm "/var/service/$svc"
+                echo "Disabled: $svc"
+            else
+                echo "Service '$svc' was not enabled."
+            fi
+            ;;
+
+        # --- Standard runit controls ---
+        start|stop|restart|status|log)
+            [ -z "$svc" ] && echo "Usage: sv $action <service>" && return 1
+            sudo sv "$action" "$svc"
+            ;;
+
+        # --- Advanced runit controls ---
+        once|pause|cont|reload|hup|term|kill)
+            [ -z "$svc" ] && echo "Usage: sv $action <service>" && return 1
+            sudo sv "$action" "$svc"
+            ;;
+
+        # --- Listing helpers ---
+        list)
+            echo "Enabled services (in /var/service):"
+            ls -1 /var/service/
+            ;;
+
+        avail|list-available)
+            echo "Available services (in /etc/sv):"
+            ls -1 /etc/sv/
+            ;;
+
+        # --- Edit service run script ---
+        edit)
+            [ -z "$svc" ] && echo "Usage: sv edit <service>" && return 1
+            [ ! -f "/etc/sv/$svc/run" ] && echo "Service '$svc' has no run script" && return 1
+            ${EDITOR:-vim} "/etc/sv/$svc/run"
+            ;;
+
+        # --- Help ---
+        *)
+            cat <<EOF
+Usage: sv <command> [service]
+
+Enable / Disable:
+  sv enable <svc>      Enable service
+  sv disable <svc>     Disable service
+
+Basic Control:
+  sv start <svc>       Start service
+  sv stop <svc>        Stop service
+  sv restart <svc>     Restart service
+  sv status <svc>      Show service status
+  sv log <svc>         View logs
+
+Advanced:
+  sv once <svc>        Start once, no respawn
+  sv pause <svc>       Pause service
+  sv cont <svc>        Resume after pause
+  sv reload <svc>      Reload configuration
+  sv hup <svc>         Send HUP signal
+  sv term <svc>        Send TERM signal
+  sv kill <svc>        Kill service
+
+Listing:
+  sv list              List enabled services
+  sv avail             List available service definitions
+
+Editing:
+  sv edit <svc>        Edit the service run script (\$EDITOR)
+EOF
+            ;;
+    esac
+}
 
 # git add, commit
 gac() {
@@ -142,58 +405,6 @@ mkcd() {
 
     mkdir -p "$@"
     cd "$_"
-}
-
-# Copy to clipboard
-xcopy() {
-    # If text is piped: cb < file or echo "txt" | cb
-    if [ -t 0 ]; then
-        # No piped input → treat arguments as text
-        printf "%s" "$*" | xclip -selection clipboard
-    else
-        # Piped input
-        xclip -selection clipboard
-    fi
-}
-
-# Paste from clipboard
-xpaste() {
-    xclip -selection clipboard -o
-}
-
-# Enable a runit service
-sv-enable() {
-    local svc="$1"
-
-    if [ -z "$svc" ]; then
-        echo "Usage: sv-enable <service>"
-        return 1
-    fi
-
-    if [ ! -d "/etc/sv/$svc" ]; then
-        echo "Service '$svc' does not exist in /etc/sv/"
-        return 1
-    fi
-
-    sudo ln -sf "/etc/sv/$svc" /var/service/
-    echo "Enabled: $svc"
-}
-
-# Disable a runit service
-sv-disable() {
-    local svc="$1"
-
-    if [ -z "$svc" ]; then
-        echo "Usage: sv-disable <service>"
-        return 1
-    fi
-
-    if [ -L "/var/service/$svc" ]; then
-        sudo rm "/var/service/$svc"
-        echo "Disabled: $svc"
-    else
-        echo "Service '$svc' is not enabled."
-    fi
 }
 
 # ----------------------------

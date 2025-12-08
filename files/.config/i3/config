@@ -12,6 +12,11 @@ exec --no-startup-id dex --autostart --environment i3
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
+# Start PipeWire
+exec --no-startup-id pipewire
+exec --no-startup-id pipewire-pulse
+exec --no-startup-id wireplumber
+
 # Brightness control using brightnessctl (uncomment if you're in a laptop)
 # Ensure you have 'brightnessctl' installed (run 'od-laptop.sh', through the IS_LAPTOP flag to install it)
 

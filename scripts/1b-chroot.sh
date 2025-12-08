@@ -44,7 +44,7 @@ xbps-reconfigure -fa
 
 # Download dotfiles
 git clone "$REPO_URL" "$HOME/dotfiles"
-chown -R "$USERNAME:$USERNAME" "$HOME/dotfiles"
+chown -R "$USERNAME" "$HOME/dotfiles"
 
 # Run config scripts
 "$HOME/dotfiles/scripts/1c-xbps.sh"

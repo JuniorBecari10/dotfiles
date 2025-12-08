@@ -15,15 +15,15 @@ cp -n "$DOTFILES/files/.sl.sh" "$HOME/"
 cp -f "$DOTFILES/files/.xinitrc" "$HOME/"
 
 # Fix ownership
-chown "$USERNAME:$USERNAME" "$HOME/.bashrc" "$HOME/.sl.sh" "$HOME/.xinitrc"
+chown "$USERNAME" "$HOME/.bashrc" "$HOME/.sl.sh" "$HOME/.xinitrc"
 
 # Ensure ~/.config exists
 mkdir -p "$CONFIG"
-chown "$USERNAME:$USERNAME" "$CONFIG"
+chown "$USERNAME" "$CONFIG"
 
 # Copy everything inside '.config' to '~/.config'
 cp -rf "$DOTFILES/files/.config/"* "$CONFIG/"
-chown -R "$USERNAME:$USERNAME" "$CONFIG"
+chown -R "$USERNAME" "$CONFIG"
 
 # Perform (again) the laptop changes if enabled
 if [ "$IS_LAPTOP" = true ]; then

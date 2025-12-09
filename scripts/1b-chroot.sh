@@ -51,6 +51,7 @@ chown -R "$USERNAME" "$HOME/dotfiles"
 "$HOME/dotfiles/scripts/1d-services.sh"
 "$HOME/dotfiles/scripts/1e-pipewire.sh"
 "$HOME/dotfiles/scripts/1f-patch.sh"
+"$HOME/dotfiles/scripts/1g-flatpak.sh"
 
 # Delete config file
 rm -rf /general.sh

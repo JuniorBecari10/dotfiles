@@ -1,24 +1,13 @@
 #!/bin/sh
 set -e
 
-# Source settings
-. ./config/general.sh
-
-# Install Flatpak apps
-./scripts/2b-flatpak.sh
-
-# Create convenience folders
-mkdir -p ~/dev
-mkdir -p ~/docs
-mkdir -p ~/Downloads # Because of Firefox
+# Fix broken symlink for DNS
+ln -sf /run/NetworkManager/resolv.conf /etc/resolv.conf
 
 # Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)
 nvim --headless \
   +"set clipboard+=unnamedplus" \
   +qa
-
-# Start system tray volume icon in background
-volumeicon &
 
 # Set up git configurations
 git config --global user.name "$GIT_USERNAME"

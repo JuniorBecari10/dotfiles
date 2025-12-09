@@ -14,16 +14,18 @@ cp -f "$DOTFILES/files/.bashrc" "$HOME/"
 cp -n "$DOTFILES/files/.sl.sh" "$HOME/"
 cp -f "$DOTFILES/files/.xinitrc" "$HOME/"
 
-# Fix ownership
-chown "$USERNAME" "$HOME/.bashrc" "$HOME/.sl.sh" "$HOME/.xinitrc"
-
 # Ensure ~/.config exists
 mkdir -p "$CONFIG"
-chown "$USERNAME" "$CONFIG"
 
 # Copy everything inside '.config' to '~/.config'
 cp -rf "$DOTFILES/files/.config/"* "$CONFIG/"
-chown -R "$USERNAME" "$CONFIG"
+
+# Create convenience folders
+mkdir -p "$HOME/dev"
+mkdir -p "$HOME/docs"
+mkdir -p "$HOME/Downloads" # Because of Firefox
+
+chown -R "$USERNAME" "$HOME"
 
 # Perform (again) the laptop changes if enabled
 if [ "$IS_LAPTOP" = true ]; then

@@ -42,7 +42,7 @@ tree
 ripgrep
 xorg-fonts
 noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
-adwaita-icon-theme adwaita-qt
+adwaita-icon-theme adwaita-qt gsettings-desktop-schemas
 flatpak
 vlc
 curl

@@ -210,7 +210,7 @@ for_window [class="pavucontrol"] floating enable, resize set 900 600, move posit
 for_window [class="Arandr"] floating enable, resize set 900 600, move position center
 
 # Compositor
-exec --no-startup-id picom -c
+exec --no-startup-id picom --backend xrender -c
 
 # - Bindings -
 

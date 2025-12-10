@@ -8,11 +8,12 @@ HOME="/home/$USERNAME"
 DOTFILES="$HOME/dotfiles"
 CONFIG="$HOME/.config"
 
-# Copy '.bashrc', '.sl.sh' and '.xinitrc' to "$HOME"
+# Copy config files to "$HOME"
 # Don't replace existing '.sl.sh' if it already exists.
 cp -f "$DOTFILES/files/.bashrc" "$HOME/"
 cp -n "$DOTFILES/files/.sl.sh" "$HOME/"
 cp -f "$DOTFILES/files/.xinitrc" "$HOME/"
+cp -f "$DOTFILES/files/.xprofile" "$HOME/"
 
 # Ensure ~/.config exists
 mkdir -p "$CONFIG"
@@ -25,6 +26,7 @@ mkdir -p "$HOME/dev"
 mkdir -p "$HOME/docs"
 mkdir -p "$HOME/Downloads" # Because of Firefox
 
+# Give all the files inside ~ ownership to the user
 chown -R "$USERNAME" "$HOME"
 
 # Perform (again) the laptop changes if enabled

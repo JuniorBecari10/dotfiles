@@ -26,14 +26,14 @@ python3
 go
 github-cli
 volumeicon
-xorg xorg-server
-xinit
-yad
+xorg-minimal xdg-user-dirs xdg-utils
+xrandr xset xsetroot xrdb
+xmodmap xkbcomp
+yad polkit dunst
 lightdm lightdm-gtk-greeter
 unzip
 nodejs
 arandr
-xrandr
 pipewire wireplumber alsa-pipewire
 xclip
 Thunar

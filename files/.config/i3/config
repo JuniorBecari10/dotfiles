@@ -196,6 +196,9 @@ exec_always feh --bg-fill ~/.config/wallpaper.jpg
 # Setup Night Light
 exec --no-startup-id redshift
 
+# Setup volumeicon
+exec --no-startup-id volumeicon
+
 # Assign Firefox to second monitor (workspace 1)
 # And yad (calendar) to be floating (because of a bug)
 

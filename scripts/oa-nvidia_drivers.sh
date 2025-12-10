@@ -2,14 +2,16 @@
 set -e
 
 PACKAGES="
-nvidia
-nvidia-libs
-dkms
+nvidia-dkms
 linux-headers
+dkms
 "
+
+# Enable the nonfreepackage
+xbps-install -Sy void-repo-nonfree
 
 # Update repo index and install packages
 xbps-install -Sy $PACKAGES
 
-# Rebuild initramfs
-dracut --force
+# Regenerate initramfs
+xbps-reconfigure -fa

@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-# Fix broken symlink for DNS
-ln -sf /run/NetworkManager/resolv.conf /etc/resolv.conf
+# Perform network config as root
+sudo ./scripts/2b-network.sh
 
 # Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)
 nvim --headless \

@@ -29,7 +29,7 @@ volumeicon
 xorg xorg-server
 xinit
 yad
-lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
+lightdm lightdm-gtk-greeter
 unzip
 nodejs
 arandr
@@ -42,7 +42,7 @@ tree
 ripgrep
 xorg-fonts
 noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
-adwaita-icon-theme adwaita-qt gsettings-desktop-schemas
+adwaita-icon-theme adwaita-qt
 flatpak
 vlc
 curl

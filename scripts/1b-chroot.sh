@@ -58,10 +58,9 @@ rm -rf /general.sh
 
 # Optional installs
 [ "$INSTALL_NVIDIA_DRIVERS" = true ] && "$HOME/dotfiles/scripts/oa-nvidia_drivers.sh"
-[ "$INSTALL_YAY" = true ] && "$HOME/dotfiles/scripts/ob-install_yay.sh"
-[ "$IS_DUAL_BOOT" = true ] && "$HOME/dotfiles/scripts/oc-dual_boot.sh"
+[ "$IS_DUAL_BOOT" = true ] && "$HOME/dotfiles/scripts/ob-dual_boot.sh"
 
 if [ "$IS_LAPTOP" = true ]; then
-    "$HOME/dotfiles/scripts/oda-laptop_install.sh"
-    "$HOME/dotfiles/scripts/odb-laptop_config.sh"
+    "$HOME/dotfiles/scripts/oca-laptop_install.sh"
+    "$HOME/dotfiles/scripts/ocb-laptop_config.sh"
 fi

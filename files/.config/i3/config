@@ -213,9 +213,9 @@ for_window [class="pavucontrol"] floating enable, resize set 900 600, move posit
 for_window [class="Arandr"] floating enable, resize set 900 600, move position center
 
 # Compositor
-exec --no-startup-id picom --backend xrender -c
+exec --no-startup-id picom -c --config ~/.config/picom/picom.conf
 
-# - Bindings -
+# --- Bindings ---
 
 # Mod + Enter: Terminal (kitty)
 bindsym $mod+Return exec kitty

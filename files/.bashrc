@@ -146,10 +146,6 @@ x() {
             cat <<EOF
 Usage: x <command> [arguments]
 
-===========================
-  XBPS PACKAGE MANAGEMENT
-===========================
-
 Install packages:
   i, install <pkg>        Install a package (with repo sync)
   iy, install-yes <pkg>   Install (auto-yes)
@@ -170,63 +166,38 @@ Search & info:
 Reconfigure:
   rec, reconfigure <pkg>  Reconfigure a package
 
-===========================
-        ORPHANS
-===========================
-
+Orphans:
   o, orphans              List orphaned packages
   ro, remove-orphans      Remove orphaned packages
 
-===========================
-     DEPENDENCY TOOLS
-===========================
-
+Dependencies:
   d, deps <pkg>           Show dependencies
   rd, rdeps <pkg>         Show reverse dependencies
 
-===========================
-     FILE OWNERSHIP
-===========================
-
+File ownership:
   f, owns <file>          Which package owns this file?
   fl, files <pkg>         List files of a package
 
-===========================
-     REPOSITORY MGMT
-===========================
-
+Repository management:
   rl, replist             List repositories
   ra, repadd <repo>       Add repository
   rr, repremove <repo>    Remove repository
 
-===========================
-        UPDATES
-===========================
-
+Updates:
   lu, list-updates        List packages that can update
   od, outdated            Show outdated packages
 
-===========================
-         KEYRING
-===========================
-
+Keyring:
   sk, sync-keys           Sync keyring with repos
 
-===========================
-       BUILD HELPERS
-===========================
-
+Build helpers:
   cs, clean-src           Clean xbps-src build files
   st, show-template <pkg> Show template for a source pkg
 
-===========================
-          LOGS
-===========================
-
+Logs:
   lg, log                 View XBPS log
 
-  CLIPBOARD TOOLS
-
+CLIPBOARD TOOLS
   cp, copy <text>         Copy text or piped input to clipboard
   pt, paste               Paste from clipboard
 

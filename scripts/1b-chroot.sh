@@ -54,9 +54,6 @@ chown -R "$USERNAME" "$HOME/dotfiles"
 "$HOME/dotfiles/scripts/1f-patch.sh"
 "$HOME/dotfiles/scripts/1g-flatpak.sh"
 
-# Delete config file
-rm -rf /general.sh
-
 # Optional installs
 [ "$INSTALL_NVIDIA_DRIVERS" = true ] && "$HOME/dotfiles/scripts/oa-nvidia_drivers.sh"
 [ "$IS_DUAL_BOOT" = true ] && "$HOME/dotfiles/scripts/ob-dual_boot.sh"
@@ -65,3 +62,6 @@ if [ "$IS_LAPTOP" = true ]; then
     "$HOME/dotfiles/scripts/oca-laptop_install.sh"
     "$HOME/dotfiles/scripts/ocb-laptop_config.sh"
 fi
+
+# Delete config file
+rm -rf /general.sh

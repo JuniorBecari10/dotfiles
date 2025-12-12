@@ -40,7 +40,8 @@ grub-install \
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Finalize the core installation
-xbps-reconfigure -fa
+# Optimize if NVIDIA drivers option is enabled, so it builds the initramfs only once
+[ "$INSTALL_NVIDIA_DRIVERS" = false ] && xbps-reconfigure -fa
 
 # Download dotfiles
 git clone "$REPO_URL" "$HOME/dotfiles"

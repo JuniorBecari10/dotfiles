@@ -26,13 +26,11 @@ python3
 go
 github-cli
 volumeicon
-xorg-minimal xdg-user-dirs xdg-utils
-xrandr xset xsetroot xrdb
-xmodmap xkbcomp
-yad polkit dunst
+xorg yad polkit dunst
 lightdm lightdm-gtk-greeter
 unzip
 nodejs
+xrandr
 arandr
 pipewire wireplumber alsa-pipewire
 xclip
@@ -51,7 +49,7 @@ dbus elogind
 "
 
 # Install packages
-xbps-install -Sy $PACKAGES
+xbps-install -Syu $PACKAGES
 
 # Font variables
 FONT_DIR="/usr/share/fonts/TTF"

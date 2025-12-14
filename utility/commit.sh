@@ -18,6 +18,7 @@ cp -f "$HOME/.bashrc" "$DOTFILES/"
 cp -f "$HOME/.sl.sh" "$DOTFILES/"
 cp -f "$HOME/.xinitrc" "$DOTFILES/"
 cp -f "$HOME/.xprofile" "$DOTFILES/"
+cp -f "$HOME/.Xresources" "$DOTFILES/"
 
 # Move contents of ~/.config to dotfiles/.config
 cp -f "$HOME/.config/"* "$CONFIG/"

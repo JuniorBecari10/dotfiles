@@ -64,12 +64,13 @@ ask_password() {
 }
 
 ask_yesno() {
-    if dialog --yesno "$1" 7 50; then
-        echo true
+    if dialog --yesno "$1" 7 50 >/dev/tty 2>/dev/null; then
+        printf '%s\n' true
     else
-        echo false
+        printf '%s\n' false
     fi
 }
+
 
 # --- Menu Actions ---
 

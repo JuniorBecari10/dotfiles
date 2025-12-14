@@ -196,9 +196,6 @@ exec_always feh --bg-fill ~/.config/wallpaper.jpg
 # Setup Night Light
 exec --no-startup-id redshift
 
-# Setup volumeicon
-exec --no-startup-id volumeicon
-
 # Assign Firefox to second monitor (workspace 1)
 # And yad (calendar) to be floating (because of a bug)
 
@@ -213,7 +210,7 @@ for_window [class="pavucontrol"] floating enable, resize set 900 600, move posit
 for_window [class="Arandr"] floating enable, resize set 900 600, move position center
 
 # Compositor
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id xcompmgr -c -t-5 -l-5 -r4 -o.55
 
 # --- Bindings ---
 

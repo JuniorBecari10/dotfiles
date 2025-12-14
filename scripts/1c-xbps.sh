@@ -21,7 +21,7 @@ flameshot
 feh
 xfce4-clipman-plugin
 NetworkManager
-picom
+xcompmgr
 python3
 go
 github-cli

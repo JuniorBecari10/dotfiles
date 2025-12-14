@@ -1,5 +1,11 @@
 # dotfiles
 
+> ### TL;DR
+> The one-liner command to download and run the installer:
+> ```
+> sh -c "$(curl -fsSL https://tinyurl.com/jdotfiles)"
+> ```
+
 The dotfiles that I use in my personal Linux installation, along with some scripts to install them. <br />
 The configurations in this repository are highly opinionated for my personal use, and may not fit the best for your needs.
 
@@ -291,6 +297,18 @@ All of them are from [here](https://github.com/vivien/i3blocks-contrib).
 
 Before installing, make sure you have a stable internet connection. If you're using Wi-Fi, consider setupping it first using `iwctl`.
 
+### Automatic Installation
+At the start of this file there's an one-liner command to run the script that downloads this repository and runs the installer there is:
+```
+sh -c "$(curl -fsSL https://tinyurl.com/jdotfiles)"
+```
+> This is a shortened link. The real (long) one is this one: https://gist.githubusercontent.com/JuniorBecari10/37eafd061cd09c03ac4f35eb5ae690f8/raw/8fb31c32037c8a484ec8a7564ce66dd19aace900/installer.sh. <br>
+> It's hosted on GitHub Gist, because it's a single file, and it's independent from this repository.
+
+If you have already downloaded this repository, you just need to run `dotfiles/installer.sh`.
+
+### Manual Installation
+
 1. Boot up the Void Linux live CD _with glibc_;
 2. Set up the partitions using `cfdisk` according to this table (the script already handles the formatting):
    Type|Size|Format (FYI)
@@ -305,13 +323,16 @@ Before installing, make sure you have a stable internet connection. If you're us
 4. Get the `git` and `vim` (or `nano`) commands through `xbps-install -S git vim` (or `nano`). You may need to update xbps first by running `xbps-install -u xbps`.
 5. Clone the repository using `git clone https://github.com/JuniorBecari10/dotfiles` and enter into it using `cd dotfiles`;
 6. Certify that all scripts have the _execute_ permission through `ls -la`, also check in the `scripts` folder _(optional)_;
-7. Change your settings as you prefer by editing the `config/general.sh` and `config/passwords.sh` files, using the code editor you have downloaded.
+7. Change your settings as you prefer by editing the `config.sh` file, using the code editor you have downloaded.
 8. Once you are happy with your settings, run the `1-install.sh` script. Wait for it to complete. If there any errors, fix them (there's a section below called _Common Problems_ to explain some common errors and how to fix them), and if you think the error is in the installer, please open an Issue.
 9. Reboot your computer, and if necessary, change in your BIOS settings to boot up your Void installation. Its name will probably be `Void` (or just `GRUB`). Fix any issues related to BIOS and booting, if necessary. Check _Common Problems_ if you need more help.
 10. Log into i3 using your password.
 11. Open the terminal (press `Mod (Windows key)` + `Enter`), enter the `dotfiles` folder (`cd dotfiles`) and run `2-post.sh`. It will perform some system changes, and will ask you for root permission; just type your password to allow it. It will open Firefox, there you can log into your account, and follow the instructions in the terminal to log into Git with your GitHub account.
 
 You're good to go.
+
+### Even more manual installation
+You may also want to run the commands separately, or even audit the entire installer. If you want to do this, open the files (and edit them if you want) and do it.
 
 ## Optional Installations
 

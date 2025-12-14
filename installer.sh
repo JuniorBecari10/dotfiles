@@ -2,7 +2,7 @@
 
 CONFIG="./config.sh"
 
-# --- Load config or create defaults ---
+# Load config or create defaults
 if [ -f "$CONFIG" ]; then
     . "$CONFIG"
 else
@@ -11,17 +11,17 @@ BOOT_PART="/dev/sda1"
 SWAP_PART="/dev/sda2"
 MAIN_PART="/dev/sda3"
 
-HOSTNAME="host-pc"
-USERNAME="user"
+HOSTNAME="antonio-pc"
+USERNAME="antonio"
 
-INSTALL_NVIDIA_DRIVERS=true
+INSTALL_NVIDIA_DRIVERS=false
 IS_DUAL_BOOT=false
 IS_LAPTOP=false
 USE_GRUB_REMOVABLE=false
 BLUETOOTH=false
 
-GIT_USERNAME="Git user"
-GIT_EMAIL="email@git.com"
+GIT_USERNAME="Antônio Carlos"
+GIT_EMAIL="antonioocarlos@proton.me"
 
 ROOT_PASS=""
 USER_PASS=""
@@ -53,7 +53,7 @@ USER_PASS="$USER_PASS"
 EOF
 }
 
-# --- Dialog helpers ---
+# Dialog helpers
 
 ask() {
     dialog --inputbox "$1" 10 50 "$2" 2>&1 >/dev/tty
@@ -72,7 +72,7 @@ ask_yesno() {
 }
 
 
-# --- Menu Actions ---
+# Menu Actions
 
 partition_disks() {
     dialog --msgbox "Launching cfdisk. Partition your disks.\n\nPress ENTER to continue." 8 50
@@ -144,12 +144,43 @@ do_install() {
     clear
     ./1-install.sh
 
-    dialog --msgbox "Installation complete! You can now reboot your system." 7 50
-    clear
-    exit 0
+    while true; do
+        CHOICE=$(dialog --clear --stdout \
+            --title "Installation Complete!" \
+            --menu "Choose what to do next:" 15 60 5 \
+            1 "Exit installer" \
+            2 "Reboot system now" \
+            3 "Continue in chroot")
+
+        case "$CHOICE" in
+            1)
+                clear
+                exit 0
+                ;;
+            2)
+                clear
+                reboot
+                ;;
+            3)
+                clear
+
+                # Source settings
+                . config.sh
+
+                # Re-mount partitions
+                mount "$MAIN_PART" /mnt
+                mkdir -p /mnt/boot/efi
+                mount "$BOOT_PART" /mnt/boot/efi
+                swapon "$SWAP_PART" || true
+            
+                xchroot /mnt /bin/bash
+                ;;
+        esac
+    done
 }
 
-# --- Main Menu ---
+# Main Menu
+
 main_menu() {
     while true; do
         CHOICE=$(dialog --clear --stdout --title "Installer Menu" --menu "Choose an option:" 18 60 10 \

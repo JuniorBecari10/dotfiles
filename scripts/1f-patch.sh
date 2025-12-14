@@ -2,7 +2,7 @@
 set -e
 
 # Source configs from the copied file
-. /general.sh
+. /config.sh
 
 HOME="/home/$USERNAME"
 DOTFILES="$HOME/dotfiles"

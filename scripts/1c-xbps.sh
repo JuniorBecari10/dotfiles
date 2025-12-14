@@ -32,7 +32,7 @@ unzip
 nodejs
 xrandr
 arandr
-pipewire wireplumber alsa-pipewire
+pipewire alsa-pipewire
 xclip
 Thunar
 fastfetch
@@ -40,7 +40,7 @@ tree
 ripgrep
 xorg-fonts
 noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
-adwaita-icon-theme adwaita-qt
+gtk+3 adwaita-qt
 flatpak
 vlc htop
 curl

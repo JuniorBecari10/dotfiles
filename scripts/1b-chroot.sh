@@ -37,7 +37,9 @@ grub-install \
     --recheck \
     ${USE_GRUB_REMOVABLE:+--removable}
 
-grub-mkconfig -o /boot/grub/grub.cfg
+# Run 
+[ "$IS_DUAL_BOOT" = false ] && grub-mkconfig -o /boot/grub/grub.cfg
+[ "$IS_DUAL_BOOT" = true ] && "$HOME/dotfiles/scripts/ob-dual_boot.sh"
 
 # Download dotfiles
 git clone "$REPO_URL" "$HOME/dotfiles"
@@ -51,7 +53,7 @@ chown -R "$USERNAME" "$HOME/dotfiles"
 "$HOME/dotfiles/scripts/1g-flatpak.sh"
 
 # Optional installs
-[ "$IS_DUAL_BOOT" = true ] && "$HOME/dotfiles/scripts/ob-dual_boot.sh"
+[ "$BLUETOOTH" = true ] && "$HOME/dotfiles/scripts/od-bluetooth.sh"
 
 if [ "$IS_LAPTOP" = true ]; then
     "$HOME/dotfiles/scripts/oca-laptop_install.sh"

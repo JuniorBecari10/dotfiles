@@ -23,8 +23,18 @@ alias fsx='fsi'
 
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
-alias xcopy='x copy'
-alias xpaste='x paste'
+# Clipboard helper functions
+xcopy() {
+    if [ -t 0 ]; then
+        printf "%s" "$*" | xclip -selection clipboard
+    else
+        xclip -selection clipboard
+    fi
+}
+
+xpaste() {
+    xclip -selection clipboard -o
+}
 
 # xbps/X11 helper
 # xbps + X11 helper command
@@ -34,112 +44,48 @@ x() {
 
     case "$cmd" in
         # --- Core operations ---
-        install|i)
-            sudo xbps-install -S "$@"
-            ;;
-        install-yes|iy)
-            sudo xbps-install -Sy "$@"
-            ;;
-        src)
-            sudo xbps-src "$@"
-            ;;
-        remove|r)
-            sudo xbps-remove "$@"
-            ;;
-        search|s)
-            xbps-query -Rs "$@"
-            ;;
-        search-installed|si)
-            xbps-query -l | grep -i "$@"
-            ;;
-        info|q)
-            xbps-query -R "$@"
-            ;;
-        update|up)
-            sudo xbps-install -S
-            ;;
-        upgrade|u)
-            sudo xbps-install -Su
-            ;;
-        full-upgrade|fu)
-            sudo xbps-install -Suv
-            ;;
-        reconfigure|rec)
-            sudo xbps-reconfigure -f "$@"
-            ;;
+        install|i)            sudo xbps-install -S "$@" ;;
+        install-yes|iy)       sudo xbps-install -Sy "$@" ;;
+        src)                  sudo xbps-src "$@" ;;
+        remove|r)             sudo xbps-remove "$@" ;;
+        search|s)             xbps-query -Rs "$@" ;;
+        search-installed|si)  xbps-query -l | grep -i "$@" ;;
+        info|q)               xbps-query -R "$@" ;;
+        update|up)            sudo xbps-install -S ;;
+        upgrade|u)            sudo xbps-install -Su ;;
+        full-upgrade|fu)      sudo xbps-install -Suv ;;
+        reconfigure|rec)      sudo xbps-reconfigure -f "$@" ;;
 
         # --- Orphans ---
-        orphans|o)
-            xbps-query -O
-            ;;
-        remove-orphans|ro)
-            sudo xbps-remove -Oo
-            ;;
+        orphans|o)            xbps-query -O ;;
+        remove-orphans|ro)    sudo xbps-remove -Oo ;;
 
         # --- Dependency tools ---
-        deps|d)
-            xbps-query -d "$@"
-            ;;
-        rdeps|rd)
-            xbps-query -R -x "$@"
-            ;;
+        deps|d)               xbps-query -d "$@" ;;
+        rdeps|rd)             xbps-query -R -x "$@" ;;
 
         # --- File ownership ---
-        owns|f)
-            xbps-query -o "$@"
-            ;;
-        files|fl)
-            xbps-query -f "$@"
-            ;;
+        owns|f)               xbps-query -o "$@" ;;
+        files|fl)             xbps-query -f "$@" ;;
 
         # --- Repo management ---
-        replist|rl)
-            xbps-query -L
-            ;;
-        repadd|ra)
-            sudo xbps-query -A "$@"
-            ;;
-        repremove|rr)
-            sudo xbps-query -Rr "$@"
-            ;;
+        replist|rl)           xbps-query -L ;;
+        repadd|ra)            sudo xbps-query -A "$@" ;;
+        repremove|rr)         sudo xbps-query -Rr "$@" ;;
 
         # --- Updates ---
-        list-updates|lu)
-            xbps-install -nu 2>/dev/null | grep -v "already installed"
-            ;;
-        outdated|od)
-            xbps-install -nu | awk '/updating/'
-            ;;
+        list-updates|lu)      xbps-install -nu 2>/dev/null | grep -v "already installed" ;;
+        outdated|od)          xbps-install -nu | awk '/updating/' ;;
 
         # --- Keyring ---
-        sync-keys|sk)
-            sudo xbps-install -S --sync-keyring
-            ;;
+        sync-keys|sk)         sudo xbps-install -S --sync-keyring ;;
 
         # --- Build helpers ---
-        clean-src|cs)
-            sudo xbps-src clean
-            ;;
-        show-template|st)
-            xbps-src show "$@"
-            ;;
+        clean-src|cs)         sudo xbps-src clean ;;
+        show-template|st)     xbps-src show "$@" ;;
 
         # --- Logs ---
-        log|lg)
-            sudo less /var/log/xbps/xbps.log
-            ;;
-
-        # --- Clipboard: copy / paste ---
-        copy|cp)
-            if [ -t 0 ]; then
-                printf "%s" "$*" | xclip -selection clipboard
-            else
-                xclip -selection clipboard
-            fi
-            ;;
-        paste|pt)
-            xclip -selection clipboard -o
-            ;;
+        log|lg)               sudo less /var/log/xbps/xbps.log ;;
 
         # --- Help ---
         *)
@@ -196,10 +142,6 @@ Build helpers:
 
 Logs:
   lg, log                 View XBPS log
-
-CLIPBOARD TOOLS
-  cp, copy <text>         Copy text or piped input to clipboard
-  pt, paste               Paste from clipboard
 
 EOF
             ;;

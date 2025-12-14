@@ -1,14 +1,11 @@
 # dotfiles
 
-The dotfiles that I use in my personal Linux PC, along with some scripts to install them. <br />
+The dotfiles that I use in my personal Linux installation, along with some scripts to install them. <br />
 The configurations in this repository are highly opinionated for my personal use, and may not fit the best for your needs.
 
-You are free to edit the files yourself to fit better your needs.
+You are free to edit the files yourself to your own desire.
 
 The scripts this repository has can replicate exactly my personal Void Linux installation and configuration on any PC that can run it.
-
-The Void Linux installation itself is very minimal, installing roughly X packages, with no WM or DE. <br />
-When the WM and the programs are installed, the number of packages goes up to roughly Y (Xorg has many dependencies).
 
 This repository is meant to be kept in your home (`~`) folder even after the installation is complete, because you may want to make changes to it,
 and it's already there for you to sync your configurations.
@@ -17,14 +14,14 @@ and it's already there for you to sync your configurations.
 
 - **Distro**: Void Linux / _glibc_
 - **Window Manager**: i3
-- **Bar**: i3blocks with custom blocks
+- **Bar**: i3blocks
 - **Lock Screen**: i3lock
 - **Display Manager**: LightDM GTK Greeter
 - **Bootloader**: GRUB
 - **Code Editor**: Neovim / NVChad
 - **Audio Server**: PipeWire
 - **Terminal Emulator**: kitty
-- **Compositor**: picom
+- **Compositor**: xcompmgr
 - **Init System**: runit
 
 ### My wallpaper:
@@ -109,8 +106,147 @@ Keybinding|Action
 `mkcd <path>`|`mkdir -p <path>` and `cd <path>`.
 `xcopy`|`xclip -selection clipboard`.
 `xpaste`|`xclip -selection clipboard -o`.
-`sv-enable <svc>`|`sudo ln -sf "/etc/sv/<svc>" /var/service/`.
-`sv-disable <svc>`|`sudo rm "/var/service/<svc>"`.
+
+### Custom utilities
+
+#### `x` — XBPS wrapper
+
+##### Install packages
+
+| Command             | Arguments | Description                        |
+| --------------------- | --------- | ---------------------------------- |
+| `i`, `install`      | `<pkg>`   | Install a package (with repo sync) |
+| `iy`, `install-yes` | `<pkg>`   | Install a package (auto-yes)       |
+
+##### Remove
+
+| Command       | Arguments | Description      |
+| --------------- | --------- | ---------------- |
+| `r`, `remove` | `<pkg>`   | Remove a package |
+
+##### Update & upgrade
+
+| Command              | Arguments | Description                |
+| ---------------------- | --------- | -------------------------- |
+| `up`, `update`       | —         | Update repository index    |
+| `u`, `upgrade`       | —         | Upgrade system             |
+| `fu`, `full-upgrade` | —         | Update + upgrade + verbose |
+
+##### Search & info
+
+| Command                  | Arguments | Description                     |
+| -------------------------- | --------- | ------------------------------- |
+| `s`, `search`            | `<name>`  | Search repository packages      |
+| `si`, `search-installed` | —         | Search among installed packages |
+| `q`, `info`              | `<pkg>`   | Show package information        |
+
+##### Reconfigure
+
+| Command              | Arguments | Description           |
+| ---------------------- | --------- | --------------------- |
+| `rec`, `reconfigure` | `<pkg>`   | Reconfigure a package |
+
+##### Orphans
+
+| Command                | Arguments | Description              |
+| ------------------------ | --------- | ------------------------ |
+| `o`, `orphans`         | —         | List orphaned packages   |
+| `ro`, `remove-orphans` | —         | Remove orphaned packages |
+
+##### Dependencies
+
+| Command       | Arguments | Description               |
+| --------------- | --------- | ------------------------- |
+| `d`, `deps`   | `<pkg>`   | Show dependencies         |
+| `rd`, `rdeps` | `<pkg>`   | Show reverse dependencies |
+
+##### File ownership
+
+| Command       | Arguments | Description                       |
+| --------------- | --------- | --------------------------------- |
+| `f`, `owns`   | `<file>`  | Show which package owns a file    |
+| `fl`, `files` | `<pkg>`   | List files installed by a package |
+
+##### Repository management
+
+| Command           | Arguments | Description                  |
+| ------------------- | --------- | ---------------------------- |
+| `rl`, `replist`   | —         | List configured repositories |
+| `ra`, `repadd`    | `<repo>`  | Add a repository             |
+| `rr`, `repremove` | `<repo>`  | Remove a repository          |
+
+##### Updates
+
+| Command              | Arguments | Description                       |
+| ---------------------- | --------- | --------------------------------- |
+| `lu`, `list-updates` | —         | List packages that can be updated |
+| `od`, `outdated`     | —         | Show outdated packages            |
+
+##### Keyring
+
+| Command           | Arguments | Description                    |
+| ------------------- | --------- | ------------------------------ |
+| `sk`, `sync-keys` | —         | Sync keyring with repositories |
+
+##### Build helpers
+
+| Command               | Arguments | Description                        |
+| ----------------------- | --------- | ---------------------------------- |
+| `cs`, `clean-src`     | —         | Clean `xbps-src` build files       |
+| `st`, `show-template` | `<pkg>`   | Show template for a source package |
+
+##### Logs
+
+| Command     | Arguments | Description   |
+| ------------- | --------- | ------------- |
+| `lg`, `log` | —         | View XBPS log |
+
+---
+
+#### `sv` — runit service control
+
+##### Enable / Disable
+
+| Command   | Arguments | Description       |
+| ----------- | --------- | ----------------- |
+| `enable`  | `<svc>`   | Enable a service  |
+| `disable` | `<svc>`   | Disable a service |
+
+##### Basic control
+
+| Command   | Arguments | Description         |
+| ----------- | --------- | ------------------- |
+| `start`   | `<svc>`   | Start a service     |
+| `stop`    | `<svc>`   | Stop a service      |
+| `restart` | `<svc>`   | Restart a service   |
+| `status`  | `<svc>`   | Show service status |
+| `log`     | `<svc>`   | View service logs   |
+
+##### Advanced
+
+| Command  | Arguments | Description                  |
+| ---------- | --------- | ---------------------------- |
+| `once`   | `<svc>`   | Start once (no respawn)      |
+| `pause`  | `<svc>`   | Pause a service              |
+| `cont`   | `<svc>`   | Resume a paused service      |
+| `reload` | `<svc>`   | Reload service configuration |
+| `hup`    | `<svc>`   | Send HUP signal              |
+| `term`   | `<svc>`   | Send TERM signal             |
+| `kill`   | `<svc>`   | Kill a service               |
+
+##### Listing
+
+| Command | Arguments | Description                        |
+| --------- | --------- | ---------------------------------- |
+| `list`  | —         | List enabled services              |
+| `avail` | —         | List available service definitions |
+
+##### Editing
+
+| Command | Arguments | Description                             |
+| --------- | --------- | --------------------------------------- |
+| `edit`  | `<svc>`   | Edit the service run script (`$EDITOR`) |
+> Use this as `EDITOR=<editor> sv edit <svc>`.
 
 ### System tray icons
 
@@ -166,14 +302,14 @@ Before installing, make sure you have a stable internet connection. If you're us
    Take notes of the names of the partitions and their functions;
    > Remember: running this command will destroy any data you have inside the partitions,
    > so if you have meaningful data in there, consider make a backup first.
-4. Get the `git` command through `xbps-install -Sy git`.
+4. Get the `git` and `vim` (or `nano`) commands through `xbps-install -S git vim` (or `nano`). You may need to update xbps first by running `xbps-install -u xbps`.
 5. Clone the repository using `git clone https://github.com/JuniorBecari10/dotfiles` and enter into it using `cd dotfiles`;
-6. Certify that all scripts have the _execute_ permission through `ls -la`, also check in the `scripts` folder;
-7. Change your settings as you prefer by editing the `settings/general.sh` and `settings/passwords.sh` files.
-8. Once you are happy with your settings, run the `install.sh` script.
-9. Reboot your computer, and if necessary, change in your BIOS settings to boot up your Void installation. Its name will probably be `Void`. Fix any issues related to BIOS and booting, if necessary. Check _Common Problems_ if you need more help.
+6. Certify that all scripts have the _execute_ permission through `ls -la`, also check in the `scripts` folder _(optional)_;
+7. Change your settings as you prefer by editing the `config/general.sh` and `config/passwords.sh` files, using the code editor you have downloaded.
+8. Once you are happy with your settings, run the `1-install.sh` script. Wait for it to complete. If there any errors, fix them (there's a section below called _Common Problems_ to explain some common errors and how to fix them), and if you think the error is in the installer, please open an Issue.
+9. Reboot your computer, and if necessary, change in your BIOS settings to boot up your Void installation. Its name will probably be `Void` (or just `GRUB`). Fix any issues related to BIOS and booting, if necessary. Check _Common Problems_ if you need more help.
 10. Log into i3 using your password.
-11. Open the terminal (press `Mod (Win)` + `Enter`), enter the `dotfiles` folder (`cd dotfiles`) and run `post.sh` with `sudo`. It will open Firefox, log into your account, and follow the instructions in the terminal to log Git into your GitHub account.
+11. Open the terminal (press `Mod (Windows key)` + `Enter`), enter the `dotfiles` folder (`cd dotfiles`) and run `2-post.sh`. It will perform some system changes, and will ask you for root permission; just type your password to allow it. It will open Firefox, there you can log into your account, and follow the instructions in the terminal to log into Git with your GitHub account.
 
 You're good to go.
 
@@ -182,17 +318,16 @@ You're good to go.
 This script allows you to perform optional installations as well. Here's what they are, and what they do.
 
 ### Install NVIDIA drivers
-Installs NVIDIA drivers into your system.
+Installs NVIDIA drivers into your system. Note that this installs the proprietary drivers (not the open-source `nouveau`), and thus it needs to enable the `nonfree` repository.
 
 ### Is Dual Boot
-Enables `os-prober` and runs it during the GRUB configuration, so that your other OSs can also be booted up. <br />
-This configuration has an extra variable, OTHER_EFI_PART, which is the EFI partition of the other operating system you want to dual boot too. This is necessary, since `os-prober` doesn't usually find it if it's unmounted, so it'll be used to mount it temporarily, run `os-prober`, and then unmount.
-
-If you haven't checked this option that variable has no use, and therefore it won't hrm your installation. <br />
-In the future this might be an array.
+Enables `os-prober` and runs it during the GRUB configuration, so that your other OSs can also be selected.
 
 ### Is Laptop
-Installs and configures laptop-specific stuff, such as brightness control, extra blocks in i3blocks, such as charging and brightness state.
+Installs and configures laptop-specific stuff, such as brightness control and extra blocks in i3blocks, such as charging and brightness state.
+
+### Bluetooth
+Enables support for Bluetooth technology. Obviously, only enable this option if your device supports Bluetooth.
 
 ## Common Problems
 
@@ -206,23 +341,22 @@ Some computers may have this problem. Here's the steps to fix it.
 2. Remember the number of the partition that you installed GRUB (the 1 GiB one), select its filesystem, and select to `\EFI\Void\grubx64.efi`. Name the entry with the name of your choice;
 3. Save the changes.
 
-Now it should work.
+Now it should work. It not, you may want to enable the `GRUB_REMOVABLE` option, but if you have other OSs installed, this may remove their bootloader from the BIOS menu
 
 ### `os-prober` didn't find my other OS
 
-This script is prepared for this case, but if it still fails, do the following:
-
-> Note: this is exactly what the script does, but if it's done manually, one can troubleshoot better the problem and fix it.
+> `os-prober` may fail to detect other OSs if they aren't mounted. So, you may want to mount them manually and run the utility while mounted. The steps to perform it are below:
 
 1. Boot up again the Void Linux live CD;
 2. _Chroot_ into your installation;
     1. Mount the main partition into `/mnt`: `mount /dev/sdX /mnt`, where `X` is your partition number;
-    2. Mount the EFI (boot) partition into `/mnt/boot/efi`: `mount /dev/sdX /mnt/boot/efi`, where `X` is your partition number;
-    3. Run `chroot /mnt`;
+    2. Mount the boot partition into `/mnt/boot/efi`: `mount /dev/sdX /mnt/boot/efi`, where `X` is your partition number;
+    3. Run `xchroot /mnt`;
 3. Mount the other OS' EFI partition, if it's only one, you can mount it directly into `/mnt`, otherwise, create subfolders, and mount each OS in one of them. It's important that all OSs are mounted at the same time. `mount /dev/sdX /mnt`;
 4. Run `os-prober`, make sure it's run as `root`;
-5. It should print the name of the other OSs. If so, patch the changes into GRUB by typing the following commands, and then, you're good to go. Exit the chroot, and reboot your computer. In the GRUB menu the other OSs should be listed.
-```
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=Void
-grub-mkconfig -o /boot/grub/grub.cfg
-```
+5. It should print the name of the other OSs. If so, patch the changes into GRUB by typing the following commands:
+    ```
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=Void
+    grub-mkconfig -o /boot/grub/grub.cfg
+    ```
+6. Exit the chroot, and reboot your computer. In the GRUB menu the other OSs should be listed.

@@ -80,6 +80,7 @@ Keybinding|Action
 `Ctrl + PrintScr`                 | Flameshot fullscreen screenshot to file (`~/Pictures`)
 `Mod + N`                         | Lock screen with `i3lock`
 `Mod + G`                         | Open Thunar file explorer
+`Mod + Shift + G`                 | Open Rofi emoji selector
 `Mod + X`                         | Open Firefox
 `Mod + P`                         | Open Power menu using Rofi
 

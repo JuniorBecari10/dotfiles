@@ -233,6 +233,9 @@ bindsym $mod+n exec --no-startup-id i3lock
 # Mod + G: File Explorer (Thunar)
 bindsym $mod+g exec thunar
 
+# Mod + Shift + G: Rofi Emoji Picker
+bindsym $mod+Shift+g exec --no-startup-id rofi-emoji -c -t
+
 # Mod + X: Firefox
 bindsym $mod+x exec firefox
 

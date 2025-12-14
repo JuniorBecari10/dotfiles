@@ -11,7 +11,7 @@ PACKAGES="
 i3 i3blocks i3lock
 kitty
 neovim
-rofi rofi-calc
+rofi rofi-calc rofi-emoji
 redshift
 git
 pavucontrol
@@ -26,7 +26,9 @@ python3
 go
 github-cli
 volumeicon
-xorg yad polkit dunst
+xorg-minimal xf86-input-libinput
+xinit fontconfig
+yad polkit dunst
 lightdm lightdm-gtk-greeter
 unzip
 nodejs
@@ -38,7 +40,6 @@ Thunar
 fastfetch
 tree
 ripgrep
-xorg-fonts
 noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
 gtk+3 adwaita-qt
 flatpak

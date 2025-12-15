@@ -2,7 +2,7 @@
 set -e
 
 # Source settings
-. config.sh
+. ./config.sh
 
 # Set up filesystems
 mkfs.fat -F32 "$BOOT_PART"
@@ -26,12 +26,12 @@ yes | xbps-install -Sy -R "$REPO" -r /mnt base-system linux linux-firmware git v
 # Generate fstab
 xgenfstab -U /mnt > /mnt/etc/fstab
 
-# Copy the general settings file into the installation; the chroot script automatically deletes it.
-cp config/general.sh /mnt/config.sh
+# Copy the settings file into the installation; the chroot script automatically deletes it.
+cp ./config.sh /mnt/config.sh
 chmod +x /mnt/config.sh
 
 # Chroot into the system and run the the configuration commands
-cat config.sh scripts/1b-chroot.sh | xchroot /mnt /bin/sh -s
+cat ./config.sh scripts/1b-chroot.sh | xchroot /mnt /bin/sh -s
 
 # Unmount all the drives under '/mnt'
 umount -R /mnt

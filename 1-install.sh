@@ -3,7 +3,7 @@
 set -e
 
 # Source settings
-. config.sh
+. ./config.sh
 
 if ./scripts/1a-install.sh; then
     echo "(!) Installation completed successfully!"

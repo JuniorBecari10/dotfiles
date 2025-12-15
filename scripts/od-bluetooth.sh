@@ -2,7 +2,7 @@
 set -e
 
 # Source configs from the copied file
-. /general.sh
+. /config.sh
 
 # This only installs 'blueman' for GUI management of Bluetooth devices.
 # If you prefer using 'bluetoothctl', please install it manually.

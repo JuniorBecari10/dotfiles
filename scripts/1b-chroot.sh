@@ -67,4 +67,4 @@ fi
 [ "$INSTALL_NVIDIA_DRIVERS" = false ] && xbps-reconfigure -fa
 
 # Delete config file
-rm -rf /general.sh
+rm -rf /config.sh

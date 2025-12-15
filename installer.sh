@@ -1,5 +1,6 @@
 #!/bin/sh
 
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 CONFIG="./config.sh"
 
 # Load config or create defaults
@@ -144,7 +145,7 @@ do_install() {
 
     # Run installer and capture output
     (
-        cd dotfiles || exit 1
+        cd "$SCRIPT_DIR/dotfiles" || exit 1
         ./1-install.sh
     ) >"$LOGFILE" 2>&1
 

@@ -17,7 +17,7 @@ mount "$BOOT_PART" /mnt/boot/efi
 fallocate -l 4G /mnt/swapfile
 chmod 600 /mnt/swapfile
 mkswap /mnt/swapfile
-swapon /mnt/swapfile
+swapon /mnt/swapfile || true
 
 # Perform base system installation
 REPO="https://repo-default.voidlinux.org/current"

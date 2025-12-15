@@ -138,14 +138,27 @@ Git:
 
 do_install() {
     clear
-    cd dotfiles
-    ./1-install.sh
+
+    # Run installer from dotfiles directory safely
+    (
+        cd dotfiles || exit 1
+        ./1-install.sh
+    )
+    INSTALL_STATUS=$?
+
+    if [ "$INSTALL_STATUS" -ne 0 ]; then
+        dialog --title "Installation Failed" \
+               --msgbox "The installer exited with an error.\n\nCheck the logs or fix the issue and try again.\n\nYou are still in live mode." \
+               10 60
+        clear
+        return 1
+    fi
 
     while true; do
         CHOICE=$(dialog --clear --stdout \
             --title "Installation Complete!" \
             --menu "Choose what to do next:" 15 60 5 \
-            1 "Exit installer" \
+            1 "Exit installer (stay in live system)" \
             2 "Reboot system now" \
             3 "Continue in chroot")
 
@@ -161,16 +174,16 @@ do_install() {
             3)
                 clear
 
-                # Source settings
+                # Source settings (absolute / known location)
                 . config.sh
 
                 # Re-mount partitions
                 mount "$MAIN_PART" /mnt
                 mkdir -p /mnt/boot/efi
                 mount "$BOOT_PART" /mnt/boot/efi
-                swapon /mnt/swapfile
-            
-                xchroot /mnt /bin/bash
+                swapon /mnt/swapfile || true
+
+                xchroot /mnt /bin/sh
                 ;;
         esac
     done

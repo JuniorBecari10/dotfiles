@@ -9,8 +9,8 @@ if ./scripts/1a-install.sh; then
     echo "(!) Installation completed successfully!"
     echo "You may reboot your computer."
 else
+    swapoff /mnt/swapfile
     umount -R /mnt
-    swapoff "$SWAP_PART"
 
     echo "(X) Installation failed."
     echo "Check the log above for errors, fix them, and then run the installer again."

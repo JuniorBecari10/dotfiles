@@ -34,5 +34,5 @@ chmod +x /mnt/config.sh
 cat ./config.sh scripts/1b-chroot.sh | xchroot /mnt /bin/sh -s
 
 # Unmount all the drives under '/mnt'
-umount -R /mnt
 swapoff /mnt/swapfile
+umount -R /mnt

@@ -112,6 +112,12 @@ edit_system_flags() {
 }
 
 show_summary() {
+    if [ -n "$ROOT_PASS" ] && [ -n "$USER_PASS" ]; then
+        PASS_STATUS="set"
+    else
+        PASS_STATUS="not set"
+    fi
+
     dialog --msgbox "
 Partitions:
   BOOT: $BOOT_PART
@@ -120,6 +126,7 @@ Partitions:
 Users:
   Hostname: $HOSTNAME
   Username: $USERNAME
+  Passwords: $PASS_STATUS
 
 Options:
   NVIDIA drivers: $INSTALL_NVIDIA_DRIVERS
@@ -131,10 +138,18 @@ Options:
 Git:
   Username: $GIT_USERNAME
   Email: $GIT_EMAIL
-" 26 60
+" 27 60
 }
 
 do_install() {
+    if [ -z "$ROOT_PASS" ] || [ -z "$USER_PASS" ]; then
+        dialog --title "Missing Passwords" \
+               --msgbox "Root and user passwords are not set.\n\nPlease set BOTH passwords before installing." \
+               9 60
+        clear
+        return 1
+    fi
+
     clear
 
     LOGFILE="/tmp/installer.log"

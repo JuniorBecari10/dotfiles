@@ -1,5 +1,6 @@
 #!/bin/sh
-# Used to commit the configuration files that are on the computer to the local repository, so they can be committed to the remote one.
+# Used to commit the configuration files that are on the computer
+# to the local repository, so they can be committed to the remote one.
 # This is essentially the opposite of 'patch.sh'.
 set -e
 
@@ -20,8 +21,10 @@ cp -f "$HOME/.xinitrc" "$DOTFILES/"
 cp -f "$HOME/.xprofile" "$DOTFILES/"
 cp -f "$HOME/.Xresources" "$DOTFILES/"
 
-# Move contents of ~/.config to dotfiles/.config
+# Move contents of ~/.config to dotfiles/.config and
+# delete everything the repository doesn't track.
 cp -f "$HOME/.config/"* "$CONFIG/"
+git clean -fd "$CONFIG"
 
 # Fix ownership
 chown -R "$USERNAME" "$DOTFILES"

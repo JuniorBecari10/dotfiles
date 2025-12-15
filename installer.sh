@@ -74,11 +74,8 @@ ask_yesno() {
 # Menu Actions
 
 partition_disks() {
-    dialog --msgbox "Launching cfdisk. Partition your disks.\n\nPress ENTER to continue." 8 50
     clear
-
     cfdisk </dev/tty >/dev/tty 2>/dev/tty
-    dialog --msgbox "cfdisk closed. Returning to installer." 7 40
 }
 
 edit_partitions() {

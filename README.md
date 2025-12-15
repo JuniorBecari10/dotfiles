@@ -7,6 +7,8 @@
 > curl -fsSL https://tinyurl.com/dfvinstall | sh
 > ```
 > `dfvinstall` _means "Dotfiles Void Install"._ <br>
+> You may type it wrong, so I reserved `vdfinstall` as well, pointing to the same URL to avoid typos.
+>
 > If you use a Brazilian ABNT2 keyboard, you may find it useful to load it: `loadkeys br-abnt2`.
 
 The dotfiles that I use in my personal Linux installation, along with some scripts to install them. <br />

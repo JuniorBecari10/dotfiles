@@ -6,7 +6,8 @@
 > xbps-install -Syu xbps curl
 > curl -fsSL https://tinyurl.com/dfvinstall | sh
 > ```
-> `dfvinstall` _means "Dotfiles Void Install"._
+> `dfvinstall` _means "Dotfiles Void Install"._ <br>
+> If you use a Brazilian ABNT2 keyboard, you may find it useful to load it: `loadkeys br-abnt2`.
 
 The dotfiles that I use in my personal Linux installation, along with some scripts to install them. <br />
 The configurations in this repository are highly opinionated for my personal use, and may not fit the best for your needs.

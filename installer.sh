@@ -138,6 +138,7 @@ Git:
 
 do_install() {
     clear
+    cd dotfiles
     ./1-install.sh
 
     while true; do

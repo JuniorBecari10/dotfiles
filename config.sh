@@ -1,6 +1,5 @@
 BOOT_PART="/dev/sda1"
-SWAP_PART="/dev/sda2"
-MAIN_PART="/dev/sda3"
+MAIN_PART="/dev/sda2"
 
 HOSTNAME="antonio-pc"
 USERNAME="antonio"

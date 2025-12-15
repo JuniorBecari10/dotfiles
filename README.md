@@ -1,10 +1,12 @@
 # dotfiles
 
 > ### TL;DR
-> The one-liner command to download and run the installer:
+> The two-liner commands to download and run the installer:
 > ```
-> sh -c "$(curl -fsSL https://tinyurl.com/jdotfiles)"
+> xbps-install -Syu xbps curl
+> curl -fsSL https://tinyurl.com/dfvinstall | sh
 > ```
+> `dfvinstall` _means "Dotfiles Void Install"._
 
 The dotfiles that I use in my personal Linux installation, along with some scripts to install them. <br />
 The configurations in this repository are highly opinionated for my personal use, and may not fit the best for your needs.
@@ -296,16 +298,10 @@ All of them are from [here](https://github.com/vivien/i3blocks-contrib).
 
 ## How to Install
 
-Before installing, make sure you have a stable internet connection. If you're using Wi-Fi, consider setupping it first using `iwctl`.
+Before installing, make sure you have a stable internet connection. If you're using Wi-Fi, consider setupping it first using `wpa_cli` (`wpa_supplicant`).
 
 ### Automatic Installation
-At the start of this file there's an one-liner command to run the script that downloads this repository and runs the installer there is:
-```
-sh -c "$(curl -fsSL https://tinyurl.com/jdotfiles)"
-```
-> This is a shortened link. The real (long) one is this one: https://gist.githubusercontent.com/JuniorBecari10/37eafd061cd09c03ac4f35eb5ae690f8/raw/8fb31c32037c8a484ec8a7564ce66dd19aace900/installer.sh. <br>
-> It's hosted on GitHub Gist, because it's a single file, and it's independent from this repository.
-
+At the start of this file there's an one-liner command to run the script that downloads this repository and runs the installer. <br>
 If you have already downloaded this repository, you just need to run `dotfiles/installer.sh`.
 
 ### Manual Installation
@@ -315,13 +311,12 @@ If you have already downloaded this repository, you just need to run `dotfiles/i
    Type|Size|Format (FYI)
    ---|---|---
    Boot|1 GiB|FAT32
-   Swap|At least 2 GiB|Swap
    Main|However you like (usually the rest of your drive)|ext4
    
    Take notes of the names of the partitions and their functions;
    > Remember: running this command will destroy any data you have inside the partitions,
    > so if you have meaningful data in there, consider make a backup first.
-4. Get the `git` and `vim` (or `nano`) commands through `xbps-install -S git vim` (or `nano`). You may need to update xbps first by running `xbps-install -u xbps`.
+4. Get the `git` and `vim` (or `nano`) commands through `xbps-install -Syu xbps git vim` (or `nano`). `xbps` is there because it may need to be updated. If you're sure about it, then just run `xbps-install -S git vim`.
 5. Clone the repository using `git clone https://github.com/JuniorBecari10/dotfiles` and enter into it using `cd dotfiles`;
 6. Certify that all scripts have the _execute_ permission through `ls -la`, also check in the `scripts` folder _(optional)_;
 7. Change your settings as you prefer by editing the `config.sh` file, using the code editor you have downloaded.

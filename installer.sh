@@ -8,8 +8,7 @@ if [ -f "$CONFIG" ]; then
 else
 cat > "$CONFIG" <<EOF
 BOOT_PART="/dev/sda1"
-SWAP_PART="/dev/sda2"
-MAIN_PART="/dev/sda3"
+MAIN_PART="/dev/sda2"
 
 HOSTNAME="antonio-pc"
 USERNAME="antonio"
@@ -33,7 +32,6 @@ fi
 save_config() {
 cat > "$CONFIG" <<EOF
 BOOT_PART="$BOOT_PART"
-SWAP_PART="$SWAP_PART"
 MAIN_PART="$MAIN_PART"
 
 HOSTNAME="$HOSTNAME"
@@ -78,13 +76,12 @@ partition_disks() {
     dialog --msgbox "Launching cfdisk. Partition your disks.\n\nPress ENTER to continue." 8 50
     clear
 
-    cfdisk
+    cfdisk </dev/tty >/dev/tty 2>/dev/tty
     dialog --msgbox "cfdisk closed. Returning to installer." 7 40
 }
 
 edit_partitions() {
     BOOT_PART=$(ask "Boot partition (EFI)" "$BOOT_PART")
-    SWAP_PART=$(ask "Swap partition" "$SWAP_PART")
     MAIN_PART=$(ask "Root partition" "$MAIN_PART")
     save_config
 }
@@ -120,7 +117,6 @@ show_summary() {
     dialog --msgbox "
 Partitions:
   BOOT: $BOOT_PART
-  SWAP: $SWAP_PART
   ROOT: $MAIN_PART
 
 Users:
@@ -171,7 +167,7 @@ do_install() {
                 mount "$MAIN_PART" /mnt
                 mkdir -p /mnt/boot/efi
                 mount "$BOOT_PART" /mnt/boot/efi
-                swapon "$SWAP_PART" || true
+                swapon /mnt/swapfile
             
                 xchroot /mnt /bin/bash
                 ;;

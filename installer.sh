@@ -139,16 +139,23 @@ Git:
 do_install() {
     clear
 
-    # Run installer from dotfiles directory safely
+    LOGFILE="/tmp/installer.log"
+    : > "$LOGFILE"
+
+    # Run installer and capture output
     (
         cd dotfiles || exit 1
         ./1-install.sh
-    )
+    ) >"$LOGFILE" 2>&1
+
     INSTALL_STATUS=$?
 
     if [ "$INSTALL_STATUS" -ne 0 ]; then
         dialog --title "Installation Failed" \
-               --msgbox "The installer exited with an error.\n\nCheck the logs or fix the issue and try again.\n\nYou are still in live mode." \
+               --textbox "$LOGFILE" 20 80
+
+        dialog --title "Installer Error" \
+               --msgbox "The installer exited with an error.\n\nLog saved to:\n$LOGFILE\n\nYou are still in live mode." \
                10 60
         clear
         return 1
@@ -174,10 +181,8 @@ do_install() {
             3)
                 clear
 
-                # Source settings (absolute / known location)
                 . config.sh
 
-                # Re-mount partitions
                 mount "$MAIN_PART" /mnt
                 mkdir -p /mnt/boot/efi
                 mount "$BOOT_PART" /mnt/boot/efi

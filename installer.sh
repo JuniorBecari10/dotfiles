@@ -143,13 +143,14 @@ do_install() {
     LOGFILE="/tmp/installer.log"
     : > "$LOGFILE"
 
-    # Run installer and capture output
+    # Run installer with live output + logging
     (
-        cd "$SCRIPT_DIR/dotfiles" || exit 1
         ./1-install.sh
-    ) >"$LOGFILE" 2>&1
+        echo $? > /tmp/.install_status
+    ) 2>&1 | tee "$LOGFILE"
 
-    INSTALL_STATUS=$?
+    INSTALL_STATUS=$(cat /tmp/.install_status)
+    rm -f /tmp/.install_status
 
     if [ "$INSTALL_STATUS" -ne 0 ]; then
         dialog --title "Installation Failed" \

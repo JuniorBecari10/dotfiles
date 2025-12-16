@@ -34,5 +34,8 @@ chmod +x /mnt/config.sh
 cat ./config.sh scripts/1b-chroot.sh | xchroot /mnt /bin/sh -s
 
 # Unmount all the drives under '/mnt'
-swapoff /mnt/swapfile
-umount -R /mnt
+swapoff /mnt/swapfile 2>/dev/null || true
+if ! umount -R /mnt 2>/dev/null; then
+    echo "Normal unmount failed, using lazy unmount..."
+    umount -Rl /mnt
+fi

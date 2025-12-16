@@ -9,7 +9,7 @@ HOME="/home/$USERNAME"
 # List of packages to install
 PACKAGES="
 i3 i3blocks i3lock
-kitty
+kitty xterm
 neovim
 rofi rofi-calc rofi-emoji
 redshift
@@ -26,8 +26,8 @@ python3
 go
 github-cli
 volumeicon
-xorg-minimal xf86-input-libinput
-xinit fontconfig
+xorg-minimal xf86-input-libinput setxkbmap
+xinit fontconfig mesa-dri
 yad polkit dunst
 lightdm lightdm-gtk-greeter
 unzip

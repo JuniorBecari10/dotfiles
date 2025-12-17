@@ -48,6 +48,7 @@ x() {
         install-yes|iy)       sudo xbps-install -Sy "$@" ;;
         src)                  sudo xbps-src "$@" ;;
         remove|r)             sudo xbps-remove "$@" ;;
+        remove-yes|ry)        sudo xbps-remove -y "$@" ;;
         search|s)             xbps-query -Rs "$@" ;;
         search-installed|si)  xbps-query -l | grep -i "$@" ;;
         info|q)               xbps-query -R "$@" ;;
@@ -98,6 +99,7 @@ Install packages:
 
 Remove:
   r, remove <pkg>         Remove a package
+  ry, remove-yes <pkg>    Remove a package (auto-yes)
 
 Update & upgrade:
   up, update              Update repo index

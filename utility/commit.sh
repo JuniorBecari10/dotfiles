@@ -4,27 +4,23 @@
 # This is essentially the opposite of 'patch.sh'.
 set -e
 
-# Source configs
-. config.sh
-
-HOME="/home/$USERNAME"
-DOTFILES="$HOME/dotfiles/files"
+DOTFILES=~/dotfiles/files
 CONFIG="$DOTFILES/.config"
 
 # Make sure the destination exists
 mkdir -p "$CONFIG"
 
 # Copy dotfiles from home to dotfiles
-cp -f "$HOME/.bashrc" "$DOTFILES/"
-cp -f "$HOME/.sl.sh" "$DOTFILES/"
-cp -f "$HOME/.xinitrc" "$DOTFILES/"
-cp -f "$HOME/.xprofile" "$DOTFILES/"
-cp -f "$HOME/.Xresources" "$DOTFILES/"
+cp -f ~/.bashrc "$DOTFILES"
+cp -f ~/.sl.sh "$DOTFILES"
+cp -f ~/.xinitrc "$DOTFILES"
+cp -f ~/.xprofile "$DOTFILES"
+cp -f ~/.Xresources "$DOTFILES"
 
 # Move contents of ~/.config to dotfiles/.config and
 # delete everything the repository doesn't track.
-cp -f "$HOME/.config/"* "$CONFIG/"
+cp -f ~/.config/* "$CONFIG"
 git clean -fd "$CONFIG"
 
 # Fix ownership
-chown -R "$USERNAME" "$DOTFILES"
+chown -R "$USER" "$DOTFILES"

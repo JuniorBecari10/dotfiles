@@ -43,7 +43,7 @@ ripgrep
 noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
 gtk+3 adwaita-qt
 flatpak
-vlc htop
+htop
 curl
 dracut
 dbus elogind

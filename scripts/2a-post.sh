@@ -2,7 +2,10 @@
 set -e
 
 # Perform network config as root
-sudo ./scripts/2b-network.sh
+sudo ~/dotfiles/scripts/2b-network.sh
+
+# Install Flatpak apps
+~/dotfiles/scripts/2c-flatpak.sh
 
 # Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)
 nvim --headless \

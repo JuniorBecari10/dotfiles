@@ -47,8 +47,8 @@ x() {
         install|i)            sudo xbps-install -S "$@" ;;
         install-yes|iy)       sudo xbps-install -Sy "$@" ;;
         src)                  sudo xbps-src "$@" ;;
-        remove|r)             sudo xbps-remove "$@" ;;
-        remove-yes|ry)        sudo xbps-remove -y "$@" ;;
+        remove|r)             sudo xbps-remove "$@"; sudo xbps-remove -Ooy ;;
+        remove-yes|ry)        sudo xbps-remove -y "$@"; sudo xbps-remove -Ooy ;;
         search|s)             xbps-query -Rs "$@" ;;
         search-installed|si)  xbps-query -l | grep -i "$@" ;;
         info|q)               xbps-query -R "$@" ;;
@@ -58,8 +58,9 @@ x() {
         reconfigure|rec)      sudo xbps-reconfigure -f "$@" ;;
 
         # --- Orphans ---
-        orphans|o)            xbps-query -O ;;
-        remove-orphans|ro)    sudo xbps-remove -Oo ;;
+        orphans|o)              xbps-query -O ;;
+        remove-orphans|ro)      sudo xbps-remove -Oo ;;
+        remove-orphan-yes|roy) sudo xbps-remove -Ooy ;;
 
         # --- Dependency tools ---
         deps|d)               xbps-query -d "$@" ;;
@@ -94,56 +95,57 @@ x() {
 Usage: x <command> [arguments]
 
 Install packages:
-  i, install <pkg>        Install a package (with repo sync)
-  iy, install-yes <pkg>   Install (auto-yes)
+  i, install <pkg>          Install a package (with repo sync)
+  iy, install-yes <pkg>     Install (auto-yes)
 
 Remove:
-  r, remove <pkg>         Remove a package
-  ry, remove-yes <pkg>    Remove a package (auto-yes)
+  r, remove <pkg>           Remove a package
+  ry, remove-yes <pkg>      Remove a package (auto-yes)
 
 Update & upgrade:
-  up, update              Update repo index
-  u, upgrade              Upgrade system
-  fu, full-upgrade        Update + upgrade + verbose
+  up, update                Update repo index
+  u, upgrade                Upgrade system
+  fu, full-upgrade          Update + upgrade + verbose
 
 Search & info:
-  s, search <name>        Search repo packages
-  si, search-installed    Search among installed pkgs
-  q, info <pkg>           Show package info
+  s, search <name>          Search repo packages
+  si, search-installed      Search among installed pkgs
+  q, info <pkg>             Show package info
 
 Reconfigure:
-  rec, reconfigure <pkg>  Reconfigure a package
+  rec, reconfigure <pkg>    Reconfigure a package
 
 Orphans:
-  o, orphans              List orphaned packages
-  ro, remove-orphans      Remove orphaned packages
+  o, orphans                List orphaned packages
+  ro, remove-orphans        Remove orphaned packages
+  roy, remove-orphans-yes   Remove orphaned packages (auto-yes)
 
 Dependencies:
-  d, deps <pkg>           Show dependencies
-  rd, rdeps <pkg>         Show reverse dependencies
+  d, deps <pkg>             Show dependencies
+  rd, rdeps <pkg>           Show reverse dependencies
 
 File ownership:
-  f, owns <file>          Which package owns this file?
-  fl, files <pkg>         List files of a package
+  f, owns <file>            Which package owns this file?
+  fl, files <pkg>           List files of a package
 
 Repository management:
-  rl, replist             List repositories
-  ra, repadd <repo>       Add repository
-  rr, repremove <repo>    Remove repository
+  rl, replist               List repositories
+  ra, repadd <repo>         Add repository
+  rr, repremove <repo>      Remove repository
 
 Updates:
-  lu, list-updates        List packages that can update
-  od, outdated            Show outdated packages
+  lu, list-updates          List packages that can update
+  od, outdated              Show outdated packages
 
 Keyring:
-  sk, sync-keys           Sync keyring with repos
+  sk, sync-keys             Sync keyring with repos
 
 Build helpers:
-  cs, clean-src           Clean xbps-src build files
-  st, show-template <pkg> Show template for a source pkg
+  cs, clean-src             Clean xbps-src build files
+  st, show-template <pkg>   Show template for a source pkg
 
 Logs:
-  lg, log                 View XBPS log
+  lg, log                   View XBPS log
 
 EOF
             ;;

@@ -281,10 +281,6 @@ All of them are from [here](https://github.com/vivien/i3blocks-contrib).
 
 ## My Neovim extensions
 
-> **Note** <br />
->
-> They aren't installed out-of-the-box. The script is already there to handle them gracefully, but you still have to run `:MasonInstall <extension>`.
-
 - bash-language-server
 - clangd
 - css-lsp

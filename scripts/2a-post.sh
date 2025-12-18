@@ -6,6 +6,7 @@ sudo ~/dotfiles/scripts/2b-network.sh
 
 # Install Flatpak apps
 ~/dotfiles/scripts/2c-flatpak.sh
+~/dotfiles/scripts/2d-gtk.sh
 
 # Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)
 nvim --headless \

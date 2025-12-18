@@ -23,7 +23,7 @@ xfce4-clipman-plugin
 NetworkManager
 xcompmgr
 python3
-go
+go ripgrep
 github-cli
 volumeicon
 xorg-minimal xf86-input-libinput setxkbmap

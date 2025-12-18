@@ -14,7 +14,6 @@ cp -f "$DOTFILES/files/.bashrc" "$HOME/"
 cp -n "$DOTFILES/files/.sl.sh" "$HOME/"
 cp -f "$DOTFILES/files/.xinitrc" "$HOME/"
 cp -f "$DOTFILES/files/.xprofile" "$HOME/"
-cp -f "$DOTFILES/files/.profile" "$HOME/"
 cp -f "$DOTFILES/files/.Xresources" "$HOME/"
 
 # Ensure ~/.config exists

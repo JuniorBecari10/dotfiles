@@ -3,8 +3,6 @@ set -e
 
 # Perform network config as root
 sudo ~/dotfiles/scripts/2b-network.sh
-
-# Install Flatpak apps
 ~/dotfiles/scripts/2c-flatpak.sh
 ~/dotfiles/scripts/2d-gtk.sh
 

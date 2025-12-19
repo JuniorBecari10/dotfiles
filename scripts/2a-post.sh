@@ -25,6 +25,9 @@ git config --global pull.rebase true
 git config --global rebase.autoStash true
 git config --global push.autoSetupRemote true
 
+# Reset config.sh
+git restore ~/dotfiles/config.sh
+
 # Run Firefox in background, while the command below opens a tab in it
 # Meanwhile you can log into your account.
 firefox &

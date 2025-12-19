@@ -41,6 +41,27 @@ grub-install \
 git clone "$REPO_URL" "$HOME/dotfiles"
 chown -R "$USERNAME" "$HOME/dotfiles"
 
+# Write configs for post script
+cat > "$HOME/dotfiles/config.sh" <<EOF
+BOOT_PART="$BOOT_PART"
+MAIN_PART="$MAIN_PART"
+
+HOSTNAME="$HOSTNAME"
+USERNAME="$USERNAME"
+
+INSTALL_NVIDIA_DRIVERS=$INSTALL_NVIDIA_DRIVERS
+IS_DUAL_BOOT=$IS_DUAL_BOOT
+IS_LAPTOP=$IS_LAPTOP
+USE_GRUB_REMOVABLE=$USE_GRUB_REMOVABLE
+BLUETOOTH=$BLUETOOTH
+
+GIT_USERNAME="$GIT_USERNAME"
+GIT_EMAIL="$GIT_EMAIL"
+
+ROOT_PASS=""
+USER_PASS=""
+EOF
+
 [ "$IS_DUAL_BOOT" = false ] && grub-mkconfig -o /boot/grub/grub.cfg
 [ "$IS_DUAL_BOOT" = true ] && "$HOME/dotfiles/scripts/ob-dual_boot.sh"
 

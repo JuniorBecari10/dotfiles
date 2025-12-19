@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+# Source configs
+. ~/dotfiles/config.sh
+
 # Perform network config as root
 sudo ~/dotfiles/scripts/2b-network.sh
 

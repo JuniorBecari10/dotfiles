@@ -125,112 +125,118 @@ Keybinding|Action
 
 ##### Install packages
 
-| Command             | Arguments | Description                        |
-| --------------------- | --------- | ---------------------------------- |
-| `i`, `install`      | `<pkg>`   | Install a package (with repo sync) |
-| `iy`, `install-yes` | `<pkg>`   | Install a package (auto-yes)       |
+| Command                     | Arguments | Description                                    |
+| --------------------------- | --------- | ---------------------------------------------- |
+| `i`, `install`              | `<pkg>`   | Install packages (with repo sync)              |
+| `iy`, `install-yes`         | `<pkg>`   | Install packages (with repo sync, auto-yes)    |
+| `ii`, `install-nosync`      | `<pkg>`   | Install packages (without repo sync)           |
+| `iiy`, `install-nosync-yes` | `<pkg>`   | Install packages (without repo sync, auto-yes) |
 
 ##### Remove
 
-| Command       | Arguments | Description      |
-| --------------- | --------- | ---------------- |
-| `r`, `remove` | `<pkg>`   | Remove a package |
+| Command            | Arguments | Description                |
+| ------------------ | --------- | -------------------------- |
+| `r`, `remove`      | `<pkg>`   | Remove packages            |
+| `ry`, `remove-yes` | `<pkg>`   | Remove packages (auto-yes) |
 
 ##### Update & upgrade
 
-| Command              | Arguments | Description                |
-| ---------------------- | --------- | -------------------------- |
-| `up`, `update`       | —         | Update repository index    |
-| `u`, `upgrade`       | —         | Upgrade system             |
-| `fu`, `full-upgrade` | —         | Update + upgrade + verbose |
+| Command                   | Arguments | Description                           |
+| ------------------------- | --------- | ------------------------------------- |
+| `up`, `update`            | —         | Update repository index               |
+| `u`, `upgrade`            | —         | Upgrade system                        |
+| `uy`, `upgrade-yes`       | —         | Upgrade system (auto-yes)             |
+| `fu`, `full-upgrade`      | —         | Update + upgrade + verbose            |
+| `fuy`, `full-upgrade-yes` | —         | Update + upgrade + verbose (auto-yes) |
 
 ##### Search & info
 
-| Command                  | Arguments | Description                     |
-| -------------------------- | --------- | ------------------------------- |
-| `s`, `search`            | `<name>`  | Search repository packages      |
-| `si`, `search-installed` | —         | Search among installed packages |
-| `q`, `info`              | `<pkg>`   | Show package information        |
+| Command                        | Arguments | Description                     |
+| ------------------------------ | --------- | ------------------------------- |
+| `s`, `q`, `search`             | `<name>`  | Search repository packages      |
+| `si`, `qi`, `search-installed` | —         | Search among installed packages |
+| `i`, `info`                    | `<pkg>`   | Show package information        |
 
 ##### Reconfigure
 
 | Command              | Arguments | Description           |
-| ---------------------- | --------- | --------------------- |
+| -------------------- | --------- | --------------------- |
 | `rec`, `reconfigure` | `<pkg>`   | Reconfigure a package |
 
 ##### Orphans
 
-| Command                | Arguments | Description              |
-| ------------------------ | --------- | ------------------------ |
-| `o`, `orphans`         | —         | List orphaned packages   |
-| `ro`, `remove-orphans` | —         | Remove orphaned packages |
+| Command                     | Arguments | Description                         |
+| --------------------------- | --------- | ----------------------------------- |
+| `o`, `orphans`              | —         | List orphaned packages              |
+| `ro`, `remove-orphans`      | —         | Remove orphaned packages            |
+| `roy`, `remove-orphans-yes` | —         | Remove orphaned packages (auto-yes) |
 
 ##### Dependencies
 
 | Command       | Arguments | Description               |
-| --------------- | --------- | ------------------------- |
+| ------------- | --------- | ------------------------- |
 | `d`, `deps`   | `<pkg>`   | Show dependencies         |
 | `rd`, `rdeps` | `<pkg>`   | Show reverse dependencies |
 
 ##### File ownership
 
-| Command       | Arguments | Description                       |
-| --------------- | --------- | --------------------------------- |
-| `f`, `owns`   | `<file>`  | Show which package owns a file    |
-| `fl`, `files` | `<pkg>`   | List files installed by a package |
+| Command       | Arguments | Description                   |
+| ------------- | --------- | ----------------------------- |
+| `f`, `owns`   | `<file>`  | Which package owns this file? |
+| `fl`, `files` | `<pkg>`   | List files of a package       |
 
 ##### Repository management
 
-| Command           | Arguments | Description                  |
-| ------------------- | --------- | ---------------------------- |
-| `rl`, `replist`   | —         | List configured repositories |
-| `ra`, `repadd`    | `<repo>`  | Add a repository             |
-| `rr`, `repremove` | `<repo>`  | Remove a repository          |
+| Command           | Arguments | Description       |
+| ----------------- | --------- | ----------------- |
+| `rl`, `replist`   | —         | List repositories |
+| `ra`, `repadd`    | `<repo>`  | Add repository    |
+| `rr`, `repremove` | `<repo>`  | Remove repository |
 
 ##### Updates
 
-| Command              | Arguments | Description                       |
-| ---------------------- | --------- | --------------------------------- |
-| `lu`, `list-updates` | —         | List packages that can be updated |
-| `od`, `outdated`     | —         | Show outdated packages            |
+| Command              | Arguments | Description                   |
+| -------------------- | --------- | ----------------------------- |
+| `lu`, `list-updates` | —         | List packages that can update |
+| `od`, `outdated`     | —         | Show outdated packages        |
 
 ##### Keyring
 
-| Command           | Arguments | Description                    |
-| ------------------- | --------- | ------------------------------ |
-| `sk`, `sync-keys` | —         | Sync keyring with repositories |
+| Command           | Arguments | Description             |
+| ----------------- | --------- | ----------------------- |
+| `sk`, `sync-keys` | —         | Sync keyring with repos |
 
 ##### Build helpers
 
-| Command               | Arguments | Description                        |
-| ----------------------- | --------- | ---------------------------------- |
-| `cs`, `clean-src`     | —         | Clean `xbps-src` build files       |
-| `st`, `show-template` | `<pkg>`   | Show template for a source package |
+| Command               | Arguments | Description                    |
+| --------------------- | --------- | ------------------------------ |
+| `cs`, `clean-src`     | —         | Clean `xbps-src` build files   |
+| `st`, `show-template` | `<pkg>`   | Show template for a source pkg |
 
 ##### Logs
 
 | Command     | Arguments | Description   |
-| ------------- | --------- | ------------- |
+| ----------- | --------- | ------------- |
 | `lg`, `log` | —         | View XBPS log |
 
 ---
 
-#### `sv` — runit service control
+#### `svc` — runit service control
 
 ##### Enable / Disable
 
 | Command   | Arguments | Description       |
 | ----------- | --------- | ----------------- |
-| `enable`  | `<svc>`   | Enable a service  |
-| `disable` | `<svc>`   | Disable a service |
+| `enable`  | `<svc>`   | Enable service  |
+| `disable` | `<svc>`   | Disable service |
 
 ##### Basic control
 
 | Command   | Arguments | Description         |
 | ----------- | --------- | ------------------- |
-| `start`   | `<svc>`   | Start a service     |
-| `stop`    | `<svc>`   | Stop a service      |
-| `restart` | `<svc>`   | Restart a service   |
+| `start`   | `<svc>`   | Start service     |
+| `stop`    | `<svc>`   | Stop service      |
+| `restart` | `<svc>`   | Restart service   |
 | `status`  | `<svc>`   | Show service status |
 | `log`     | `<svc>`   | View service logs   |
 

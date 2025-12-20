@@ -43,133 +43,150 @@ x() {
     shift || true
 
     case "$cmd" in
-        # --- Core operations ---
-        install|i)            sudo xbps-install -S "$@" ;;
-        install-yes|iy)       sudo xbps-install -Sy "$@" ;;
-        src)                  sudo xbps-src "$@" ;;
-        remove|r)             sudo xbps-remove "$@"; sudo xbps-remove -Ooy ;;
-        remove-yes|ry)        sudo xbps-remove -y "$@"; sudo xbps-remove -Ooy ;;
-        search|s)             xbps-query -Rs "$@" ;;
-        search-installed|si)  xbps-query -l | grep -i "$@" ;;
-        info|q)               xbps-query -R "$@" ;;
-        update|up)            sudo xbps-install -S ;;
-        upgrade|u)            sudo xbps-install -Su ;;
-        full-upgrade|fu)      sudo xbps-install -Suv ;;
-        reconfigure|rec)      sudo xbps-reconfigure -f "$@" ;;
+        # Core operations
+        install|i)                sudo xbps-install -S "$@" ;;
+        install-yes|iy)           sudo xbps-install -Sy "$@" ;;
+        
+        install-nosync|ii)        sudo xbps-install "$@" ;;
+        install-nosync-yes|iiy)   sudo xbps-install -y "$@" ;;
 
-        # --- Orphans ---
-        orphans|o)              xbps-query -O ;;
-        remove-orphans|ro)      sudo xbps-remove -Oo ;;
-        remove-orphan-yes|roy) sudo xbps-remove -Ooy ;;
+        src)                      sudo xbps-src "$@" ;;
+        
+        remove|r)                 sudo xbps-remove "$@"; sudo xbps-remove -Ooy ;;
+        remove-yes|ry)            sudo xbps-remove -y "$@"; sudo xbps-remove -Ooy ;;
+        
+        search|s|q)               xbps-query -Rs "$@" ;;
+        search-installed|si|qi)   xbps-query -l | grep -i "$@" ;;
+        info|i)                   xbps-query -R "$@" ;;
+        
+        update|up)                sudo xbps-install -S ;;
+        upgrade|u)                sudo xbps-install -Su ;;
+        upgrade-yes|uy)           sudo xbps-install -Suy ;;
 
-        # --- Dependency tools ---
-        deps|d)               xbps-query -d "$@" ;;
-        rdeps|rd)             xbps-query -R -x "$@" ;;
+        full-upgrade|fu)          sudo xbps-install -Suv ;;
+        full-upgrade-yes|fuy)     sudo xbps-install -Suvy ;;
+        
+        reconfigure|rec)          sudo xbps-reconfigure -f "$@" ;;
 
-        # --- File ownership ---
-        owns|f)               xbps-query -o "$@" ;;
-        files|fl)             xbps-query -f "$@" ;;
+        # Orphans
+        orphans|o)                xbps-query -O ;;
+        remove-orphans|ro)        sudo xbps-remove -Oo ;;
+        remove-orphans-yes|roy)   sudo xbps-remove -Ooy ;;
 
-        # --- Repo management ---
-        replist|rl)           xbps-query -L ;;
-        repadd|ra)            sudo xbps-query -A "$@" ;;
-        repremove|rr)         sudo xbps-query -Rr "$@" ;;
+        # Dependency tools
+        deps|d)                   xbps-query -d "$@" ;;
+        rdeps|rd)                 xbps-query -R -x "$@" ;;
 
-        # --- Updates ---
-        list-updates|lu)      xbps-install -nu 2>/dev/null | grep -v "already installed" ;;
-        outdated|od)          xbps-install -nu | awk '/updating/' ;;
+        # File ownership
+        owns|f)                   xbps-query -o "$@" ;;
+        files|fl)                 xbps-query -f "$@" ;;
 
-        # --- Keyring ---
-        sync-keys|sk)         sudo xbps-install -S --sync-keyring ;;
+        # Repo management
+        replist|rl)               xbps-query -L ;;
+        repadd|ra)                sudo xbps-query -A "$@" ;;
+        repremove|rr)             sudo xbps-query -Rr "$@" ;;
 
-        # --- Build helpers ---
-        clean-src|cs)         sudo xbps-src clean ;;
-        show-template|st)     xbps-src show "$@" ;;
+        # Updates
+        list-updates|lu)          xbps-install -nu 2>/dev/null | grep -v "already installed" ;;
+        outdated|od)              xbps-install -nu | awk '/updating/' ;;
 
-        # --- Logs ---
-        log|lg)               sudo less /var/log/xbps/xbps.log ;;
+        # Keyring
+        sync-keys|sk)             sudo xbps-install -S --sync-keyring ;;
 
-        # --- Help ---
+        # Build helpers
+        clean-src|cs)             sudo xbps-src clean ;;
+        show-template|st)         xbps-src show "$@" ;;
+
+        # Logs
+        log|lg)                   sudo less /var/log/xbps/xbps.log ;;
+
+        # Help
         *)
             cat <<EOF
 Usage: x <command> [arguments]
 
 Install packages:
-  i, install <pkg>          Install a package (with repo sync)
-  iy, install-yes <pkg>     Install (auto-yes)
+  i, install <pkg>                Install packages (with repo sync)
+  iy, install-yes <pkg>           Install packages (with repo sync, auto-yes)
+  
+  ii, install-nosync <pkg>        Install packages (without repo sync)
+  iiy, install-nosync-yes <pkg>   Install packages (without repo sync, auto-yes)
 
 Remove:
-  r, remove <pkg>           Remove a package
-  ry, remove-yes <pkg>      Remove a package (auto-yes)
+  r, remove <pkg>                 Remove packages
+  ry, remove-yes <pkg>            Remove packages (auto-yes)
 
 Update & upgrade:
-  up, update                Update repo index
-  u, upgrade                Upgrade system
-  fu, full-upgrade          Update + upgrade + verbose
+  up, update                      Update repo index
+  
+  u, upgrade                      Upgrade system
+  uy, upgrade-yes                 Upgrade system (auto-yes)
+
+  fu, full-upgrade                Update + upgrade + verbose
+  fuy, full-upgrade-yes           Update + upgrade + verbose (auto-yes)
 
 Search & info:
-  s, search <name>          Search repo packages
-  si, search-installed      Search among installed pkgs
-  q, info <pkg>             Show package info
+  s, q, search <name>             Search repo packages
+  si, qi, search-installed        Search among installed pkgs
+  i, info <pkg>                   Show package info
 
 Reconfigure:
-  rec, reconfigure <pkg>    Reconfigure a package
+  rec, reconfigure <pkg>          Reconfigure a package
 
 Orphans:
-  o, orphans                List orphaned packages
-  ro, remove-orphans        Remove orphaned packages
-  roy, remove-orphans-yes   Remove orphaned packages (auto-yes)
+  o, orphans                      List orphaned packages
+  ro, remove-orphans              Remove orphaned packages
+  roy, remove-orphans-yes         Remove orphaned packages (auto-yes)
 
 Dependencies:
-  d, deps <pkg>             Show dependencies
-  rd, rdeps <pkg>           Show reverse dependencies
+  d, deps <pkg>                   Show dependencies
+  rd, rdeps <pkg>                 Show reverse dependencies
 
 File ownership:
-  f, owns <file>            Which package owns this file?
-  fl, files <pkg>           List files of a package
+  f, owns <file>                  Which package owns this file?
+  fl, files <pkg>                 List files of a package
 
 Repository management:
-  rl, replist               List repositories
-  ra, repadd <repo>         Add repository
-  rr, repremove <repo>      Remove repository
+  rl, replist                     List repositories
+  ra, repadd <repo>               Add repository
+  rr, repremove <repo>            Remove repository
 
 Updates:
-  lu, list-updates          List packages that can update
-  od, outdated              Show outdated packages
+  lu, list-updates                List packages that can update
+  od, outdated                    Show outdated packages
 
 Keyring:
-  sk, sync-keys             Sync keyring with repos
+  sk, sync-keys                   Sync keyring with repos
 
 Build helpers:
-  cs, clean-src             Clean xbps-src build files
-  st, show-template <pkg>   Show template for a source pkg
+  cs, clean-src                   Clean xbps-src build files
+  st, show-template <pkg>         Show template for a source pkg
 
 Logs:
-  lg, log                   View XBPS log
+  lg, log                         View XBPS log
 
 EOF
             ;;
     esac
 }
 
-
-sv() {
+svc() {
     action="$1"
     shift || true
     svc="$1"
 
     case "$action" in
-        # --- Enable / Disable services ---
+        # Enable / Disable services
         enable)
-            [ -z "$svc" ] && echo "Usage: sv enable <service>" && return 1
+            [ -z "$svc" ] && echo "Usage: svc enable <service>" && return 1
             [ ! -d "/etc/sv/$svc" ] && echo "Service '$svc' not found in /etc/sv/" && return 1
-            
+
             sudo ln -sf "/etc/sv/$svc" /var/service/
             echo "Enabled: $svc"
             ;;
 
         disable)
-            [ -z "$svc" ] && echo "Usage: sv disable <service>" && return 1
+            [ -z "$svc" ] && echo "Usage: svc disable <service>" && return 1
             if [ -L "/var/service/$svc" ]; then
                 sudo rm "/var/service/$svc"
                 echo "Disabled: $svc"
@@ -178,67 +195,76 @@ sv() {
             fi
             ;;
 
-        # --- Standard runit controls ---
-        start|stop|restart|status|log)
-            [ -z "$svc" ] && echo "Usage: sv $action <service>" && return 1
-            sudo sv "$action" "$svc"
+        # Basic runit controls
+        start|stop|restart|status)
+            [ -z "$svc" ] && echo "Usage: svc $action <service>" && return 1
+            sudo /usr/bin/sv "$action" "$svc"
             ;;
 
-        # --- Advanced runit controls ---
+        # Advanced runit / signal controls
         once|pause|cont|reload|hup|term|kill)
-            [ -z "$svc" ] && echo "Usage: sv $action <service>" && return 1
-            sudo sv "$action" "$svc"
+            [ -z "$svc" ] && echo "Usage: svc $action <service>" && return 1
+            sudo /usr/bin/sv "$action" "$svc"
             ;;
 
-        # --- Listing helpers ---
+        # Logs (actual log viewing)
+        log)
+            [ -z "$svc" ] && echo "Usage: svc log <service>" && return 1
+            logdir="/var/log/sv/$svc/current"
+            [ ! -f "$logdir" ] && echo "No logs found for '$svc'" && return 1
+            sudo tail -f "$logdir"
+            ;;
+
+        # Listing helpers
         list)
-            echo "Enabled services (in /var/service):"
-            ls -1 /var/service/
+            sudo /usr/bin/sv status /var/service/*
             ;;
 
         avail|list-available)
-            echo "Available services (in /etc/sv):"
             ls -1 /etc/sv/
             ;;
 
-        # --- Edit service run script ---
+        # Edit service run script
         edit)
-            [ -z "$svc" ] && echo "Usage: sv edit <service>" && return 1
-            [ ! -f "/etc/sv/$svc/run" ] && echo "Service '$svc' has no run script" && return 1
-            ${EDITOR:-vim} "/etc/sv/$svc/run"
+            [ -z "$svc" ] && echo "Usage: svc edit <service>" && return 1
+            run="/etc/sv/$svc/run"
+            [ ! -f "$run" ] && echo "Service '$svc' has no run script" && return 1
+            sudo ${EDITOR:-vim} "$run"
             ;;
 
-        # --- Help ---
+        # Help
         *)
             cat <<EOF
-Usage: sv <command> [service]
+Usage: svc <command> [service]
 
 Enable / Disable:
-  sv enable <svc>      Enable service
-  sv disable <svc>     Disable service
+  svc enable <svc>      Enable service
+  svc disable <svc>     Disable service
 
 Basic Control:
-  sv start <svc>       Start service
-  sv stop <svc>        Stop service
-  sv restart <svc>     Restart service
-  sv status <svc>      Show service status
-  sv log <svc>         View logs
+  svc start <svc>       Start service
+  svc stop <svc>        Stop service
+  svc restart <svc>     Restart service
+  svc status <svc>      Show service status
 
 Advanced:
-  sv once <svc>        Start once, no respawn
-  sv pause <svc>       Pause service
-  sv cont <svc>        Resume after pause
-  sv reload <svc>      Reload configuration
-  sv hup <svc>         Send HUP signal
-  sv term <svc>        Send TERM signal
-  sv kill <svc>        Kill service
+  svc once <svc>        Start once, no respawn
+  svc pause <svc>       Pause service
+  svc cont <svc>        Resume after pause
+  svc reload <svc>      Reload configuration (if supported)
+  svc hup <svc>         Send HUP signal
+  svc term <svc>        Send TERM signal
+  svc kill <svc>        Kill service
+
+Logs:
+  svc log <svc>         Follow service logs
 
 Listing:
-  sv list              List enabled services
-  sv avail             List available service definitions
+  svc list              Show status of enabled services
+  svc avail             List available service definitions
 
 Editing:
-  sv edit <svc>        Edit the service run script (\$EDITOR)
+  svc edit <svc>        Edit the service run script (\$EDITOR)
 EOF
             ;;
     esac

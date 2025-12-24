@@ -46,27 +46,26 @@ x() {
         # Core operations
         install|i)                sudo xbps-install -S "$@" ;;
         install-yes|iy)           sudo xbps-install -Sy "$@" ;;
-        
+
         install-nosync|ii)        sudo xbps-install "$@" ;;
         install-nosync-yes|iiy)   sudo xbps-install -y "$@" ;;
 
-        src)                      sudo xbps-src "$@" ;;
-        
         remove|r)                 sudo xbps-remove "$@"; sudo xbps-remove -Ooy ;;
         remove-yes|ry)            sudo xbps-remove -y "$@"; sudo xbps-remove -Ooy ;;
-        
+
         search|s|q)               xbps-query -Rs "$@" ;;
         search-installed|si|qi)   xbps-query -l | grep -i "$@" ;;
-        info|i)                   xbps-query -R "$@" ;;
-        
+        info)                     xbps-query -R "$@" ;;
+
         update|up)                sudo xbps-install -S ;;
         upgrade|u)                sudo xbps-install -Su ;;
         upgrade-yes|uy)           sudo xbps-install -Suy ;;
 
         full-upgrade|fu)          sudo xbps-install -Suv ;;
         full-upgrade-yes|fuy)     sudo xbps-install -Suvy ;;
-        
+
         reconfigure|rec)          sudo xbps-reconfigure -f "$@" ;;
+        reconfigure-all|reca)     sudo xbps-reconfigure -fa "$@" ;;
 
         # Orphans
         orphans|o)                xbps-query -O ;;
@@ -82,23 +81,13 @@ x() {
         files|fl)                 xbps-query -f "$@" ;;
 
         # Repo management
-        replist|rl)               xbps-query -L ;;
-        repadd|ra)                sudo xbps-query -A "$@" ;;
-        repremove|rr)             sudo xbps-query -Rr "$@" ;;
+        rep-list|rl)              xbps-query -L ;;
+        rep-add|ra)               sudo xbps-query -A "$@" ;;
+        rep-remove|rr)            sudo xbps-query -Rr "$@" ;;
 
         # Updates
         list-updates|lu)          xbps-install -nu 2>/dev/null | grep -v "already installed" ;;
         outdated|od)              xbps-install -nu | awk '/updating/' ;;
-
-        # Keyring
-        sync-keys|sk)             sudo xbps-install -S --sync-keyring ;;
-
-        # Build helpers
-        clean-src|cs)             sudo xbps-src clean ;;
-        show-template|st)         xbps-src show "$@" ;;
-
-        # Logs
-        log|lg)                   sudo less /var/log/xbps/xbps.log ;;
 
         # Help
         *)
@@ -128,10 +117,11 @@ Update & upgrade:
 Search & info:
   s, q, search <name>             Search repo packages
   si, qi, search-installed        Search among installed pkgs
-  i, info <pkg>                   Show package info
+  info <pkg>                      Show package info
 
 Reconfigure:
   rec, reconfigure <pkg>          Reconfigure a package
+  reca, reconfigure-all <pkg>     Reconfigure all packages (and rebuild initramfs)
 
 Orphans:
   o, orphans                      List orphaned packages
@@ -147,24 +137,13 @@ File ownership:
   fl, files <pkg>                 List files of a package
 
 Repository management:
-  rl, replist                     List repositories
-  ra, repadd <repo>               Add repository
-  rr, repremove <repo>            Remove repository
+  rl, rep-list                    List repositories
+  ra, rep-add <repo>              Add repository
+  rr, rep-remove <repo>           Remove repository
 
 Updates:
   lu, list-updates                List packages that can update
   od, outdated                    Show outdated packages
-
-Keyring:
-  sk, sync-keys                   Sync keyring with repos
-
-Build helpers:
-  cs, clean-src                   Clean xbps-src build files
-  st, show-template <pkg>         Show template for a source pkg
-
-Logs:
-  lg, log                         View XBPS log
-
 EOF
             ;;
     esac

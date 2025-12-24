@@ -163,13 +163,14 @@ Keybinding|Action
 | ------------------------------ | --------- | ------------------------------- |
 | `s`, `q`, `search`             | `<name>`  | Search repository packages      |
 | `si`, `qi`, `search-installed` | —         | Search among installed packages |
-| `i`, `info`                    | `<pkg>`   | Show package information        |
+| `info`                         | `<pkg>`   | Show package information        |
 
 ##### Reconfigure
 
-| Command              | Arguments | Description           |
-| -------------------- | --------- | --------------------- |
-| `rec`, `reconfigure` | `<pkg>`   | Reconfigure a package |
+| Command                   | Arguments | Description              |
+| ------------------------- | --------- | ------------------------ |
+| `rec`, `reconfigure`      | `<pkg>`   | Reconfigure a package    |
+| `reca`, `reconfigure-all` | `<pkg>`   | Reconfigure all packages |
 
 ##### Orphans
 
@@ -195,11 +196,11 @@ Keybinding|Action
 
 ##### Repository management
 
-| Command           | Arguments | Description       |
-| ----------------- | --------- | ----------------- |
-| `rl`, `replist`   | —         | List repositories |
-| `ra`, `repadd`    | `<repo>`  | Add repository    |
-| `rr`, `repremove` | `<repo>`  | Remove repository |
+| Command            | Arguments | Description       |
+| ------------------ | --------- | ----------------- |
+| `rl`, `rep-list`   | —         | List repositories |
+| `ra`, `rep-add`    | `<repo>`  | Add repository    |
+| `rr`, `rep-remove` | `<repo>`  | Remove repository |
 
 ##### Updates
 
@@ -207,25 +208,6 @@ Keybinding|Action
 | -------------------- | --------- | ----------------------------- |
 | `lu`, `list-updates` | —         | List packages that can update |
 | `od`, `outdated`     | —         | Show outdated packages        |
-
-##### Keyring
-
-| Command           | Arguments | Description             |
-| ----------------- | --------- | ----------------------- |
-| `sk`, `sync-keys` | —         | Sync keyring with repos |
-
-##### Build helpers
-
-| Command               | Arguments | Description                    |
-| --------------------- | --------- | ------------------------------ |
-| `cs`, `clean-src`     | —         | Clean `xbps-src` build files   |
-| `st`, `show-template` | `<pkg>`   | Show template for a source pkg |
-
-##### Logs
-
-| Command     | Arguments | Description   |
-| ----------- | --------- | ------------- |
-| `lg`, `log` | —         | View XBPS log |
 
 ---
 

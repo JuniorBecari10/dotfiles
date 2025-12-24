@@ -13,7 +13,7 @@
 
 <img src="https://raw.githubusercontent.com/JuniorBecari10/df-installer/refs/heads/main/screenshot.png" />
 
-_My desktop interface with the terminal open running Fastfetch_
+_My desktop interface with the terminal open running Fastfetch._
 
 ## Overview
 

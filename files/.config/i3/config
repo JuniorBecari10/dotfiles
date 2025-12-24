@@ -180,7 +180,7 @@ bar {
 # Start tray icons
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-clipman
-exec --no-startup-id sleep 1 && volumeicon
+exec --no-startup-id sh -c 'sleep 1 && volumeicon'
 
 # Set keymap to brazilian keyboard
 exec_always setxkbmap br
@@ -199,7 +199,7 @@ exec --no-startup-id redshift
 
 # If you're in a laptop you may consider flipping those options' workspaces.
 # for_window [class="kitty"] move to workspace $ws2 # This option messes up more than helps.
-for_window [class="firefox"] move to workspace $ws1
+for_window [class="Firefox"] move to workspace $ws1
 for_window [class="Yad"] floating enable
 for_window [class="Xfce4-clipman-history"] floating enable, resize set 500 600, move position center
 for_window [class="Thunar"] floating enable, resize set 1000 700, move position center
@@ -233,9 +233,6 @@ bindsym $mod+n exec --no-startup-id i3lock
 # Mod + G: File Explorer (Thunar)
 bindsym $mod+g exec thunar
 
-# Mod + Shift + G: Rofi Emoji Picker
-bindsym $mod+Shift+g exec --no-startup-id rofi -show emoji
-
 # Mod + X: Firefox
 bindsym $mod+x exec firefox
 
@@ -253,3 +250,6 @@ bindsym $mod+Shift+d exec ~/.config/i3/scripts/flatpak
 
 # Mod + Ctrl + D: Launch rofi Calculator menu
 bindsym $mod+Ctrl+d exec rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip -selection clipboard"
+
+# Mod + Shift + G: Rofi Emoji Picker
+bindsym $mod+Shift+g exec --no-startup-id rofi -show emoji

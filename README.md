@@ -7,9 +7,15 @@
 > curl -fsSL https://tinyurl.com/dfvinstall | sh
 > ```
 > `dfvinstall` _means "Dotfiles Void Install"._ <br>
-> You may type it wrong, so I reserved `vdfinstall` as well, pointing to the same URL to avoid typos.
+> You may type it wrong, so I reserved `vdfinstall` as well, pointing to the same URL to avoid typos! 😀
 >
 > If you use a Brazilian ABNT2 keyboard, you may find it useful to load it: `loadkeys br-abnt2`.
+
+<img src="https://raw.githubusercontent.com/JuniorBecari10/df-installer/refs/heads/main/screenshot.png" />
+
+_My desktop interface with the terminal open running Fastfetch_
+
+## Overview
 
 The dotfiles that I use in my personal Linux installation, along with some scripts to install them. <br />
 The configurations in this repository are highly opinionated for my personal use, and may not fit the best for your needs.
@@ -34,8 +40,10 @@ and it's already there for you to sync your configurations.
 - **Terminal Emulator**: kitty
 - **Compositor**: xcompmgr
 - **Init System**: runit
+- **Locale**: PT-BR / UTF-8
+- **Time Zone**: UTC-3
 
-### My wallpaper:
+### My wallpaper
 
 <img src="files/.config/wallpaper.jpg" width=500 /> <br />
 _This is the default wallpaper on Archcraft._

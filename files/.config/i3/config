@@ -180,7 +180,7 @@ bar {
 # Start tray icons
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-clipman
-exec --no-startup-id sh -c 'sleep 2 && volumeicon'
+exec --no-startup-id sh -c 'sleep 3 && volumeicon'
 
 # Set keymap to brazilian keyboard
 exec_always setxkbmap br

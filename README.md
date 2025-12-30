@@ -133,19 +133,21 @@ Keybinding|Action
 
 ##### Install packages
 
-| Command                     | Arguments | Description                                    |
-| --------------------------- | --------- | ---------------------------------------------- |
-| `i`, `install`              | `<pkg>`   | Install packages (with repo sync)              |
-| `iy`, `install-yes`         | `<pkg>`   | Install packages (with repo sync, auto-yes)    |
-| `ii`, `install-nosync`      | `<pkg>`   | Install packages (without repo sync)           |
-| `iiy`, `install-nosync-yes` | `<pkg>`   | Install packages (without repo sync, auto-yes) |
+| Command                     | Arguments | Description                                   |
+| --------------------------- | --------- | --------------------------------------------- |
+| `i`, `install`              | `<pkg>`   | Install packages with repo sync               |
+| `iy`, `install-yes`         | `<pkg>`   | Install packages with repo sync (auto-yes)    |
+| `ii`, `install-nosync`      | `<pkg>`   | Install packages without repo sync            |
+| `iiy`, `install-nosync-yes` | `<pkg>`   | Install packages without repo sync (auto-yes) |
 
 ##### Remove
 
-| Command            | Arguments | Description                |
-| ------------------ | --------- | -------------------------- |
-| `r`, `remove`      | `<pkg>`   | Remove packages            |
-| `ry`, `remove-yes` | `<pkg>`   | Remove packages (auto-yes) |
+| Command            | Arguments | Description                                         |
+| ------------------ | --------- | --------------------------------------------------- |
+| `r`, `remove`      | `<pkg>`   | Remove packages and clear orphans                   |
+| `ry`, `remove-yes` | `<pkg>`   | Remove packages and clear orphans (auto-yes)        |
+| `rr`, `remove`      | `<pkg>`   | Remove packages and don't clear orphans            |
+| `rry`, `remove-yes` | `<pkg>`   | Remove packages and don't clear orphans (auto-yes) |
 
 ##### Update & upgrade
 

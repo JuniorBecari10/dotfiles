@@ -335,6 +335,9 @@ mkcd() {
     cd "$_"
 }
 
+# Path
+PATH="$PATH:~/.bun/bin"
+
 # ----------------------------
 
 # Disable Ctrl-Z binding

@@ -76,3 +76,6 @@ chmod +x dotnet-install.sh
 
 ln -sf "$DOTNET_DIR/dotnet" "$DOTNET_BIN"
 rm dotnet-install.sh
+
+# Install Bun
+curl -fsSL https://bun.sh/install | bash

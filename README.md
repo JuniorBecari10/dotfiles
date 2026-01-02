@@ -9,7 +9,8 @@
 > `dfvinstall` _means "Dotfiles Void Install"._ <br>
 > You may type it wrong, so I reserved `vdfinstall` as well, pointing to the same URL to avoid typos! 😀
 >
-> If you use a Brazilian ABNT2 keyboard, you may find it useful to load it: `loadkeys br-abnt2`.
+> If you use a Brazilian ABNT2 keyboard, you may find it useful to load it: `loadkeys br-abnt2`. <br>
+> Also, if you are inside the live CD, you already are root, but if you are running outside it, don't forget to run it with root privileges.
 
 <img src="https://raw.githubusercontent.com/JuniorBecari10/df-installer/refs/heads/main/screenshot.png" />
 
@@ -22,13 +23,13 @@ The configurations in this repository are highly opinionated for my personal use
 
 You are free to edit the files yourself to your own desire.
 
-The scripts this repository has can replicate exactly my personal Void Linux installation and configuration on any PC that can run the distro. The advantages of using it to install the system over and over using `xbps` as opposed to inflating tarballs, is that it enables you to change and configure your installation to your needs and also getting the latest software provided by the package manager.
+The scripts this repository has can replicate exactly my personal Void Linux installation and configuration on any PC that can run the distro. The advantages of using it to install the system using `xbps` as opposed to inflating tarballs, is that it enables you to change and configure your installation to your needs and also getting the latest software provided by the package manager. This also makes optional installations possible.
 
 This repository is meant to be kept in your home (`~`) folder even after the installation is complete, because you may want to make changes to it,
 and it's already there for you to sync your configurations.
 
 A clean installation made using this script should install roughly `598` packages. <br>
-I'm still making efforts to lower this number, while keeping the same experience.
+I'm still making efforts to lower this number, while keeping the same experience. If you know of some change that keeps the same experience while reducing the number of packages, please tell me.
 
 ## Specification
 
@@ -308,7 +309,7 @@ Before installing, make sure you have a stable internet connection. If you're us
 
 ### Automatic Installation
 At the start of this file there's an one-liner command to run the script that downloads this repository and runs the installer. <br>
-If you have already downloaded this repository, you just need to run `dotfiles/installer.sh`.
+If you have already downloaded this repository, you just need to run `dotfiles/installer.sh`. **REMEMBER TO RUN THIS AS ROOT.**
 
 ### Manual Installation
 

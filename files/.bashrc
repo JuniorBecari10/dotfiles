@@ -269,7 +269,9 @@ gac() {
         return 1
     fi
 
-    if git diff --quiet && git diff --cached --quiet; then
+    if git rev-parse --verify HEAD >/dev/null 2>&1 \
+       && git diff --quiet \
+       && git diff --cached --quiet; then
         echo "No changes to commit."
         return 0
     fi
@@ -310,7 +312,9 @@ gacp() {
         return 1
     fi
 
-    if git diff --quiet && git diff --cached --quiet; then
+    if git rev-parse --verify HEAD >/dev/null 2>&1 \
+       && git diff --quiet \
+       && git diff --cached --quiet; then
         echo "No changes to commit."
         return 0
     fi

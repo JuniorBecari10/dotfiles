@@ -35,6 +35,3 @@ firefox &
 # Set up GitHub CLI to link git to your GitHub account
 # (requires Firefox to be the default browser - this is set if you run it at least once before this)
 gh auth login
-
-# Remove GitHub CLI since it's not needed anymore
-sudo xbps-remove -y github-cli

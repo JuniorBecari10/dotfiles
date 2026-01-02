@@ -391,3 +391,7 @@ Alternatively, you can also use `efibootmgr`. The complete command is in `script
     grub-mkconfig -o /boot/grub/grub.cfg
     ```
 6. Exit the chroot, and reboot your computer. In the GRUB menu, the other OSs should be listed.
+
+### `xbps` cannot grab the packages because the mirror is out
+
+This is a normal outage. Please try again in a few minutes.

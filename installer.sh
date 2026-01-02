@@ -70,12 +70,37 @@ ask_yesno() {
     fi
 }
 
+select_disk() {
+    set --  # reset positional parameters
+
+    while IFS= read -r line; do
+        NAME=$(printf '%s\n' "$line" | awk '{print $1}')
+        SIZE=$(printf '%s\n' "$line" | awk '{print $2}')
+        MODEL=$(printf '%s\n' "$line" | cut -d' ' -f3-)
+
+        [ -z "$MODEL" ] && MODEL="unknown"
+
+        set -- "$@" "$NAME" "$SIZE - $MODEL"
+    done <<EOF
+$(lsblk -dn -o NAME,SIZE,MODEL)
+EOF
+
+    if [ "$#" -eq 0 ]; then
+        dialog --msgbox "No disks detected." 7 40
+        return 1
+    fi
+
+    dialog --clear --stdout \
+        --title "Select Disk" \
+        --menu "Choose a disk to partition:" 15 70 6 \
+        "$@"
+}
 
 # Menu Actions
 
 partition_disks() {
-    clear
-    cfdisk </dev/tty >/dev/tty 2>/dev/tty
+    DISK=$(select_disk) || return 1
+    cfdisk "/dev/$DISK" </dev/tty >/dev/tty 2>/dev/tty
 }
 
 edit_partitions() {

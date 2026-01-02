@@ -37,6 +37,14 @@ grub-install \
     --recheck \
     ${USE_GRUB_REMOVABLE:+--removable}
 
+# Add entry in boot menu
+DISK=$(lsblk -no PKNAME "$BOOT_PART")
+PART=$(lsblk -no PARTN "$BOOT_PART")
+
+sudo efibootmgr -c -d "/dev/$DISK" -p "$PART" \
+  -L "Void Linux" \
+  -l '\EFI\BOOT\BOOTX64.EFI'
+
 # Download dotfiles
 git clone "$REPO_URL" "$HOME/dotfiles"
 chown -R "$USERNAME" "$HOME/dotfiles"

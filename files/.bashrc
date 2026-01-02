@@ -15,6 +15,7 @@ alias fehe='feh --edit'
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ls -la'
+alias lah='ls -lah'
 alias nv='nvim'
 
 alias ff='fastfetch'

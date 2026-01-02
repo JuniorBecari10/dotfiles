@@ -22,26 +22,32 @@ The configurations in this repository are highly opinionated for my personal use
 
 You are free to edit the files yourself to your own desire.
 
-The scripts this repository has can replicate exactly my personal Void Linux installation and configuration on any PC that can run it.
+The scripts this repository has can replicate exactly my personal Void Linux installation and configuration on any PC that can run the distro. The advantages of using it to install the system over and over using `xbps` as opposed to inflating tarballs, is that it enables you to change and configure your installation to your needs and also getting the latest software provided by the package manager.
 
 This repository is meant to be kept in your home (`~`) folder even after the installation is complete, because you may want to make changes to it,
 and it's already there for you to sync your configurations.
 
+A clean installation made using this script should install roughly `598` packages. <br>
+I'm still making efforts to lower this number, while keeping the same experience.
+
 ## Specification
 
-- **Distro**: Void Linux / _glibc_
+- **Distro**: Void Linux / glibc
 - **Window Manager**: i3
 - **Bar**: i3blocks
 - **Lock Screen**: i3lock
 - **Display Manager**: LightDM GTK Greeter
+- **Display Server**: X.org
 - **Bootloader**: GRUB
 - **Code Editor**: Neovim / NVChad
-- **Audio Server**: PipeWire
+- **Shell**: Bash
+- **Audio Server**: PipeWire (with PulseAudio emulation)
 - **Terminal Emulator**: kitty
 - **Compositor**: xcompmgr
 - **Init System**: runit
 - **Locale**: PT-BR / UTF-8
 - **Time Zone**: UTC-3
+- **Boot Mode**: UEFI
 
 ### My wallpaper
 
@@ -100,6 +106,8 @@ Keybinding|Action
 
 ### Extra commands and aliases
 
+All of these aliases and utilities are defined in `.bashrc`.
+
 - Aliases
 
 **Command**|**Alias to**|**Description**
@@ -112,6 +120,7 @@ Keybinding|Action
 `ls`|`ls --color=auto`|Regular `ls` with color.
 `ll`|`ls -l`|Display the files one per line.
 `la`|`ls -la`|Display the files one per line and also show hidden files.
+`lah`|`ls -lah`|Display the files one per line and also show hidden files, with the file sizes formatted to be more readable by humans.
 `nv`|`nvim`|Shortcut for the `nvim` command.
 `ff`|`fastfetch`|Shortcut for the `fastfetch` command.
 `fsi`|`dotnet fsi`|Shortcut for the `dotnet fsi` subcommand.
@@ -313,19 +322,24 @@ If you have already downloaded this repository, you just need to run `dotfiles/i
    Take notes of the names of the partitions and their functions;
    > Remember: running this command will destroy any data you have inside the partitions,
    > so if you have meaningful data in there, consider make a backup first.
-4. Get the `git` and `vim` (or `nano`) commands through `xbps-install -Syu xbps git vim` (or `nano`). `xbps` is there because it may need to be updated. If you're sure about it, then just run `xbps-install -S git vim`.
-5. Clone the repository using `git clone https://github.com/JuniorBecari10/dotfiles` and enter into it using `cd dotfiles`;
-6. Certify that all scripts have the _execute_ permission through `ls -la`, also check in the `scripts` folder _(optional)_;
-7. Change your settings as you prefer by editing the `config.sh` file, using the code editor you have downloaded.
-8. Once you are happy with your settings, run the `1-install.sh` script. Wait for it to complete. If there any errors, fix them (there's a section below called _Common Problems_ to explain some common errors and how to fix them), and if you think the error is in the installer, please open an Issue.
-9. Reboot your computer, and if necessary, change in your BIOS settings to boot up your Void installation. Its name will probably be `Void` (or just `GRUB`). Fix any issues related to BIOS and booting, if necessary. Check _Common Problems_ if you need more help.
-10. Log into i3 using your password.
-11. Open the terminal (press `Mod (Windows key)` + `Enter`), enter the `dotfiles` folder (`cd dotfiles`) and run `2-post.sh`. It will perform some system changes, and will ask you for root permission; just type your password to allow it. It will open Firefox, there you can log into your account, and follow the instructions in the terminal to log into Git with your GitHub account.
+3. Get the `git` and `vim` (or `nano`) commands through `xbps-install -Syu xbps git vim` (or `nano`). `xbps` is there because it may need to be updated. If you're sure about it, then just run `xbps-install -S git vim`.
+4. Clone the repository using `git clone https://github.com/JuniorBecari10/dotfiles` and enter into it using `cd dotfiles`;
+5. Certify that all scripts have the _execute_ permission through `ls -la`, also check in the `scripts` folder _(optional)_;
+6. Change your settings as you prefer by editing the `config.sh` file, using the code editor you have downloaded.
+7. Once you are happy with your settings, run the `1-install.sh` script. Wait for it to complete. If there any errors, fix them (there's a section below called _Common Problems_ to explain some common errors and how to fix them), and if you think the error is in the installer, please open an Issue.
+8. Reboot your computer, and if necessary, change in your BIOS settings to boot up your Void installation. Its name will probably be `Void` (or just `GRUB`). Fix any issues related to BIOS and booting, if necessary. Check _Common Problems_ if you need more help.
+9. Log into i3 using your password.
+10. Open the terminal (press `Mod (Windows key)` + `Enter`), enter the `dotfiles` folder (`cd dotfiles`) and run `2-post.sh`. It will perform some system changes, and will ask you for root permission; just type your password to allow it. It will open Firefox, there you can log into your account, and follow the instructions in the terminal to log into Git with your GitHub account.
 
-You're good to go.
+> **Important** <br>
+> Don't worry if you open the `dotfiles` folder and your config file is modified containing your passwords; as long as you don't push it, the `2-post.sh` script will use its information to run and then it resets the file to its defaults, allowing you to safely change your dotfiles and pushing them without any fear.
+
+11. To properly apply the GTK theme to the bar's icons, log out and then log in back again. Press `Mod` + `P` and then select `Logout`, or, alternatively, press `Mod` + `Shift` + `E`, and select `Yes`. Log in back typing your password and pressing `Enter` afterward.
+
+After this, you're good to go.
 
 ### Even more manual installation
-You may also want to run the commands separately, or even audit the entire installer. If you want to do this, open the files (and edit them if you want) and do it.
+You may also want to run the commands separately, or even audit the entire installer. If you want to do this, open the files (and edit them if you want) and do what your heart desires.
 
 ## Optional Installations
 
@@ -349,17 +363,19 @@ During installations, especially in Void Linux ones, can occur many problems. He
 
 ### BIOS doesn't recognize my Void installation
 
-Some computers may have this problem. Here's the steps to fix it.
+This script already adds your installation to the UEFI boot list, but some computers may still have this problem. Here's the steps to fix it.
 
-1. Open the menu to manually add a boot entry;
-2. Remember the number of the partition that you installed GRUB (the 1 GiB one), select its filesystem, and select to `\EFI\Void\grubx64.efi`. Name the entry with the name of your choice;
+1. Open the UEFI menu to manually add a boot entry;
+2. Remember the number of the partition that you installed GRUB (the 1 GiB one), select its filesystem, and select to `\EFI\Void\grubx64.efi` (or alternatively, `\EFI\BOOT\BOOTX64.EFI`). Name the entry with the name of your choice. I'd recommend to name it as `Void Linux`;
 3. Save the changes.
 
 Now it should work. It not, you may want to enable the `GRUB_REMOVABLE` option, but if you have other OSs installed, this may remove their bootloader from the BIOS menu
 
+Alternatively, you can also use `efibootmgr`. The complete command is in `scripts/1b-chroot.sh`. You may want to take a look at it.
+
 ### `os-prober` didn't find my other OS
 
-> `os-prober` may fail to detect other OSs if they aren't mounted. So, you may want to mount them manually and run the utility while mounted. The steps to perform it are below:
+`os-prober` under normal circumstances should not require mounting to work properly, but it may still fail to detect other OSs. So, you may want to mount them manually and run the utility while mounted. The steps to perform it are below:
 
 1. Boot up again the Void Linux live CD;
 2. _Chroot_ into your installation;
@@ -373,4 +389,4 @@ Now it should work. It not, you may want to enable the `GRUB_REMOVABLE` option, 
     grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=Void
     grub-mkconfig -o /boot/grub/grub.cfg
     ```
-6. Exit the chroot, and reboot your computer. In the GRUB menu the other OSs should be listed.
+6. Exit the chroot, and reboot your computer. In the GRUB menu, the other OSs should be listed.

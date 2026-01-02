@@ -30,7 +30,7 @@ xorg-minimal xf86-input-libinput setxkbmap
 xinit fontconfig mesa-dri
 yad polkit dunst
 lightdm lightdm-gtk-greeter
-unzip
+zip unzip
 nodejs
 xrandr
 arandr

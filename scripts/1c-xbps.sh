@@ -23,7 +23,7 @@ xfce4-clipman-plugin
 NetworkManager
 xcompmgr
 python3
-go ripgrep
+go ripgrep lazygit
 github-cli
 volumeicon
 xorg-minimal xf86-input-libinput setxkbmap

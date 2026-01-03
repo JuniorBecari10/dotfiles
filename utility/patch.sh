@@ -2,4 +2,4 @@
 # Used separately to patch the dotfiles config files into the system.
 set -e
 
-~/dotfiles/scripts/1f-patch.sh
+~/dotfiles/scripts/1ff-patch.sh

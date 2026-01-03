@@ -341,7 +341,7 @@ mkcd() {
 }
 
 # Path
-PATH="$PATH:~/.bun/bin"
+PATH="$HOME/.bun/bin:$PATH"
 
 # ----------------------------
 

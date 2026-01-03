@@ -40,7 +40,7 @@ I'm still making efforts to lower this number, while keeping the same experience
 - **Display Manager**: LightDM GTK Greeter
 - **Display Server**: X.org
 - **Bootloader**: GRUB
-- **Code Editor**: Neovim / NVChad
+- **Code Editor**: Helix (Neovim / NVChad still kept)
 - **Shell**: Bash
 - **Audio Server**: PipeWire (with PulseAudio emulation)
 - **Terminal Emulator**: kitty
@@ -302,6 +302,9 @@ All of them are from [here](https://github.com/vivien/i3blocks-contrib).
 - tailwindcss-language-server
 - typescript-language-server
 - vue-language-server
+
+> **Note** <br>
+> All the programs I use are downloaded through `xbps`, except `bun` and `dotnet`, which it doesn't currently offer, so I install them separately and put them in PATH.
 
 ## How to Install
 

@@ -10,7 +10,7 @@ HOME="/home/$USERNAME"
 PACKAGES="
 i3 i3blocks i3lock
 kitty xterm
-neovim
+neovim helix
 rofi rofi-calc rofi-emoji
 redshift
 git

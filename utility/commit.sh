@@ -7,20 +7,13 @@ set -e
 DOTFILES=~/dotfiles/files
 CONFIG="$DOTFILES/.config"
 
-# Make sure the destination exists
-mkdir -p "$CONFIG"
-
-# Copy dotfiles from home to dotfiles
-cp -f ~/.bashrc "$DOTFILES"
-cp -f ~/.sl.sh "$DOTFILES"
-cp -f ~/.xinitrc "$DOTFILES"
-cp -f ~/.xprofile "$DOTFILES"
-cp -f ~/.Xresources "$DOTFILES"
-
-# Move contents of ~/.config to dotfiles/.config and
+# Force copy contents of ~/.config to files/.config and
 # delete everything the repository doesn't track.
-cp -f ~/.config/* "$CONFIG"
+# This already cleans untracked files.
+cp -rf "$HOME/.config/"* "$CONFIG/"
 git clean -fd "$CONFIG"
+
+# TODO: this also copies laptop-patched files
 
 # Fix ownership
 chown -R "$USER" "$DOTFILES"

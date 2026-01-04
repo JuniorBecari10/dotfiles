@@ -15,8 +15,8 @@ cp -n "$DOTFILES/files/.sl.sh" "$HOME/"
 # Ensure ~/.config exists
 mkdir -p "$CONFIG"
 
-# Soft link everything inside '.config' to '~/.config'
-ln -sf "$DOTFILES/files/.config/"* "$CONFIG/"
+# Force copy everything inside 'files/.config' to '~/.config'
+cp -rf "$DOTFILES/files/.config/"* "$CONFIG/"
 
 # Create convenience folders
 mkdir -p "$HOME/dev"

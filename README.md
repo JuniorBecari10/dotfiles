@@ -350,7 +350,8 @@ You may also want to run the commands separately, or even audit the entire insta
 
 This script allows you to perform optional installations as well. Here's what they are, and what they do.
 
-Remember that you don't need to set them up when installing the system. There are specific scripts to perform them after the system is installed. The post-install scripts should be run with your user.
+Remember that you don't need to set them up when installing the system; there are specific scripts to perform them after the system is installed.
+The post-install scripts should be run with your user, and they are located under the `post-optional` directory. There is no need to run them directly as a root, since the actual required parts already use sudo, and you only need to type your user password for it to work correctly.
 
 ### Install NVIDIA drivers
 Installs NVIDIA drivers into your system. Note that this installs the proprietary drivers (not the open-source `nouveau`), and thus it needs to enable the `nonfree` repository.

@@ -22,7 +22,11 @@ alias ff='fastfetch'
 alias fsi='dotnet fsi'
 alias fsx='fsi'
 
+alias yz='yazi'
+
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+
+export EDITOR=hx
 
 # Clipboard helper functions
 xcopy() {
@@ -341,7 +345,7 @@ mkcd() {
 }
 
 # Path
-PATH="$HOME/.bun/bin:$PATH"
+PATH="$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH"
 
 # ----------------------------
 

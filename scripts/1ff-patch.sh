@@ -4,19 +4,19 @@ set -e
 DOTFILES="$HOME/dotfiles"
 CONFIG="$HOME/.config"
 
-# Copy config files to "$HOME"
+# Soft link files to "$HOME"
 # Don't replace existing '.sl.sh' if it already exists.
-cp -f "$DOTFILES/files/.bashrc" "$HOME/"
+ln -sf "$DOTFILES/files/.bashrc" "$HOME/"
+ln -sf "$DOTFILES/files/.xinitrc" "$HOME/"
+ln -sf "$DOTFILES/files/.xprofile" "$HOME/"
+ln -sf "$DOTFILES/files/.Xresources" "$HOME/"
 cp -n "$DOTFILES/files/.sl.sh" "$HOME/"
-cp -f "$DOTFILES/files/.xinitrc" "$HOME/"
-cp -f "$DOTFILES/files/.xprofile" "$HOME/"
-cp -f "$DOTFILES/files/.Xresources" "$HOME/"
 
 # Ensure ~/.config exists
 mkdir -p "$CONFIG"
 
-# Copy everything inside '.config' to '~/.config'
-cp -rf "$DOTFILES/files/.config/"* "$CONFIG/"
+# Soft link everything inside '.config' to '~/.config'
+ln -sf "$DOTFILES/files/.config/"* "$CONFIG/"
 
 # Create convenience folders
 mkdir -p "$HOME/dev"

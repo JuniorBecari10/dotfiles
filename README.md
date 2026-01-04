@@ -28,7 +28,7 @@ The scripts this repository has can replicate exactly my personal Void Linux ins
 This repository is meant to be kept in your home (`~`) folder even after the installation is complete, because you may want to make changes to it,
 and it's already there for you to sync your configurations.
 
-A clean installation made using this script should install roughly `597` packages. <br>
+A clean installation made using this script should install roughly `580` packages without any optional installations. <br>
 I'm still making efforts to lower this number, while keeping the same experience. If you know of some change that keeps the same experience while reducing the number of packages, please tell me.
 
 ## Specification
@@ -49,6 +49,7 @@ I'm still making efforts to lower this number, while keeping the same experience
 - **Locale**: PT-BR / UTF-8
 - **Time Zone**: UTC-3
 - **Boot Mode**: UEFI
+- **Swap Size**: 2 GB
 
 ### My wallpaper
 
@@ -348,6 +349,8 @@ You may also want to run the commands separately, or even audit the entire insta
 ## Optional Installations
 
 This script allows you to perform optional installations as well. Here's what they are, and what they do.
+
+Remember that you don't need to set them up when installing the system. There are specific scripts to perform them after the system is installed. The post-install scripts should be run with your user.
 
 ### Install NVIDIA drivers
 Installs NVIDIA drivers into your system. Note that this installs the proprietary drivers (not the open-source `nouveau`), and thus it needs to enable the `nonfree` repository.

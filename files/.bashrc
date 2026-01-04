@@ -23,7 +23,6 @@ alias fsi='dotnet fsi'
 alias fsx='fsi'
 
 alias yz='yazi'
-
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 export EDITOR=hx
@@ -348,12 +347,6 @@ mkcd() {
 PATH="$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH"
 
 # ----------------------------
-
-# Disable Ctrl-Z binding
-stty susp undef
-
-# To return it:
-# stty susp ^Z
 
 # Define prompt.
 # folder $

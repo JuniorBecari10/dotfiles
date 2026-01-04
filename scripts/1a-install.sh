@@ -13,8 +13,8 @@ mount "$MAIN_PART" /mnt
 mkdir -p /mnt/boot/efi
 mount "$BOOT_PART" /mnt/boot/efi
 
-# Create swapfile of 4GB
-fallocate -l 4G /mnt/swapfile
+# Create swapfile of 2GB
+fallocate -l 2G /mnt/swapfile
 chmod 600 /mnt/swapfile
 mkswap /mnt/swapfile
 swapon /mnt/swapfile || true

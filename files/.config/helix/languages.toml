@@ -1,3 +1,7 @@
+[language-server.emmet-ls]
+args = ["--stdio"]
+command="emmet-ls"
+
 [[language]]
 name = "fsharp"
 indent = { tab-width = 4, unit = "    " }
@@ -13,6 +17,7 @@ indent = { tab-width = 4, unit = "    " }
 [[language]]
 name = "html"
 indent = { tab-width = 4, unit = "    " }
+language-servers = ["vscode-html-language-server", "emmet-ls"]
 
 [[language]]
 name = "css"
@@ -21,6 +26,7 @@ indent = { tab-width = 4, unit = "    " }
 [[language]]
 name = "svelte"
 indent = { tab-width = 4, unit = "    " }
+language-servers = ["svelteserver", "emmet-ls"]
 
 [[language]]
 name = "go"
@@ -30,6 +36,7 @@ auto-format = false
 [[language]]
 name = "vue"
 indent = { tab-width = 4, unit = "    " }
+language-servers = ["vue-language-server", "emmet-ls"]
 
 [[language]]
 name = "typescript"

@@ -7,7 +7,7 @@ set -e
 # Perform network config as root
 sudo ~/dotfiles/scripts/2b-network.sh
 
-~/dotfiles/scripts/2c-flatpak.sh
+# ~/dotfiles/scripts/2c-flatpak.sh # don't call it yet, since I won't use it anymore
 ~/dotfiles/scripts/2d-gtk.sh
 
 # Set up neovim's clipboard (requires 'xclip' installed, if on Xorg)

@@ -47,6 +47,8 @@ htop
 curl
 dracut
 dbus elogind
+PrismLauncher
+openjdk11-jre
 "
 
 # Install packages

@@ -61,7 +61,7 @@ x() {
         remove-only-yes|rry)      sudo xbps-remove -y "$@" ;;
 
         search|s|q)               xbps-query -Rs "$@" ;;
-        search-installed|si|qi)   xbps-query -l | grep -i "$@" ;;
+        search-installed|si|qi)   xbps-query -l | grep -i "$@" | sed "s/ii //g" ;;
         info)                     xbps-query -R "$@" ;;
 
         update|up)                sudo xbps-install -S ;;

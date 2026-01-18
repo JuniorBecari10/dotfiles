@@ -16,7 +16,6 @@ alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ls -la'
 alias lah='ls -lah'
-alias nv='nvim'
 
 alias ff='fastfetch'
 alias fsi='dotnet fsi'
@@ -48,53 +47,53 @@ x() {
 
     case "$cmd" in
         # Core operations
-        install|i)                sudo xbps-install -S "$@" ;;
-        install-yes|iy)           sudo xbps-install -Sy "$@" ;;
+        install|i)                             sudo xbps-install -S "$@" ;;
+        install-yes|iy)                        sudo xbps-install -Sy "$@" ;;
 
-        install-nosync|ii)        sudo xbps-install "$@" ;;
-        install-nosync-yes|iiy)   sudo xbps-install -y "$@" ;;
+        install-nosync|ii)                     sudo xbps-install "$@" ;;
+        install-nosync-yes|iiy)                sudo xbps-install -y "$@" ;;
 
-        remove|r)                 sudo xbps-remove "$@"; sudo xbps-remove -Ooy ;;
-        remove-yes|ry)            sudo xbps-remove -y "$@"; sudo xbps-remove -Ooy ;;
-        
-        remove-only|rr)           sudo xbps-remove "$@" ;;
-        remove-only-yes|rry)      sudo xbps-remove -y "$@" ;;
+        remove|r)                              sudo xbps-remove "$@"; echo "Done. Removing orphans..."; sudo xbps-remove -Ooy ;;
+        remove-yes|ry)                         sudo xbps-remove -y "$@"; echo "Done. Removing orphans..."; sudo xbps-remove -Ooy ;;
 
-        search|s|q)               xbps-query -Rs "$@" ;;
-        search-installed|si|qi)   xbps-query -l | grep -i "$@" | sed "s/ii //g" ;;
-        info)                     xbps-query -R "$@" ;;
+        remove-only|rr)                        sudo xbps-remove "$@" ;;
+        remove-only-yes|rry)                   sudo xbps-remove -y "$@" ;;
 
-        update|up)                sudo xbps-install -S ;;
-        upgrade|u)                sudo xbps-install -Su ;;
-        upgrade-yes|uy)           sudo xbps-install -Suy ;;
+        search|s|q)                            xbps-query -Rs "$@" ;;
+        search-installed|si|qi)                xbps-query -l | grep -i "$@" | sed "s/ii //g" ;;
+        search-installed-explicitly|sie|qie)   xbps-query -m ;;
 
-        full-upgrade|fu)          sudo xbps-install -Suv ;;
-        full-upgrade-yes|fuy)     sudo xbps-install -Suvy ;;
+        info)                                  xbps-query -R "$@" ;;
 
-        reconfigure|rec)          sudo xbps-reconfigure -f "$@" ;;
-        reconfigure-all|reca)     sudo xbps-reconfigure -fa "$@" ;;
+        update|up)                             sudo xbps-install -S ;;
+        upgrade|u)                             sudo xbps-install -Su ;;
+        upgrade-yes|uy)                        sudo xbps-install -Suy ;;
+
+        full-upgrade|fu)                       sudo xbps-install -Suv ;;
+        full-upgrade-yes|fuy)                  sudo xbps-install -Suvy ;;
+
+        reconfigure|rec)                       sudo xbps-reconfigure -f "$@" ;;
+        reconfigure-all|reca)                  sudo xbps-reconfigure -fa "$@" ;;
 
         # Orphans
-        orphans|o)                xbps-query -O ;;
-        remove-orphans|ro)        sudo xbps-remove -Oo ;;
-        remove-orphans-yes|roy)   sudo xbps-remove -Ooy ;;
+        orphans|o)                             xbps-query -O ;;
+        remove-orphans|ro)                     sudo xbps-remove -Oo ;;
+        remove-orphans-yes|roy)                sudo xbps-remove -Ooy ;;
 
         # Dependency tools
-        deps|d)                   xbps-query -d "$@" ;;
-        rdeps|rd)                 xbps-query -R -x "$@" ;;
+        deps|d)                                xbps-query -x "$@" ;;
+        rdeps|rd)                              xbps-query -R -X "$@" ;;
 
         # File ownership
-        owns|f)                   xbps-query -o "$@" ;;
-        files|fl)                 xbps-query -f "$@" ;;
+        files|fl)                              xbps-query -f "$@" ;;
 
         # Repo management
-        rep-list|rl)              xbps-query -L ;;
-        rep-add|ra)               sudo xbps-query -A "$@" ;;
-        rep-remove|rr)            sudo xbps-query -Rr "$@" ;;
+        rep-list|rl)                           xbps-query -L ;;
+        rep-add|ra)                            sudo xbps-query -A "$@" ;;
+        rep-remove|rr)                         sudo xbps-query -Rr "$@" ;;
 
         # Updates
-        list-updates|lu)          xbps-install -nu 2>/dev/null | grep -v "already installed" ;;
-        outdated|od)              xbps-install -nu | awk '/updating/' ;;
+        outdated|od)                           xbps-install -nu | awk '/update/' ;;
 
         # Help
         *)
@@ -116,44 +115,45 @@ Remove:
   rry, remove-yes <pkg>           Remove packages and don't clear orphans (auto-yes)
 
 Update & upgrade:
-  up, update                      Update repo index
+  up, update                              Update repo index
   
-  u, upgrade                      Upgrade system
-  uy, upgrade-yes                 Upgrade system (auto-yes)
+  u, upgrade                              Upgrade system
+  uy, upgrade-yes                         Upgrade system (auto-yes)
 
-  fu, full-upgrade                Update + upgrade + verbose
-  fuy, full-upgrade-yes           Update + upgrade + verbose (auto-yes)
+  fu, full-upgrade                        Update + upgrade + verbose
+  fuy, full-upgrade-yes                   Update + upgrade + verbose (auto-yes)
 
 Search & info:
-  s, q, search <name>             Search repo packages
-  si, qi, search-installed        Search among installed pkgs
-  info <pkg>                      Show package info
+  s, q, search <name>                     Search repo packages
+  si, qi, search-installed                Search among installed packages
+  sie, qie, search-installed-explicitly   Search among explicitly installed packages
+  
+  info <pkg>                              Show package info
 
 Reconfigure:
-  rec, reconfigure <pkg>          Reconfigure a package
-  reca, reconfigure-all <pkg>     Reconfigure all packages (and rebuild initramfs)
+  rec, reconfigure <pkg>                  Reconfigure a package
+  reca, reconfigure-all <pkg>             Reconfigure all packages (and rebuild initramfs)
 
 Orphans:
-  o, orphans                      List orphaned packages
-  ro, remove-orphans              Remove orphaned packages
-  roy, remove-orphans-yes         Remove orphaned packages (auto-yes)
+  o, orphans                              List orphaned packages
+  ro, remove-orphans                      Remove orphaned packages
+  roy, remove-orphans-yes                 Remove orphaned packages (auto-yes)
 
 Dependencies:
-  d, deps <pkg>                   Show dependencies
-  rd, rdeps <pkg>                 Show reverse dependencies
+  d, deps <pkg>                           Show dependencies
+  rd, rdeps <pkg>                         Show reverse dependencies
 
 File ownership:
-  f, owns <file>                  Which package owns this file?
-  fl, files <pkg>                 List files of a package
+  f, owns <file>                          Which package owns this file?
+  fl, files <pkg>                         List files of a package
 
 Repository management:
-  rl, rep-list                    List repositories
-  ra, rep-add <repo>              Add repository
-  rr, rep-remove <repo>           Remove repository
+  rl, rep-list                            List repositories
+  ra, rep-add <repo>                      Add repository
+  rr, rep-remove <repo>                   Remove repository
 
 Updates:
-  lu, list-updates                List packages that can update
-  od, outdated                    Show outdated packages
+  od, outdated                            Show outdated packages (that needs to be updated)
 EOF
             ;;
     esac

@@ -10,7 +10,7 @@ HOME="/home/$USERNAME"
 PACKAGES="
 i3 i3blocks i3lock
 kitty xterm
-neovim helix yazi
+helix yazi
 rofi rofi-calc rofi-emoji
 redshift
 git
@@ -31,15 +31,12 @@ xinit fontconfig mesa-dri
 yad polkit dunst
 lightdm lightdm-gtk-greeter
 zip unzip
-nodejs
 xrandr
 arandr
 pipewire alsa-pipewire
 xclip
 Thunar
 fastfetch
-tree
-ripgrep
 noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
 gtk+3
 flatpak

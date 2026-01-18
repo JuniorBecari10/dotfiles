@@ -1,6 +1,6 @@
 # dotfiles
 
-> ### TL;DR
+> ### Installer
 > The two-liner commands to download and run the installer:
 > ```
 > xbps-install -Syu xbps curl
@@ -29,7 +29,8 @@ This repository is meant to be kept in your home (`~`) folder even after the ins
 and it's already there for you to sync your configurations.
 
 A clean installation made using this script should install roughly `580` packages without any optional installations. <br>
-I'm still making efforts to lower this number, while keeping the same experience. If you know of some change that keeps the same experience while reducing the number of packages, please tell me.
+I'm still making efforts to lower this number, while keeping the same experience.
+If you know of some change that keeps the same experience while reducing the number of packages, please tell me.
 
 ## Specification
 
@@ -123,10 +124,11 @@ All of these aliases and utilities are defined in `.bashrc`.
 `ll`|`ls -l`|Display the files one per line.
 `la`|`ls -la`|Display the files one per line and also show hidden files.
 `lah`|`ls -lah`|Display the files one per line and also show hidden files, with the file sizes formatted to be more readable by humans.
-`nv`|`nvim`|Shortcut for the `nvim` command.
+`yz`|`yazi`|Shortcut for the `yazi` command.
 `ff`|`fastfetch`|Shortcut for the `fastfetch` command.
 `fsi`|`dotnet fsi`|Shortcut for the `dotnet fsi` subcommand.
 `fsx`|`fsi`|Typo guard for the `fsi` alias.
+`update-grub`|`sudo grub-mkconfig -o /boot/grub/grub.cfg`|Shortcut to update the GRUB configuration. Requires root permission.
 
 - Extra commands (functions)
 
@@ -137,6 +139,13 @@ All of these aliases and utilities are defined in `.bashrc`.
 `mkcd <path>`|`mkdir -p <path>` and `cd <path>`.
 `xcopy`|`xclip -selection clipboard`.
 `xpaste`|`xclip -selection clipboard -o`.
+
+### Exported variables in `.bashrc`
+
+**Variable**|**Value**
+---|---
+`EDITOR`|`hx`
+`PATH`|`$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH`
 
 ### Custom utilities
 
@@ -204,7 +213,6 @@ All of these aliases and utilities are defined in `.bashrc`.
 
 | Command       | Arguments | Description                   |
 | ------------- | --------- | ----------------------------- |
-| `f`, `owns`   | `<file>`  | Which package owns this file? |
 | `fl`, `files` | `<pkg>`   | List files of a package       |
 
 ##### Repository management
@@ -219,7 +227,6 @@ All of these aliases and utilities are defined in `.bashrc`.
 
 | Command              | Arguments | Description                   |
 | -------------------- | --------- | ----------------------------- |
-| `lu`, `list-updates` | —         | List packages that can update |
 | `od`, `outdated`     | —         | Show outdated packages        |
 
 ---
@@ -287,22 +294,6 @@ All of them are from [here](https://github.com/vivien/i3blocks-contrib).
   > along with an extra script to move the binary to the right place.
   > An up-to-date compiled version of it is already in place. But the source code is here as well, so you can make modifications and replace the original one if you want.
 - `battery` (laptop-specific)
-
-## My Neovim extensions
-
-- bash-language-server
-- clangd
-- css-lsp
-- emmet-language-server
-- fsautocomplete
-- gopls
-- html-lsp
-- lua-language-server
-- pyright
-- sqls
-- tailwindcss-language-server
-- typescript-language-server
-- vue-language-server
 
 > **Note** <br>
 > All the programs I use are downloaded through `xbps`, except `bun` and `dotnet`, which it doesn't currently offer, so I install them separately and put them in PATH.
@@ -401,4 +392,4 @@ Alternatively, you can also use `efibootmgr`. The complete command is in `script
 
 ### `xbps` cannot grab the packages because the mirror is out
 
-This is a normal outage. Please try again in a few minutes.
+This is a normal and kind of frequent outage. Please try again in a few minutes.

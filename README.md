@@ -184,7 +184,7 @@ All of these aliases and utilities are defined in `.bashrc`.
 | ------------------------------ | --------- | ------------------------------- |
 | `s`, `q`, `search`             | `<name>`  | Search repository packages      |
 | `si`, `qi`, `search-installed` | —         | Search among installed packages |
-| `sie`, `qie`, `search-explicitly-installed` | —         | Search among explicitly installed packages |
+| `sim`, `qim`, `search-installed-manually` | —         | Search among explicitly installed packages |
 | `info`                         | `<pkg>`   | Show package information        |
 
 ##### Reconfigure
@@ -201,6 +201,13 @@ All of these aliases and utilities are defined in `.bashrc`.
 | `o`, `orphans`              | —         | List orphaned packages              |
 | `ro`, `remove-orphans`      | —         | Remove orphaned packages            |
 | `roy`, `remove-orphans-yes` | —         | Remove orphaned packages (auto-yes) |
+
+##### Conversion
+
+| Command                     | Arguments | Description                         |
+| --------------------------- | --------- | ----------------------------------- |
+| `ta`, `to-automatic`, `td`, `to-deps`              | —         |  Mark packages as dependencies (automatically installed)             |
+| `tm`, `to-manual`      | —         |  Mark packages as manually installed           |
 
 ##### Dependencies
 

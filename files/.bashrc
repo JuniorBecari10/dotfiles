@@ -61,7 +61,7 @@ x() {
 
         search|s|q)                            xbps-query -Rs "$@" ;;
         search-installed|si|qi)                xbps-query -l | grep -i "$@" | sed "s/ii //g" ;;
-        search-installed-explicitly|sie|qie)   xbps-query -m ;;
+        search-installed-manually|sim|qim)     xbps-query -m ;;
 
         info)                                  xbps-query -R "$@" ;;
 
@@ -79,6 +79,10 @@ x() {
         orphans|o)                             xbps-query -O ;;
         remove-orphans|ro)                     sudo xbps-remove -Oo ;;
         remove-orphans-yes|roy)                sudo xbps-remove -Ooy ;;
+
+        # Conversion
+        to-automatic|ta|to-deps|td)            sudo xbps-pkgdb -m auto "$@" ;;
+        to-manual|tm)                          sudo xbps-pkgdb -m manual "$@" ;;
 
         # Dependency tools
         deps|d)                                xbps-query -x "$@" ;;
@@ -138,6 +142,10 @@ Orphans:
   o, orphans                              List orphaned packages
   ro, remove-orphans                      Remove orphaned packages
   roy, remove-orphans-yes                 Remove orphaned packages (auto-yes)
+
+Conversion:
+  ta, to-automatic, td, to-deps           Mark packages as dependencies (automatically installed)
+  tm, to-manual                           Mark packages as manually installed
 
 Dependencies:
   d, deps <pkg>                           Show dependencies

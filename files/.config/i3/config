@@ -237,19 +237,13 @@ bindsym $mod+g exec thunar
 bindsym $mod+x exec firefox
 
 # Mod + P: Power Menu
-bindsym $mod+p exec ~/.config/i3/scripts/powermenu
+bindsym $mod+p exec ~/.config/i3/scripts/power
 
 # Mod + B: Clipman history
 bindsym $mod+b exec xfce4-clipman-history
 
-# Mod + D: Run rofi
-bindsym $mod+d exec rofi -show run
+# Mod + D: Launch rofi menu
+bindsym $mod+d exec ~/.config/i3/scripts/menu
 
-# Mod + Shift + D: Launch rofi Flatpak menu
-bindsym $mod+Shift+d exec ~/.config/i3/scripts/flatpak
-
-# Mod + Ctrl + D: Launch rofi Calculator menu
-bindsym $mod+Ctrl+d exec rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip -selection clipboard"
-
-# Mod + Shift + G: Rofi Emoji Picker
-bindsym $mod+Shift+g exec --no-startup-id rofi -show emoji
+# Mod + Shift + D: Apps Menu
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run

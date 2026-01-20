@@ -344,7 +344,7 @@ mkcd() {
 }
 
 # Path
-PATH="$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH"
+PATH="$HOME/programs:$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH"
 
 # ----------------------------
 

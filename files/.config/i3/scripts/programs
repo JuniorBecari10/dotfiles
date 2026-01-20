@@ -1,0 +1,15 @@
+#!/bin/sh
+
+PROGRAMS_DIR="$HOME/programs"
+
+# Exit if folder doesn't exist
+[ -d "$PROGRAMS_DIR" ] || exit 1
+
+# List executable files (not directories)
+choice=$(find "$PROGRAMS_DIR" -maxdepth 1 -type f -executable -printf "%f\n" | \
+    sort | \
+    rofi -dmenu -i -p "Programs")
+
+# Run selection if not empty
+[ -n "$choice" ] && exec "$PROGRAMS_DIR/$choice"
+

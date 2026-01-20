@@ -1,0 +1,29 @@
+#!/bin/sh
+
+choice=$(printf "󰣆 Apps\n󰏖 Flatpaks\n󰆍 Programs\n⏻ Power\n󰇵 Emoji\n󰃬 Calculator\n" | \
+    rofi -dmenu -i -p "Menu" | sed 's/^[^ ]* //')
+
+case "$choice" in
+    Apps)
+        rofi -show run
+        ;;
+    Flatpaks)
+        ~/.config/i3/scripts/flatpak
+        ;;
+    Programs)
+        ~/.config/i3/scripts/programs
+        ;;
+    Power)
+        ~/.config/i3/scripts/power
+        ;;
+    Emoji)
+        rofi -show emoji
+        ;;
+    Calculator)
+        rofi -show calc \
+            -modi calc \
+            -no-show-match \
+            -no-sort \
+            -calc-command "echo -n '{result}' | xclip -selection clipboard"
+        ;;
+esac

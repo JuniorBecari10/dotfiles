@@ -56,6 +56,7 @@ done
 # Create convenience folders
 mkdir -p "$HOME/dev"
 mkdir -p "$HOME/docs"
+mkdir -p "$HOME/programs"
 mkdir -p "$HOME/Downloads" # Because of Firefox
 
 # Give all the files inside ~ ownership to the user

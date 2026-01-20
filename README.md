@@ -63,8 +63,8 @@ Modifier: `Win`
 
 Keybinding|Action
 ---|---
-`Mod + D`                         | Run `rofi`
-`Mod + Shift + D`                 | Run `rofi` for Flatpak apps
+`Mod + D`                         | Run `rofi` menu
+`Mod + Shift + D`                 | Run `rofi` for apps
 `Mod + J` / `Mod + Left`          | Move focus left
 `Mod + K` / `Mod + Down`          | Move focus down
 `Mod + L` / `Mod + Up`            | Move focus up
@@ -102,7 +102,6 @@ Keybinding|Action
 `Ctrl + PrintScr`                 | Flameshot fullscreen screenshot to file (`~/Pictures`)
 `Mod + N`                         | Lock screen with `i3lock`
 `Mod + G`                         | Open Thunar file explorer
-`Mod + Shift + G`                 | Open Rofi emoji selector
 `Mod + X`                         | Open Firefox
 `Mod + P`                         | Open Power menu using Rofi
 
@@ -145,7 +144,7 @@ All of these aliases and utilities are defined in `.bashrc`.
 **Variable**|**Value**
 ---|---
 `EDITOR`|`hx`
-`PATH`|`$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH`
+`PATH`|`$HOME/programs:$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH`
 
 ### Custom utilities
 
@@ -185,6 +184,7 @@ All of these aliases and utilities are defined in `.bashrc`.
 | ------------------------------ | --------- | ------------------------------- |
 | `s`, `q`, `search`             | `<name>`  | Search repository packages      |
 | `si`, `qi`, `search-installed` | —         | Search among installed packages |
+| `sie`, `qie`, `search-explicitly-installed` | —         | Search among explicitly installed packages |
 | `info`                         | `<pkg>`   | Show package information        |
 
 ##### Reconfigure

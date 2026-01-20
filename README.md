@@ -154,19 +154,19 @@ All of these aliases and utilities are defined in `.bashrc`.
 
 | Command                     | Arguments | Description                                   |
 | --------------------------- | --------- | --------------------------------------------- |
-| `i`, `install`              | `<pkg>`   | Install packages with repo sync               |
-| `iy`, `install-yes`         | `<pkg>`   | Install packages with repo sync (auto-yes)    |
-| `ii`, `install-nosync`      | `<pkg>`   | Install packages without repo sync            |
-| `iiy`, `install-nosync-yes` | `<pkg>`   | Install packages without repo sync (auto-yes) |
+| `i`, `install`              | `<pkgs>`   | Install packages with repo sync               |
+| `iy`, `install-yes`         | `<pkgs>`   | Install packages with repo sync (auto-yes)    |
+| `ii`, `install-nosync`      | `<pkgs>`   | Install packages without repo sync            |
+| `iiy`, `install-nosync-yes` | `<pkgs>`   | Install packages without repo sync (auto-yes) |
 
 ##### Remove
 
 | Command            | Arguments | Description                                         |
 | ------------------ | --------- | --------------------------------------------------- |
-| `r`, `remove`      | `<pkg>`   | Remove packages and clear orphans                   |
-| `ry`, `remove-yes` | `<pkg>`   | Remove packages and clear orphans (auto-yes)        |
-| `rr`, `remove`      | `<pkg>`   | Remove packages and don't clear orphans            |
-| `rry`, `remove-yes` | `<pkg>`   | Remove packages and don't clear orphans (auto-yes) |
+| `r`, `remove`      | `<pkgs>`   | Remove packages and clear orphans                   |
+| `ry`, `remove-yes` | `<pkgs>`   | Remove packages and clear orphans (auto-yes)        |
+| `rr`, `remove`      | `<pkgs>`   | Remove packages and don't clear orphans            |
+| `rry`, `remove-yes` | `<pkgs>`   | Remove packages and don't clear orphans (auto-yes) |
 
 ##### Update & upgrade
 
@@ -191,8 +191,8 @@ All of these aliases and utilities are defined in `.bashrc`.
 
 | Command                   | Arguments | Description              |
 | ------------------------- | --------- | ------------------------ |
-| `rec`, `reconfigure`      | `<pkg>`   | Reconfigure a package    |
-| `reca`, `reconfigure-all` | `<pkg>`   | Reconfigure all packages |
+| `rec`, `reconfigure`      | `<pkgs>`   | Reconfigure a package    |
+| `reca`, `reconfigure-all` |  —  | Reconfigure all packages |
 
 ##### Orphans
 
@@ -206,8 +206,8 @@ All of these aliases and utilities are defined in `.bashrc`.
 
 | Command                     | Arguments | Description                         |
 | --------------------------- | --------- | ----------------------------------- |
-| `ta`, `to-automatic`, `td`, `to-deps`              | —         |  Mark packages as dependencies (automatically installed)             |
-| `tm`, `to-manual`      | —         |  Mark packages as manually installed           |
+| `ta`, `to-automatic`, `td`, `to-deps`              | `<pkgs>`         |  Mark packages as dependencies (automatically installed)             |
+| `tm`, `to-manual`      | `<pkgs>`         |  Mark packages as manually installed           |
 
 ##### Dependencies
 

@@ -13,6 +13,7 @@ alias feh='feh --geometry 1100x700'
 alias fehe='feh --edit'
 
 alias ls='ls --color=auto'
+alias le='ls | sed "s/ /\n/g"'
 alias ll='ls -l'
 alias la='ls -la'
 alias lah='ls -lah'
@@ -130,7 +131,7 @@ Update & upgrade:
 Search & info:
   s, q, search <name>                     Search repo packages
   si, qi, search-installed                Search among installed packages
-  sie, qie, search-installed-explicitly   Search among explicitly installed packages
+  sim, qim, search-installed-manually     Search among manually installed packages
   
   info <pkg>                              Show package info
 

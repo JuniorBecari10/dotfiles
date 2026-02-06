@@ -46,6 +46,8 @@ dracut
 dbus elogind
 PrismLauncher
 openjdk11-jre
+openjdk8-jre
+wget
 "
 
 # Install packages

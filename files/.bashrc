@@ -13,7 +13,6 @@ alias feh='feh --geometry 1100x700'
 alias fehe='feh --edit'
 
 alias ls='ls --color=auto'
-alias le='ls | sed "s/ /\n/g"'
 alias ll='ls -l'
 alias la='ls -la'
 alias lah='ls -lah'
@@ -24,6 +23,10 @@ alias fsx='fsi'
 
 alias yz='yazi'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+
+le() {
+    ls "$@" | sed "s/ /\n/g"
+}
 
 export EDITOR=hx
 

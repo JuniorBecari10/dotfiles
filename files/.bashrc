@@ -73,6 +73,9 @@ x() {
         upgrade|u)                             sudo xbps-install -Su ;;
         upgrade-yes|uy)                        sudo xbps-install -Suy ;;
 
+        upgrade-xbps|ux)                       sudo xbps-install -u xbps ;;
+        upgrade-xbps-yes|uxy)                  sudo xbps-install -uy xbps ;;
+
         full-upgrade|fu)                       sudo xbps-install -Suv ;;
         full-upgrade-yes|fuy)                  sudo xbps-install -Suvy ;;
 
@@ -109,24 +112,27 @@ x() {
 Usage: x <command> [arguments]
 
 Install packages:
-  i, install <pkg>                Install packages with repo sync
-  iy, install-yes <pkg>           Install packages with repo sync (auto-yes)
+  i, install <pkg>                        Install packages with repo sync
+  iy, install-yes <pkg>                   Install packages with repo sync (auto-yes)
   
-  ii, install-nosync <pkg>        Install packages without repo sync
-  iiy, install-nosync-yes <pkg>   Install packages without repo sync (auto-yes)
+  ii, install-nosync <pkg>                Install packages without repo sync
+  iiy, install-nosync-yes <pkg>           Install packages without repo sync (auto-yes)
 
 Remove:
-  r, remove <pkg>                 Remove packages and clear orphans
-  ry, remove-yes <pkg>            Remove packages and clear orphans (auto-yes)
+  r, remove <pkg>                         Remove packages and clear orphans
+  ry, remove-yes <pkg>                    Remove packages and clear orphans (auto-yes)
   
-  rr, remove <pkg>                Remove packages and don't clear orphans
-  rry, remove-yes <pkg>           Remove packages and don't clear orphans (auto-yes)
+  rr, remove <pkg>                        Remove packages and don't clear orphans
+  rry, remove-yes <pkg>                   Remove packages and don't clear orphans (auto-yes)
 
 Update & upgrade:
   up, update                              Update repo index
   
   u, upgrade                              Upgrade system
   uy, upgrade-yes                         Upgrade system (auto-yes)
+
+  ux, upgrade-xbps                        Upgrade xbps
+  uxy, upgrade-xbps-yes                   Upgrade xbps (auto-yes)
 
   fu, full-upgrade                        Update + upgrade + verbose
   fuy, full-upgrade-yes                   Update + upgrade + verbose (auto-yes)
@@ -356,7 +362,7 @@ mkcd() {
 }
 
 # Path
-PATH="$HOME/programs:$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH"
+PATH="$HOME/.local/share/lspctl/bin:$HOME/programs:$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH"
 
 # ----------------------------
 

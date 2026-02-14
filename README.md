@@ -144,7 +144,7 @@ All of these aliases and utilities are defined in `.bashrc`.
 **Variable**|**Value**
 ---|---
 `EDITOR`|`hx`
-`PATH`|`$HOME/programs:$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH`
+`PATH`|`$HOME/.local/share/lspctl/bin:$HOME/programs:$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH`
 
 ### Custom utilities
 
@@ -175,6 +175,8 @@ All of these aliases and utilities are defined in `.bashrc`.
 | `up`, `update`            | —         | Update repository index               |
 | `u`, `upgrade`            | —         | Upgrade system                        |
 | `uy`, `upgrade-yes`       | —         | Upgrade system (auto-yes)             |
+| `ux`, `upgrade-xbps`      | —         | Upgrade xbps                          |
+| `uxy`, `upgrade-xbps-yes` | —         | Upgrade xbps (auto-yes)               |
 | `fu`, `full-upgrade`      | —         | Update + upgrade + verbose            |
 | `fuy`, `full-upgrade-yes` | —         | Update + upgrade + verbose (auto-yes) |
 

@@ -6,6 +6,6 @@ rm -rf /var/service
 ln -s /etc/runit/runsvdir/current /var/service
 
 # Enable services
-for svc in dbus elogind NetworkManager lightdm; do
+for svc in dbus elogind NetworkManager lightdm chronyd; do
     ln -snf "/etc/sv/$svc" /var/service/
 done

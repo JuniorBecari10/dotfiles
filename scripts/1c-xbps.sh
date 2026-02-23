@@ -23,7 +23,7 @@ xfce4-clipman-plugin
 NetworkManager
 xcompmgr
 python3
-go ripgrep lazygit
+go ripgrep
 github-cli
 volumeicon
 xorg-minimal xf86-input-libinput setxkbmap
@@ -47,7 +47,7 @@ dbus elogind
 PrismLauncher
 openjdk11-jre
 openjdk8-jre
-wget
+wget chrony
 "
 
 # Install packages

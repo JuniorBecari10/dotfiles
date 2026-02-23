@@ -23,6 +23,7 @@ alias fsx='fsi'
 
 alias yz='yazi'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias killall='pkill -9'
 
 le() {
     ls "$@" | sed "s/ /\n/g"

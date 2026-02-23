@@ -128,6 +128,7 @@ All of these aliases and utilities are defined in `.bashrc`.
 `fsi`|`dotnet fsi`|Shortcut for the `dotnet fsi` subcommand.
 `fsx`|`fsi`|Typo guard for the `fsi` alias.
 `update-grub`|`sudo grub-mkconfig -o /boot/grub/grub.cfg`|Shortcut to update the GRUB configuration. Requires root permission.
+`killall`|`pkill -9`|Kills all instances of the specified program.
 
 - Extra commands (functions)
 

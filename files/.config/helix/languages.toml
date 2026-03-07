@@ -1,6 +1,10 @@
 [language-server.emmet-ls]
+command = "emmet-ls"
 args = ["--stdio"]
-command="emmet-ls"
+
+[language-server.pylsp]
+command = "pyright-langserver"
+args = ["--stdio"]
 
 [[language]]
 name = "fsharp"

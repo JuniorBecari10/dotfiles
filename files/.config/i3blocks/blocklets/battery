@@ -35,7 +35,7 @@ else:
                 # check if it matches a time
                 time = re.match(r"(\d+):(\d+)", time)
                 if time:
-                    time = ":".join(time.groups()) + ":00"
+                    time = "h".join(time.groups()) + "m"
                     timeleft = " ({})".format(time)
                 else:
                     timeleft = ""

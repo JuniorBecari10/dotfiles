@@ -41,14 +41,15 @@ If you know of some change that keeps the same experience while reducing the num
 - **Display Manager**: LightDM GTK Greeter
 - **Display Server**: X.org
 - **Bootloader**: GRUB
-- **Code Editor**: Helix (Neovim / NVChad still kept)
+- **Code Editor**: Helix
 - **Shell**: Bash
 - **Audio Server**: PipeWire (with PulseAudio emulation)
+- **Screenshots**: maim + swappy
 - **Terminal Emulator**: kitty
 - **Compositor**: xcompmgr
 - **Init System**: runit
 - **Locale**: PT-BR / UTF-8
-- **Time Zone**: UTC-3
+- **Time Zone**: UTC-3 (America/São Paulo)
 - **Boot Mode**: UEFI
 - **Swap Size**: 2 GB
 
@@ -97,9 +98,8 @@ Keybinding|Action
 `L` / `Up` *(resize mode)*        | Shrink height by 10px
 `Mod + Enter`                     | Open `kitty` terminal
 `Mod + Q`                         | Close current window
-`PrintScr`                        | Flameshot interactive screenshot
-`Shift + PrintScr`                | Flameshot fullscreen screenshot to clipboard
-`Ctrl + PrintScr`                 | Flameshot fullscreen screenshot to file (`~/Pictures`)
+`PrintScr`                        | Screenshot with maim to clipboard
+`Shift + PrintScr`                | Scrrenshot with maim and swappy for editing
 `Mod + N`                         | Lock screen with `i3lock`
 `Mod + G`                         | Open Thunar file explorer
 `Mod + X`                         | Open Firefox

@@ -58,11 +58,11 @@ x() {
         install-nosync|ii)                     sudo xbps-install "$@" ;;
         install-nosync-yes|iiy)                sudo xbps-install -y "$@" ;;
 
-        remove|r)                              sudo xbps-remove "$@"; echo "Done. Removing orphans..."; sudo xbps-remove -Ooy ;;
-        remove-yes|ry)                         sudo xbps-remove -y "$@"; echo "Done. Removing orphans..."; sudo xbps-remove -Ooy ;;
+        remove|r)                              sudo xbps-remove -R "$@"; echo "Done. Removing orphans..."; sudo xbps-remove -Ooy ;;
+        remove-yes|ry)                         sudo xbps-remove -Ry "$@"; echo "Done. Removing orphans..."; sudo xbps-remove -Ooy ;;
 
-        remove-only|rr)                        sudo xbps-remove "$@" ;;
-        remove-only-yes|rry)                   sudo xbps-remove -y "$@" ;;
+        remove-only|rr)                        sudo xbps-remove -R "$@" ;;
+        remove-only-yes|rry)                   sudo xbps-remove -R -y "$@" ;;
 
         search|s|q)                            xbps-query -Rs "$@" ;;
         search-installed|si|qi)                xbps-query -l | grep -i "$@" | sed "s/ii //g" ;;

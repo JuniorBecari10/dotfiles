@@ -17,7 +17,7 @@ git
 pavucontrol
 network-manager-applet
 firefox
-flameshot
+maim swappy
 feh
 xfce4-clipman-plugin
 NetworkManager

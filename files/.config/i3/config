@@ -218,14 +218,11 @@ bindsym $mod+Return exec kitty
 # Mod + Q: Close Window (original config requires Shift)
 bindsym $mod+q kill
 
-# PrintScr: flameshot
-bindsym Print exec --no-startup-id flameshot gui
+# PrintScr: maim
+bindsym Print exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
 
-# Shift + PrintScr: full screen to clipboard
-bindsym Shift+Print exec --no-startup-id flameshot full -c
-
-# Ctrl + PrintScr: full screen to file
-bindsym Ctrl+Print exec --no-startup-id flameshot full -p ~/Pictures
+# Shift + PrintScr: maim + swappy
+bindsym Shift+Print exec --no-startup-id maim -s /tmp/shot.png && swappy -f /tmp/shot.png -o - | xclip -selection clipboard -t image/png
 
 # Mod + N: Lock Screen
 bindsym $mod+n exec --no-startup-id i3lock

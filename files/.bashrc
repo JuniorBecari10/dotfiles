@@ -77,8 +77,8 @@ x() {
         upgrade-xbps|ux)                       sudo xbps-install -u xbps ;;
         upgrade-xbps-yes|uxy)                  sudo xbps-install -uy xbps ;;
 
-        full-upgrade|fu)                       sudo xbps-install -Suv ;;
-        full-upgrade-yes|fuy)                  sudo xbps-install -Suvy ;;
+        full-upgrade|fu)                       sudo xbps-install -uy xbps; sudo xbps-install -Suv ;;
+        full-upgrade-yes|fuy)                  sudo xbps-install -uy xbps; sudo xbps-install -Suvy ;;
 
         reconfigure|rec)                       sudo xbps-reconfigure -f "$@" ;;
         reconfigure-all|reca)                  sudo xbps-reconfigure -fa "$@" ;;

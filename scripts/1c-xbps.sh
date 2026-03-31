@@ -38,7 +38,6 @@ xclip
 Thunar
 fastfetch
 noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
-gtk+3
 flatpak
 htop
 curl

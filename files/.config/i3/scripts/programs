@@ -12,4 +12,3 @@ choice=$(find "$PROGRAMS_DIR" -maxdepth 1 -type f -executable -printf "%f\n" | \
 
 # Run selection if not empty
 [ -n "$choice" ] && exec "$PROGRAMS_DIR/$choice"
-

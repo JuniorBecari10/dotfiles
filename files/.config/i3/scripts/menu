@@ -1,8 +1,6 @@
 #!/bin/sh
-
-choice=$(printf "󰣆 Apps\n󰏖 Flatpaks\n󰆍 Programs\n⏻ Power\n󰇵 Emoji\n󰃬 Calculator\n" | \
+choice=$(printf "󰣆 Apps\n󰏖 Flatpaks\n󰆍 Programs\n⏻ Power\n󰇵 Emoji\n󰃬 Calculator\n󰉋 File Explorer\n" | \
     rofi -dmenu -i -p "Menu" | sed 's/^[^ ]* //')
-
 case "$choice" in
     Apps)
         rofi -show run
@@ -25,5 +23,8 @@ case "$choice" in
             -no-show-match \
             -no-sort \
             -calc-command "echo -n '{result}' | xclip -selection clipboard"
+        ;;
+    "File Explorer")
+        thunar
         ;;
 esac

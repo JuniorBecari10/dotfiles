@@ -202,7 +202,7 @@ exec --no-startup-id redshift
 for_window [class="Firefox"] move to workspace $ws1
 for_window [class="Yad"] floating enable
 for_window [class="Xfce4-clipman-history"] floating enable, resize set 500 600, move position center
-for_window [class="Thunar"] floating enable, resize set 1000 700, move position center
+for_window [class="Thunar"] floating enable, resize set 1180 700, move position center
 for_window [class="feh"] floating enable, resize set 1000 700, move position center
 for_window [class="pavucontrol"] floating enable, resize set 900 600, move position center
 for_window [class="Arandr"] floating enable, resize set 900 600, move position center

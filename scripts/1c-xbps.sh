@@ -25,7 +25,7 @@ xcompmgr
 python3
 go ripgrep
 github-cli
-volumeicon
+volctl
 xorg-minimal xf86-input-libinput setxkbmap
 xinit fontconfig mesa-dri
 yad polkit dunst
@@ -44,7 +44,7 @@ curl
 dracut
 dbus elogind
 PrismLauncher
-openjdk11-jre
+openjdk21-jre
 openjdk8-jre
 wget chrony
 "

@@ -45,6 +45,7 @@ If you know of some change that keeps the same experience while reducing the num
 - **Shell**: Bash
 - **Audio Server**: PipeWire (with PulseAudio emulation)
 - **Screenshots**: maim + swappy
+- **Volume Control**: volctl
 - **Terminal Emulator**: kitty
 - **Compositor**: xcompmgr
 - **Init System**: runit

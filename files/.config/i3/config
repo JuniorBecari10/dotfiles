@@ -15,6 +15,14 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # Start PipeWire
 exec --no-startup-id pipewire
 
+# Volume keys
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute        exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Microphone mute
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
 # Brightness control using brightnessctl (uncomment if you're in a laptop)
 # Ensure you have 'brightnessctl' installed (run 'od-laptop.sh', through the IS_LAPTOP flag to install it)
 
@@ -161,14 +169,14 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-# class                   border    backgr.   text       indicator child_border
+# class                 border  backgr. text     indic.  child_border
 client.focused          #555555 #000000 #ffffff  #00ffcc #555555
 client.focused_inactive #333333 #000000 #ffffff  #484e50 #333333
 client.unfocused        #222222 #000000 #888888  #444444 #222222
 client.urgent           #ff0000 #000000 #ffffff  #ff0000 #ff0000
 client.placeholder      #000000 #0c0c0c #ffffff  #000000 #0c0c0c
 
-# client.background       #ffffff
+# client.background     #ffffff
 
 bindsym $mod+r mode "resize"
 
@@ -180,7 +188,7 @@ bar {
 # Start tray icons
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-clipman
-exec --no-startup-id sh -c 'sleep 3 && volumeicon'
+exec --no-startup-id volctl
 
 # Set keymap to brazilian keyboard
 exec_always setxkbmap br

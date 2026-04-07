@@ -47,5 +47,15 @@ name = "typescript"
 indent = { tab-width = 4, unit = "    " }
 
 [[language]]
+name = "tsx"
+indent = { tab-width = 4, unit = "    " }
+language-servers = ["typescript-language-server", "emmet-ls"]
+
+[[language]]
 name = "javascript"
 indent = { tab-width = 4, unit = "    " }
+
+[[language]]
+name = "jsx"
+indent = { tab-width = 4, unit = "    " }
+language-servers = ["typescript-language-server", "emmet-ls"]

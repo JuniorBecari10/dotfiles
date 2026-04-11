@@ -23,7 +23,12 @@ The configurations in this repository are highly opinionated for my personal use
 
 You are free to edit the files yourself to your own desire.
 
-The scripts this repository has can replicate exactly my personal Void Linux installation and configuration on any PC that can run the distro. The advantages of using it to install the system using `xbps` as opposed to inflating tarballs, is that it enables you to change and configure your installation to your needs and also getting the latest software provided by the package manager. This also makes optional installations possible.
+The scripts this repository has can replicate exactly my personal Void Linux installation and configuration on any PC that can run the distro.
+The advantages of using it to install the system using `xbps` as opposed to inflating tarballs, is that it enables you to change and configure your
+installation to your needs and also getting the latest software provided by the package manager. This also makes optional installations possible.
+
+Although the installation can be configured to include some things or not, it's not fully configurable through the scripts provided here, so some things
+such as timezone cannot be configured without manually editing the scripts.
 
 This repository is meant to be kept in your home (`~`) folder even after the installation is complete, because you may want to make changes to it,
 and it's already there for you to sync your configurations.
@@ -41,7 +46,7 @@ If you know of some change that keeps the same experience while reducing the num
 - **Display Manager**: LightDM GTK Greeter
 - **Display Server**: X.org
 - **Bootloader**: GRUB
-- **Code Editor**: Helix
+- **Code Editor**: Helix (with transparent Catppuccin theme)
 - **Shell**: Bash
 - **Audio Server**: PipeWire (with PulseAudio emulation)
 - **Screenshots**: maim + swappy
@@ -53,6 +58,7 @@ If you know of some change that keeps the same experience while reducing the num
 - **Time Zone**: UTC-3 (America/São Paulo)
 - **Boot Mode**: UEFI
 - **Swap Size**: 2 GB
+- **Swap Type**: File (swapfile)
 
 ### My wallpaper
 
@@ -105,6 +111,7 @@ Keybinding|Action
 `Mod + G`                         | Open Thunar file explorer
 `Mod + X`                         | Open Firefox
 `Mod + P`                         | Open Power menu using Rofi
+`Mod + O`                         | Open Pavucontrol
 
 
 ### Extra commands and aliases
@@ -140,6 +147,7 @@ All of these aliases and utilities are defined in `.bashrc`.
 `mkcd <path>`|`mkdir -p <path>` and `cd <path>`.
 `xcopy`|`xclip -selection clipboard`.
 `xpaste`|`xclip -selection clipboard -o`.
+`le`|`ls | sed "s/ /\n/g"`|Behaves like `ls -l`, but only shows the names of the files.
 
 ### Exported variables in `.bashrc`
 
@@ -154,91 +162,91 @@ All of these aliases and utilities are defined in `.bashrc`.
 
 ##### Install packages
 
-| Command                     | Arguments | Description                                   |
-| --------------------------- | --------- | --------------------------------------------- |
-| `i`, `install`              | `<pkgs>`   | Install packages with repo sync               |
-| `iy`, `install-yes`         | `<pkgs>`   | Install packages with repo sync (auto-yes)    |
-| `ii`, `install-nosync`      | `<pkgs>`   | Install packages without repo sync            |
-| `iiy`, `install-nosync-yes` | `<pkgs>`   | Install packages without repo sync (auto-yes) |
+| Command                       | Arguments | Description                                    |
+| ----------------------------- | --------- | ---------------------------------------------- |
+| `i`, `install`                | `<pkgs>`  | Install packages with repo sync                |
+| `iy`, `install-yes`           | `<pkgs>`  | Install packages with repo sync (auto-yes)     |
+| `ii`, `install-nosync`        | `<pkgs>`  | Install packages without repo sync             |
+| `iiy`, `install-nosync-yes`   | `<pkgs>`  | Install packages without repo sync (auto-yes)  |
 
 ##### Remove
 
-| Command            | Arguments | Description                                         |
-| ------------------ | --------- | --------------------------------------------------- |
-| `r`, `remove`      | `<pkgs>`   | Remove packages and clear orphans                   |
-| `ry`, `remove-yes` | `<pkgs>`   | Remove packages and clear orphans (auto-yes)        |
-| `rr`, `remove`      | `<pkgs>`   | Remove packages and don't clear orphans            |
-| `rry`, `remove-yes` | `<pkgs>`   | Remove packages and don't clear orphans (auto-yes) |
+| Command               | Arguments | Description                                                        |
+| --------------------- | --------- | ------------------------------------------------------------------ |
+| `r`, `remove`         | `<pkgs>`  | Remove packages, dependencies and clear orphans                    |
+| `ry`, `remove-yes`    | `<pkgs>`  | Remove packages, dependencies and clear orphans (auto-yes)         |
+| `rr`, `remove`        | `<pkgs>`  | Remove packages, dependencies and don't clear orphans              |
+| `rry`, `remove-yes`   | `<pkgs>`  | Remove packages, dependencies and don't clear orphans (auto-yes)   |
 
 ##### Update & upgrade
 
-| Command                   | Arguments | Description                           |
-| ------------------------- | --------- | ------------------------------------- |
-| `up`, `update`            | —         | Update repository index               |
-| `u`, `upgrade`            | —         | Upgrade system                        |
-| `uy`, `upgrade-yes`       | —         | Upgrade system (auto-yes)             |
-| `ux`, `upgrade-xbps`      | —         | Upgrade xbps                          |
-| `uxy`, `upgrade-xbps-yes` | —         | Upgrade xbps (auto-yes)               |
-| `fu`, `full-upgrade`      | —         | Update + upgrade + verbose            |
-| `fuy`, `full-upgrade-yes` | —         | Update + upgrade + verbose (auto-yes) |
+| Command                     | Arguments | Description                           |
+| --------------------------- | --------- | ------------------------------------- |
+| `up`, `update`              | —         | Update repository index               |
+| `u`, `upgrade`              | —         | Upgrade system                        |
+| `uy`, `upgrade-yes`         | —         | Upgrade system (auto-yes)             |
+| `ux`, `upgrade-xbps`        | —         | Upgrade xbps                          |
+| `uxy`, `upgrade-xbps-yes`   | —         | Upgrade xbps (auto-yes)               |
+| `fu`, `full-upgrade`        | —         | Update + upgrade + verbose            |
+| `fuy`, `full-upgrade-yes`   | —         | Update + upgrade + verbose (auto-yes) |
 
 ##### Search & info
 
-| Command                        | Arguments | Description                     |
-| ------------------------------ | --------- | ------------------------------- |
-| `s`, `q`, `search`             | `<name>`  | Search repository packages      |
-| `si`, `qi`, `search-installed` | —         | Search among installed packages |
-| `sim`, `qim`, `search-installed-manually` | —         | Search among explicitly installed packages |
-| `info`                         | `<pkg>`   | Show package information        |
+| Command                                    | Arguments | Description                                |
+| ------------------------------------------ | --------- | ------------------------------------------ |
+| `s`, `q`, `search`                         | `<name>`  | Search repository packages                 |
+| `si`, `qi`, `search-installed`             | —         | Search among installed packages            |
+| `sim`, `qim`, `search-installed-manually`  | —         | Search among explicitly installed packages |
+| `info`                                     | `<pkg>`   | Show package information                   |
 
 ##### Reconfigure
 
-| Command                   | Arguments | Description              |
-| ------------------------- | --------- | ------------------------ |
-| `rec`, `reconfigure`      | `<pkgs>`   | Reconfigure a package    |
-| `reca`, `reconfigure-all` |  —  | Reconfigure all packages |
+| Command                    | Arguments | Description              |
+| -------------------------- | --------- | ------------------------ |
+| `rec`, `reconfigure`       | `<pkgs>`  | Reconfigure a package    |
+| `reca`, `reconfigure-all`  | —         | Reconfigure all packages |
 
 ##### Orphans
 
-| Command                     | Arguments | Description                         |
-| --------------------------- | --------- | ----------------------------------- |
-| `o`, `orphans`              | —         | List orphaned packages              |
-| `ro`, `remove-orphans`      | —         | Remove orphaned packages            |
-| `roy`, `remove-orphans-yes` | —         | Remove orphaned packages (auto-yes) |
+| Command                      | Arguments | Description                         |
+| ---------------------------- | --------- | ----------------------------------- |
+| `o`, `orphans`               | —         | List orphaned packages              |
+| `ro`, `remove-orphans`       | —         | Remove orphaned packages            |
+| `roy`, `remove-orphans-yes`  | —         | Remove orphaned packages (auto-yes) |
 
 ##### Conversion
 
-| Command                     | Arguments | Description                         |
-| --------------------------- | --------- | ----------------------------------- |
-| `ta`, `to-automatic`, `td`, `to-deps`              | `<pkgs>`         |  Mark packages as dependencies (automatically installed)             |
-| `tm`, `to-manual`      | `<pkgs>`         |  Mark packages as manually installed           |
+| Command                                         | Arguments | Description                                             |
+| ----------------------------------------------- | --------- | ------------------------------------------------------- |
+| `ta`, `to-automatic`, `td`, `to-deps`           | `<pkgs>`  | Mark packages as dependencies (automatically installed) |
+| `tm`, `to-manual`                               | `<pkgs>`  | Mark packages as manually installed                     |
 
 ##### Dependencies
 
-| Command       | Arguments | Description               |
-| ------------- | --------- | ------------------------- |
-| `d`, `deps`   | `<pkg>`   | Show dependencies         |
-| `rd`, `rdeps` | `<pkg>`   | Show reverse dependencies |
+| Command         | Arguments | Description               |
+| --------------- | --------- | ------------------------- |
+| `d`, `deps`     | `<pkg>`   | Show dependencies         |
+| `rd`, `rdeps`   | `<pkg>`   | Show reverse dependencies |
 
 ##### File ownership
 
-| Command       | Arguments | Description                   |
-| ------------- | --------- | ----------------------------- |
-| `fl`, `files` | `<pkg>`   | List files of a package       |
+| Command         | Arguments | Description             |
+| --------------- | --------- | ----------------------- |
+| `fl`, `files`   | `<pkg>`   | List files of a package |
 
 ##### Repository management
 
-| Command            | Arguments | Description       |
-| ------------------ | --------- | ----------------- |
-| `rl`, `rep-list`   | —         | List repositories |
-| `ra`, `rep-add`    | `<repo>`  | Add repository    |
-| `rr`, `rep-remove` | `<repo>`  | Remove repository |
+| Command              | Arguments | Description       |
+| -------------------- | --------- | ----------------- |
+| `rl`, `rep-list`     | —         | List repositories |
+| `ra`, `rep-add`      | `<repo>`  | Add repository    |
+| `rr`, `rep-remove`   | `<repo>`  | Remove repository |
 
 ##### Updates
 
-| Command              | Arguments | Description                   |
-| -------------------- | --------- | ----------------------------- |
-| `od`, `outdated`     | —         | Show outdated packages        |
+| Command              | Arguments | Description            |
+| -------------------- | --------- | ---------------------- |
+| `od`, `outdated`     | —         | Show outdated packages |
 
 ---
 
@@ -246,45 +254,45 @@ All of these aliases and utilities are defined in `.bashrc`.
 
 ##### Enable / Disable
 
-| Command   | Arguments | Description       |
-| ----------- | --------- | ----------------- |
-| `enable`  | `<svc>`   | Enable service  |
-| `disable` | `<svc>`   | Disable service |
+| Command    | Arguments | Description     |
+| ---------- | --------- | --------------- |
+| `enable`   | `<svc>`   | Enable service  |
+| `disable`  | `<svc>`   | Disable service |
 
 ##### Basic control
 
-| Command   | Arguments | Description         |
-| ----------- | --------- | ------------------- |
-| `start`   | `<svc>`   | Start service     |
-| `stop`    | `<svc>`   | Stop service      |
-| `restart` | `<svc>`   | Restart service   |
-| `status`  | `<svc>`   | Show service status |
-| `log`     | `<svc>`   | View service logs   |
+| Command    | Arguments | Description         |
+| ---------- | --------- | ------------------- |
+| `start`    | `<svc>`   | Start service       |
+| `stop`     | `<svc>`   | Stop service        |
+| `restart`  | `<svc>`   | Restart service     |
+| `status`   | `<svc>`   | Show service status |
+| `log`      | `<svc>`   | View service logs   |
 
 ##### Advanced
 
-| Command  | Arguments | Description                  |
+| Command    | Arguments | Description                  |
 | ---------- | --------- | ---------------------------- |
-| `once`   | `<svc>`   | Start once (no respawn)      |
-| `pause`  | `<svc>`   | Pause a service              |
-| `cont`   | `<svc>`   | Resume a paused service      |
-| `reload` | `<svc>`   | Reload service configuration |
-| `hup`    | `<svc>`   | Send HUP signal              |
-| `term`   | `<svc>`   | Send TERM signal             |
-| `kill`   | `<svc>`   | Kill a service               |
+| `once`     | `<svc>`   | Start once (no respawn)      |
+| `pause`    | `<svc>`   | Pause a service              |
+| `cont`     | `<svc>`   | Resume a paused service      |
+| `reload`   | `<svc>`   | Reload service configuration |
+| `hup`      | `<svc>`   | Send HUP signal              |
+| `term`     | `<svc>`   | Send TERM signal             |
+| `kill`     | `<svc>`   | Kill a service               |
 
 ##### Listing
 
-| Command | Arguments | Description                        |
+| Command   | Arguments | Description                        |
 | --------- | --------- | ---------------------------------- |
-| `list`  | —         | List enabled services              |
-| `avail` | —         | List available service definitions |
+| `list`    | —         | List enabled services              |
+| `avail`   | —         | List available service definitions |
 
 ##### Editing
 
-| Command | Arguments | Description                             |
-| --------- | --------- | --------------------------------------- |
-| `edit`  | `<svc>`   | Edit the service run script (`$EDITOR`) |
+| Command  | Arguments | Description                             |
+| -------- | --------- | --------------------------------------- |
+| `edit`   | `<svc>`   | Edit the service run script (`$EDITOR`) |
 > Use this as `EDITOR=<editor> sv edit <svc>`.
 
 ### System tray icons

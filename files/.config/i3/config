@@ -244,6 +244,9 @@ bindsym $mod+x exec firefox
 # Mod + P: Power Menu
 bindsym $mod+p exec ~/.config/i3/scripts/power
 
+# Mod + O: Pavucontrol
+bindsym $mod+o exec pavucontrol
+
 # Mod + B: Clipman history
 bindsym $mod+b exec xfce4-clipman-history
 

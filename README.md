@@ -148,6 +148,7 @@ All of these aliases and utilities are defined in `.bashrc`.
 `xcopy`|`xclip -selection clipboard`.
 `xpaste`|`xclip -selection clipboard -o`.
 `le`|`ls | sed "s/ /\n/g"`|Behaves like `ls -l`, but only shows the names of the files.
+`clone`|`git clone`|Clones a git repository without you having to type the entire URL.
 
 ### Exported variables in `.bashrc`
 

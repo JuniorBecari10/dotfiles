@@ -8,7 +8,7 @@ set -e
 # This only installs 'blueman' for GUI management of Bluetooth devices.
 # If you prefer using 'bluetoothctl', please install it manually.
 PACKAGES="
-bluez bluez-alsa blueman
+bluez blueman
 libspa-bluetooth
 "
 

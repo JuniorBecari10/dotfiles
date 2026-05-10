@@ -26,8 +26,8 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 # Brightness control using brightnessctl (uncomment if you're in a laptop)
 # Ensure you have 'brightnessctl' installed (run 'od-laptop.sh', through the IS_LAPTOP flag to install it)
 
-##bindsym XF86MonBrightnessUp exec brightnessctl s +10%
-##bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
+## bindsym XF86MonBrightnessUp exec brightnessctl s +10%
+## bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -37,12 +37,12 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # Adjust Touchpad
-##set $touchpad "DELL083F:00 04F3:3088 Touchpad"
+## set $touchpad "DELL083F:00 04F3:3088 Touchpad"
 
-##exec xinput set-prop $touchpad "libinput Tapping Enabled" 1
-##exec xinput set-prop $touchpad "libinput Natural Scrolling Enabled" 1
-##exec xinput set-prop $touchpad "libinput Accel Profile Enabled" 0, 1
-##exec xinput set-prop $touchpad "libinput Accel Speed" 0.2
+## exec xinput set-prop $touchpad "libinput Tapping Enabled" 1
+## exec xinput set-prop $touchpad "libinput Natural Scrolling Enabled" 1
+## exec xinput set-prop $touchpad "libinput Accel Profile Enabled" 0, 1
+## exec xinput set-prop $touchpad "libinput Accel Speed" 0.2
 
 # change focus
 bindsym $mod+j focus left
@@ -189,6 +189,7 @@ bar {
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id volctl
+### exec --no-startup-id blueman-applet
 
 # Set keymap to brazilian keyboard
 exec_always setxkbmap br
@@ -213,6 +214,7 @@ for_window [class="Xfce4-clipman-history"] floating enable, resize set 500 600, 
 for_window [class="Thunar"] floating enable, resize set 1180 700, move position center
 for_window [class="feh"] floating enable, resize set 1000 700, move position center
 for_window [class="pavucontrol"] floating enable, resize set 900 600, move position center
+### for_window [class="Blueman-manager"] floating enable, resize set 900 600, move position center
 for_window [class="Arandr"] floating enable, resize set 900 600, move position center
 
 # Compositor
@@ -243,6 +245,9 @@ bindsym $mod+x exec firefox
 
 # Mod + P: Power Menu
 bindsym $mod+p exec ~/.config/i3/scripts/power
+
+# Mod + Y: Xprop (wininfo)
+bindsym $mod+y exec ~/.config/i3/scripts/wininfo
 
 # Mod + O: Pavucontrol
 bindsym $mod+o exec pavucontrol

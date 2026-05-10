@@ -111,6 +111,7 @@ Keybinding|Action
 `Mod + G`                         | Open Thunar file explorer
 `Mod + X`                         | Open Firefox
 `Mod + P`                         | Open Power menu using Rofi
+`Mod + Y`                         | Open Xprop within a custom script that shows the window name in dunst
 `Mod + O`                         | Open Pavucontrol
 
 

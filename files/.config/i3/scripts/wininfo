@@ -1,0 +1,17 @@
+#!/bin/sh
+
+info=$(xprop 2>/dev/null)
+
+if [ $? -ne 0 ] || [ -z "$info" ]; then
+    dunstify -u low "wininfo" "No window selected."
+    exit 1
+fi
+
+class=$(echo "$info" | grep '^WM_CLASS' | head -1 | sed 's/^[^=]*= *//' | tr -d '"' | cut -d',' -f2 | tr -d ' ')
+pid=$(echo "$info" | grep '^_NET_WM_PID' | head -1 | grep -o '[0-9]*$')
+
+msg="Name: ${class:-unknown}"
+[ -n "$pid" ] && msg="$msg
+PID:  $pid"
+
+dunstify -u low "Window Info" "$msg"

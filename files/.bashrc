@@ -363,11 +363,6 @@ mkcd() {
 # Path
 PATH="$HOME/.local/share/lspctl/bin:$HOME/programs:$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH"
 
-# I might remove this soon
-lspctl() {
-    (cd ~/dev/lspctl && go run . "$@")
-}
-
 clone() {
     if [[ $# -eq 1 ]]; then
         user="JuniorBecari10"

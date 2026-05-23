@@ -24,7 +24,7 @@ NetworkManager
 xcompmgr
 python3
 go ripgrep
-github-cli
+github-cli 7zip
 volctl
 xorg-minimal xf86-input-libinput setxkbmap
 xinit fontconfig mesa-dri

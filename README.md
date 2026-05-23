@@ -138,8 +138,8 @@ All of these aliases and utilities are defined in `.bashrc`.
 `fsx`|`fsi`|Typo guard for the `fsi` alias.
 `update-grub`|`sudo grub-mkconfig -o /boot/grub/grub.cfg`|Shortcut to update the GRUB configuration. Requires root permission.
 `killall`|`pkill -9`|Kills all instances of the specified program.
-`le`|`ls -1`|`ls` but only one entry per line
-`lea`|`ls -1a`|`le` but shows hidden files as well
+`le`|`ls -1`|`ls` but only one entry per line.
+`lea`|`ls -1a`|`le` but shows hidden files as well.
 
 - Extra commands (functions)
 
@@ -150,7 +150,6 @@ All of these aliases and utilities are defined in `.bashrc`.
 `mkcd <path>`|`mkdir -p <path>` and `cd <path>`.
 `xcopy`|`xclip -selection clipboard`.
 `xpaste`|`xclip -selection clipboard -o`.
-`le`|`ls | sed "s/ /\n/g"`|Behaves like `ls -l`, but only shows the names of the files.
 `clone`|`git clone`|Clones a git repository without you having to type the entire URL.
 
 ### Exported variables in `.bashrc`

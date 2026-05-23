@@ -11,5 +11,5 @@ APP=$(flatpak list --app --columns=name,application \
 
 # If a selection was made, run it
 if [ -n "$APP" ]; then
-    flatpak run "$APP"
+    WEBKIT_DISABLE_DMABUF_RENDERER=1 flatpak run "$APP"
 fi

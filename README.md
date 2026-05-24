@@ -150,7 +150,7 @@ All of these aliases and utilities are defined in `.bashrc`.
 `mkcd <path>`|`mkdir -p <path>` and `cd <path>`.
 `xcopy`|`xclip -selection clipboard`.
 `xpaste`|`xclip -selection clipboard -o`.
-`clone`|`git clone`|Clones a git repository without you having to type the entire URL.
+`clone`|`git clone`.
 
 ### Exported variables in `.bashrc`
 
@@ -301,7 +301,7 @@ All of these aliases and utilities are defined in `.bashrc`.
 ### System tray icons
 
 - NetworkManager
-- volumeicon
+- volctl
 - XFCE Clipman
 
 ### i3blocks' blocks I use

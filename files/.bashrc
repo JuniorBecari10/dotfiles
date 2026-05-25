@@ -289,6 +289,8 @@ gac() {
         return 1
     fi
 
+    git add .
+
     if git rev-parse --verify HEAD >/dev/null 2>&1 \
        && git diff --quiet \
        && git diff --cached --quiet; then
@@ -296,7 +298,6 @@ gac() {
         return 0
     fi
 
-    git add .
     git commit -m "$@"
 }
 
@@ -332,6 +333,8 @@ gacp() {
         return 1
     fi
 
+    git add .
+
     if git rev-parse --verify HEAD >/dev/null 2>&1 \
        && git diff --quiet \
        && git diff --cached --quiet; then
@@ -344,7 +347,6 @@ gacp() {
         branch=$(git rev-parse --abbrev-ref HEAD)
     fi
 
-    git add .
     git commit -m "${msg[@]}"
     git push -u origin "$branch"
 }

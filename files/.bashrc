@@ -23,6 +23,7 @@ alias fsx='fsi'
 
 alias yz='yazi'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias clean-kernels='sudo vkpurge rm all'
 alias killall='pkill -9'
 alias le='ls -1'
 alias lea='ls -1a'

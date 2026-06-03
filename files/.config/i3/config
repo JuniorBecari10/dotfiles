@@ -194,6 +194,9 @@ exec --no-startup-id volctl
 # Toggle Bluetooth off on startup
 ### exec --no-startup-id rfkill block bluetooth
 
+# Set numlock on
+exec --no-startup-id numlockx on
+
 # Set keymap to brazilian keyboard
 exec_always setxkbmap br
 

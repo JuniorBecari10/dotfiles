@@ -25,7 +25,7 @@ xcompmgr
 python3
 go ripgrep
 github-cli 7zip
-volctl
+volctl numlockx
 xorg-minimal xf86-input-libinput setxkbmap
 xinit fontconfig mesa-dri
 yad polkit dunst

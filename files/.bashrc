@@ -387,19 +387,18 @@ clone() {
 # Define prompt.
 # folder $
 # Example: ~ $
-
 parse_git_branch() {
-    # Get current branch, or return nothing if not a repo
     branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 
     if [ -n "$branch" ]; then
         dirty=""
-        
-        # Check if there are staged or unstaged changes
-        if ! git diff --quiet 2>/dev/null || ! git diff --cached --quiet 2>/dev/null; then
+
+        if ! git diff --quiet 2>/dev/null \
+            || ! git diff --cached --quiet 2>/dev/null \
+            || git ls-files --others --exclude-standard --directory 2>/dev/null | read; then
             dirty="*"
         fi
-        
+
         echo " $branch$dirty"
     fi
 }

@@ -1,5 +1,5 @@
 #!/bin/sh
-choice=$(printf "󰣆 Apps\n󰏖 Flatpaks\n󰆍 Programs\n⏻ Power\n󰇵 Emoji\n󰃬 Calculator\n󰉋 File Explorer\n" | \
+choice=$(printf "󰣆 Apps\n󰏖 Flatpaks\n󰆍 Programs\n⏻ Power\n󰃬 Calculator\n󰉋 File Explorer\n" | \
     rofi -dmenu -i -p "Menu" | sed 's/^[^ ]* //')
 case "$choice" in
     Apps)
@@ -13,9 +13,6 @@ case "$choice" in
         ;;
     Power)
         ~/.config/i3/scripts/power
-        ;;
-    Emoji)
-        rofi -show emoji
         ;;
     Calculator)
         rofi -show calc \

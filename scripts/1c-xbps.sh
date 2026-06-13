@@ -11,7 +11,7 @@ PACKAGES="
 i3 i3blocks i3lock
 kitty xterm
 helix yazi
-rofi rofi-calc rofi-emoji
+rofi rofi-calc
 redshift
 git
 pavucontrol
@@ -43,9 +43,6 @@ htop
 curl
 dracut
 dbus elogind
-PrismLauncher
-openjdk21-jre
-openjdk8-jre
 wget chrony
 "
 

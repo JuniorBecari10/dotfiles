@@ -15,8 +15,10 @@ esc = ["collapse_selection", "keep_primary_selection"]
 0 = "goto_line_start"
 G = "goto_file_end"
 tab = "goto_next_buffer"
+S-tab = "goto_previous_buffer"
 W = ":w"
 C-x = ":bc"
+A-x = ":bc!"
 C-e = [
   ':sh rm -f /tmp/files2open',
   ':set mouse false',
@@ -40,4 +42,3 @@ hidden = false
 
 [editor.indent-guides]
 render = true
-skip-levels = 1

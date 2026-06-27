@@ -22,7 +22,7 @@ C-e = [
   ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/files2open',
   ':redraw',
   ':set mouse true',
-  ':sh [ -f /tmp/files2open ] || echo "%{buffer_name}" > /tmp/files2open',
+  ':sh [ -f /tmp/files2open ] || { case "%{buffer_name}" in [~/]*) echo "%{buffer_name}" ;; *) echo "%sh{pwd}/%{buffer_name}" ;; esac > /tmp/files2open; }',
   ':sh echo "\n" >> /tmp/files2open',
   ':open /tmp/files2open',
   ':insert-output cat /tmp/files2open',

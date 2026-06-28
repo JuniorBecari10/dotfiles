@@ -35,6 +35,7 @@ C-e = [
 [keys.normal.space]
 x = ":bc"
 X = ":bc!"
+m = ":! make run"
 
 [editor.cursor-shape]
 insert = "bar"

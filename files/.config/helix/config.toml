@@ -10,10 +10,6 @@ cursor-line = "warning"
 
 [keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"]
-"&" = "match_brackets"
-"$" = "goto_line_end"
-0 = "goto_line_start"
-G = "goto_file_end"
 tab = "goto_next_buffer"
 S-tab = "goto_previous_buffer"
 C-e = [

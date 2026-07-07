@@ -21,8 +21,8 @@ maim swappy
 feh
 xfce4-clipman-plugin
 NetworkManager
-xcompmgr
-python3
+xcompmgr rustup
+python3 tree
 go ripgrep
 github-cli 7zip
 volctl numlockx

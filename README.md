@@ -140,8 +140,10 @@ All of these aliases and utilities are defined in `.bashrc`.
 `killall`|`pkill -9`|Kills all instances of the specified program.
 `le`|`ls -1`|`ls` but only one entry per line.
 `lea`|`ls -1a`|`le` but shows hidden files as well.
+`gs`|`git status`|Shows repository status.
+`gc`|`gitcheck`|Custom command for quick info about the repository.
 
-- Extra commands (functions)
+- Extra commands (shell functions)
 
 **Command**|**What it does**
 ---|---
@@ -151,6 +153,7 @@ All of these aliases and utilities are defined in `.bashrc`.
 `xcopy`|`xclip -selection clipboard`.
 `xpaste`|`xclip -selection clipboard -o`.
 `clone`|`git clone`.
+`gitcheck`|Fetches quick info about the repository. Use the flag `-n`/`--no-fetch` to not perform `git fetch`. It is performed by default.
 
 ### Exported variables in `.bashrc`
 
@@ -158,6 +161,16 @@ All of these aliases and utilities are defined in `.bashrc`.
 ---|---
 `EDITOR`|`hx`
 `PATH`|`$HOME/.local/share/lspctl/bin:$HOME/programs:$HOME/go/bin:$HOME/.cache/.bun/bin:$HOME/.bun/bin:$HOME/.dotnet/tools:$PATH`
+
+> The final `$PATH` may be modified by `xbps` depending on the packages you install. <br />
+> This listing only shows the changes I did myself or installers this installation scripts run, such as .NET and Bun.
+
+### Externally installed programs
+
+> To remove these programs, you may need a dedicated uninstaller for each one of them.
+
+- .NET;
+- Bun.
 
 ### Custom utilities
 

@@ -21,6 +21,9 @@ alias ff='fastfetch'
 alias fsi='dotnet fsi'
 alias fsx='fsi'
 
+alias gc='gitcheck'
+alias gs='git status'
+
 alias yz='yazi'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias clean-kernels='sudo vkpurge rm all'
@@ -383,25 +386,99 @@ clone() {
     git clone "https://github.com/$user/$repo.git"
 }
 
+gitcheck() {
+    local do_fetch=1
+    if [ "$1" = "--no-fetch" ] || [ "$1" = "-n" ]; then
+        do_fetch=0
+    fi
+
+    if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+        echo "Not a git repository."
+        return 1
+    fi
+
+    local branch upstream
+    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+
+    echo "Branch: $branch"
+
+    if [ -z "$upstream" ]; then
+        echo "No upstream branch set."
+    else
+        echo "Upstream: $upstream"
+
+        if [ "$do_fetch" -eq 1 ]; then
+            if git fetch --quiet 2>/dev/null; then
+                echo "(fetched latest from remote)"
+            else
+                echo "(fetch failed — showing possibly stale info)"
+            fi
+        else
+            echo "(skipped fetch — info may be stale)"
+        fi
+
+        local ahead behind
+        ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null)
+        behind=$(git rev-list --count HEAD..@{u} 2>/dev/null)
+
+        if [ "$ahead" -gt 0 ] && [ "$behind" -gt 0 ]; then
+            echo "⚠ Diverged: $ahead commit(s) to push, $behind to pull"
+        elif [ "$ahead" -gt 0 ]; then
+            echo "↑ $ahead commit(s) ahead — push needed"
+        elif [ "$behind" -gt 0 ]; then
+            echo "↓ $behind commit(s) behind — pull needed"
+        else
+            echo "✓ Up to date with upstream"
+        fi
+    fi
+
+    local staged modified untracked
+    staged=$(git diff --cached --name-only | wc -l)
+    modified=$(git diff --name-only | wc -l)
+    untracked=$(git ls-files --others --exclude-standard | wc -l)
+
+    echo "---"
+    [ "$staged" -gt 0 ] && echo "● $staged file(s) staged"
+    [ "$modified" -gt 0 ] && echo "● $modified file(s) modified (unstaged)"
+    [ "$untracked" -gt 0 ] && echo "● $untracked untracked file(s)"
+
+    if [ "$staged" -eq 0 ] && [ "$modified" -eq 0 ] && [ "$untracked" -eq 0 ]; then
+        echo "✓ Working tree clean"
+    fi
+}
+
 # ----------------------------
 
 # Define prompt.
 # folder $
 # Example: ~ $
 parse_git_branch() {
+    local branch status dirty="" sync=""
+
     branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    [ -z "$branch" ] && return
 
-    if [ -n "$branch" ]; then
-        dirty=""
+    # Single git status call, parsed for both dirty state and ahead/behind info
+    status=$(git status --porcelain=v2 --branch 2>/dev/null)
+    [ -z "$status" ] && return
 
-        if ! git diff --quiet 2>/dev/null \
-            || ! git diff --cached --quiet 2>/dev/null \
-            || git ls-files --others --exclude-standard --directory 2>/dev/null | read; then
-            dirty="*"
-        fi
-
-        echo " $branch$dirty"
+    # Any non-branch-header line means the tree isn't clean
+    if echo "$status" | grep -qv '^#'; then
+        dirty="*"
     fi
+
+    # Line format: "# branch.ab +<ahead> -<behind>"
+    local ab ahead behind
+    ab=$(echo "$status" | grep '^# branch.ab' )
+    if [ -n "$ab" ]; then
+        ahead=$(echo "$ab" | awk '{print $3}' | tr -d '+')
+        behind=$(echo "$ab" | awk '{print $4}' | tr -d '-')
+        [ "$ahead" -gt 0 ] 2>/dev/null && sync="${sync}↑"   # needs push
+        [ "$behind" -gt 0 ] 2>/dev/null && sync="${sync}↓"  # needs pull
+    fi
+
+    echo " $branch$dirty$sync"
 }
 
 PS1='\[\e[1;32m\]\w\[\e[0m\]\[\e[1;31m\]$(parse_git_branch)\[\e[0m\] \$ '

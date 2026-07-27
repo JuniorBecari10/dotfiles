@@ -466,8 +466,12 @@ parse_git_branch() {
     [ "$ahead" -gt 0 ] 2>/dev/null && sync="${sync}↑"  # needs push
     [ "$behind" -gt 0 ] 2>/dev/null && sync="${sync}↓" # needs pull
 
-    # Any non-branch-header line means the tree isn't clean
-    if echo "$status" | grep -qv '^#'; then
+    local staged modified untracked
+    staged=$(git diff --cached --name-only | wc -l)
+    modified=$(git diff --name-only | wc -l)
+    untracked=$(git ls-files --others --exclude-standard | wc -l)
+
+    if [ "$staged" -ne 0 ] || [ "$modified" -ne 0 ] || [ "$untracked" -ne 0 ]; then
         dirty="*"
     fi
 

@@ -418,6 +418,8 @@ gitcheck() {
             echo "(skipped fetch — info may be stale)"
         fi
 
+        echo ""
+
         local ahead behind
         ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null)
         behind=$(git rev-list --count HEAD..@{u} 2>/dev/null)
@@ -438,7 +440,8 @@ gitcheck() {
     modified=$(git diff --name-only | wc -l)
     untracked=$(git ls-files --others --exclude-standard | wc -l)
 
-    echo "---"
+    echo ""
+
     [ "$staged" -gt 0 ] && echo "● $staged file(s) staged"
     [ "$modified" -gt 0 ] && echo "● $modified file(s) modified (unstaged)"
     [ "$untracked" -gt 0 ] && echo "● $untracked untracked file(s)"
@@ -454,7 +457,7 @@ gitcheck() {
 # folder $
 # Example: ~ $
 parse_git_branch() {
-    local branch status dirty="" sync=""
+    local branch dirty="" sync=""
 
     branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
     [ -z "$branch" ] && return

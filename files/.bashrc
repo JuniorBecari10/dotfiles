@@ -459,23 +459,16 @@ parse_git_branch() {
     branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
     [ -z "$branch" ] && return
 
-    # Single git status call, parsed for both dirty state and ahead/behind info
-    status=$(git status --porcelain=v2 --branch 2>/dev/null)
-    [ -z "$status" ] && return
+    local ahead behind
+    ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null)
+    behind=$(git rev-list --count HEAD..@{u} 2>/dev/null)
+
+    [ "$ahead" -gt 0 ] 2>/dev/null && sync="${sync}↑"  # needs push
+    [ "$behind" -gt 0 ] 2>/dev/null && sync="${sync}↓" # needs pull
 
     # Any non-branch-header line means the tree isn't clean
     if echo "$status" | grep -qv '^#'; then
         dirty="*"
-    fi
-
-    # Line format: "# branch.ab +<ahead> -<behind>"
-    local ab ahead behind
-    ab=$(echo "$status" | grep '^# branch.ab' )
-    if [ -n "$ab" ]; then
-        ahead=$(echo "$ab" | awk '{print $3}' | tr -d '+')
-        behind=$(echo "$ab" | awk '{print $4}' | tr -d '-')
-        [ "$ahead" -gt 0 ] 2>/dev/null && sync="${sync}↑"   # needs push
-        [ "$behind" -gt 0 ] 2>/dev/null && sync="${sync}↓"  # needs pull
     fi
 
     echo " $branch$dirty$sync"

@@ -75,9 +75,10 @@ EOF
 
 # Run config scripts
 "$HOME/dotfiles/scripts/1c-xbps.sh"
-"$HOME/dotfiles/scripts/1d-services.sh"
-"$HOME/dotfiles/scripts/1e-pipewire.sh"
-"$HOME/dotfiles/scripts/1f-patch.sh"
+"$HOME/dotfiles/scripts/1d-pinned.sh"
+"$HOME/dotfiles/scripts/1e-services.sh"
+"$HOME/dotfiles/scripts/1f-pipewire.sh"
+"$HOME/dotfiles/scripts/1g-patch.sh"
 
 # Optional installs
 [ "$BLUETOOTH" = true ] && "$HOME/dotfiles/scripts/od-bluetooth.sh"
@@ -88,9 +89,10 @@ if [ "$IS_LAPTOP" = true ]; then
 fi
 
 # Finalize the core installation, building the initramfs
-# Optimize if the NVIDIA drivers option is enabled, so it builds the initramfs only once
+# Optimize if the NVIDIA drivers option is enabled, so it builds the initramfs only once.
+# (installation script already runs it)
 [ "$INSTALL_NVIDIA_DRIVERS" = true ] && "$HOME/dotfiles/scripts/oa-nvidia_drivers.sh"
 [ "$INSTALL_NVIDIA_DRIVERS" = false ] && xbps-reconfigure -fa
 
-# Delete config file
-rm -rf /config.sh
+# Delete config file and pinned folder
+rm -rf /config.sh /pinned

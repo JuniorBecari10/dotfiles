@@ -5,4 +5,4 @@ set -e
 . /config.sh
 
 HOME="/home/$USERNAME"
-"$HOME/dotfiles/scripts/1ff-patch.sh"
+"$HOME/dotfiles/scripts/1ga-patch.sh"

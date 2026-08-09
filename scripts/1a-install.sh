@@ -30,6 +30,9 @@ xgenfstab -U /mnt > /mnt/etc/fstab
 cp ./config.sh /mnt/config.sh
 chmod +x /mnt/config.sh
 
+# Copy pinned packages into the installation; also deleted
+cp -r ./pinned /mnt/pinned
+
 # Chroot into the system and run the the configuration commands
 cat ./config.sh scripts/1b-chroot.sh | xchroot /mnt /bin/sh -s
 

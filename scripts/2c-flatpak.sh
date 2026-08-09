@@ -2,7 +2,7 @@
 set -e
 
 # List of Flatpak packages to install
-FLATPAK_PACKAGES=""
+FLATPAK_PACKAGES="org.onlyoffice.desktopeditors"
 
 # Ensure Flathub remote is enabled
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo

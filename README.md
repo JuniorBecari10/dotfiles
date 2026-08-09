@@ -33,7 +33,7 @@ such as timezone cannot be configured without manually editing the scripts.
 This repository is meant to be kept in your home (`~`) folder even after the installation is complete, because you may want to make changes to it,
 and it's already there for you to sync your configurations.
 
-A clean installation made using this script should install roughly `580` packages without any optional installations. <br>
+A clean installation made using this script should install roughly `590` packages without any optional installations. <br>
 I'm still making efforts to lower this number, while keeping the same experience.
 If you know of some change that keeps the same experience while reducing the number of packages, please tell me.
 
@@ -69,7 +69,7 @@ _This is the default wallpaper on Archcraft._
 
 Modifier: `Win`
 
-Keybinding|Action
+**Keybinding**|**Action**
 ---|---
 `Mod + D`                         | Run `rofi` menu
 `Mod + Shift + D`                 | Run `rofi` for apps
@@ -85,8 +85,8 @@ Keybinding|Action
 `Mod + V`                         | Switch to vertical orientation (new windows appear below)
 `Mod + E`                         | Toggle between horizontal and vertical orientation
 `Mod + F`                         | Toggle fullscreen for focused container
-`Mod + S`                         | Set mode to stacking
-`Mod + W`                         | Set mode to tabbed
+`Mod + S`                         | Set windowing mode to stacking
+`Mod + W`                         | Set windowing mode to tabbed
 `Mod + Shift + Space`             | Toggle floating window
 `Mod + Space`                     | Toggle focus between tiling and floating windows
 `Mod + A`                         | Focus parent container
@@ -94,15 +94,15 @@ Keybinding|Action
 `Mod + Shift + 1`-`0`             | Move focused window to workspace 1–10
 `Mod + Shift + Z`                 | Move workspace to left monitor
 `Mod + Shift + X`                 | Move workspace to right monitor
-`Mod + Shift + C`                 | Reload i3
-`Mod + Shift + R`                 | Restart i3
+`Mod + Shift + C`                 | Soft-reload i3
+`Mod + Shift + R`                 | Hard-reload i3
 `Mod + Shift + E`                 | Exit i3 (log out of X session)
 `Mod + B`                         | Open Clipman clipboard tool
 `Mod + R`                         | Toggle resize mode
-`J` / `Left` *(resize mode)*      | Shrink width by 10px
-`;` / `Up` *(resize mode)*        | Grow width by 10px
-`K` / `Down` *(resize mode)*      | Grow height by 10px
-`L` / `Up` *(resize mode)*        | Shrink height by 10px
+`J` / `Left` *(resize mode)*      | Shrink window width by 10px
+`;` / `Up` *(resize mode)*        | Grow window width by 10px
+`K` / `Down` *(resize mode)*      | Grow window height by 10px
+`L` / `Up` *(resize mode)*        | Shrink window height by 10px
 `Mod + Enter`                     | Open `kitty` terminal
 `Mod + Q`                         | Close current window
 `PrintScr`                        | Screenshot with maim to clipboard
@@ -111,9 +111,17 @@ Keybinding|Action
 `Mod + G`                         | Open Thunar file explorer
 `Mod + X`                         | Open Firefox
 `Mod + P`                         | Open Power menu using Rofi
-`Mod + Y`                         | Open Xprop within a custom script that shows the window name in dunst
+`Mod + Y`                         | Open Xprop within a custom script that shows the window name and PID in dunst
 `Mod + O`                         | Open Pavucontrol
 
+### Pinned packages
+
+Some packages had to be pinned because the latest version breaks something in the system. <br />
+Note that this list only includes packages I noticed myself, so there may be others I didn't see.
+
+**Package**|**Version**|**What broke**
+---|---
+`volctl`|`0.9.3_4`|The current version is rewritten in Rust and drops XEmbed support for SNI, which i3 doesn't support.
 
 ### Extra commands and aliases
 
@@ -178,91 +186,106 @@ All of these aliases and utilities are defined in `.bashrc`.
 
 ##### Install packages
 
-| Command                       | Arguments | Description                                    |
-| ----------------------------- | --------- | ---------------------------------------------- |
-| `i`, `install`                | `<pkgs>`  | Install packages with repo sync                |
-| `iy`, `install-yes`           | `<pkgs>`  | Install packages with repo sync (auto-yes)     |
-| `ii`, `install-nosync`        | `<pkgs>`  | Install packages without repo sync             |
-| `iiy`, `install-nosync-yes`   | `<pkgs>`  | Install packages without repo sync (auto-yes)  |
+| Command                       | Arguments | Description                                   |
+| ----------------------------- | --------- | --------------------------------------------- |
+| `i`, `install`                | `<pkg>`   | Install packages with repo sync               |
+| `iy`, `install-yes`           | `<pkg>`   | Install packages with repo sync (auto-yes)    |
+| `ii`, `install-nosync`        | `<pkg>`   | Install packages without repo sync            |
+| `iiy`, `install-nosync-yes`   | `<pkg>`   | Install packages without repo sync (auto-yes) |
 
 ##### Remove
 
-| Command               | Arguments | Description                                                        |
-| --------------------- | --------- | ------------------------------------------------------------------ |
-| `r`, `remove`         | `<pkgs>`  | Remove packages, dependencies and clear orphans                    |
-| `ry`, `remove-yes`    | `<pkgs>`  | Remove packages, dependencies and clear orphans (auto-yes)         |
-| `rr`, `remove`        | `<pkgs>`  | Remove packages, dependencies and don't clear orphans              |
-| `rry`, `remove-yes`   | `<pkgs>`  | Remove packages, dependencies and don't clear orphans (auto-yes)   |
-
-##### Update & upgrade
-
-| Command                     | Arguments | Description                           |
-| --------------------------- | --------- | ------------------------------------- |
-| `up`, `update`              | —         | Update repository index               |
-| `u`, `upgrade`              | —         | Upgrade system                        |
-| `uy`, `upgrade-yes`         | —         | Upgrade system (auto-yes)             |
-| `ux`, `upgrade-xbps`        | —         | Upgrade xbps                          |
-| `uxy`, `upgrade-xbps-yes`   | —         | Upgrade xbps (auto-yes)               |
-| `fu`, `full-upgrade`        | —         | Update + upgrade + verbose            |
-| `fuy`, `full-upgrade-yes`   | —         | Update + upgrade + verbose (auto-yes) |
+| Command                      | Arguments | Description                                        |
+| ---------------------------- | --------- | -------------------------------------------------- |
+| `r`, `remove`                | `<pkg>`   | Remove packages and clear orphans                  |
+| `ry`, `remove-yes`           | `<pkg>`   | Remove packages and clear orphans (auto-yes)       |
+| `re`, `remove-only`          | `<pkg>`   | Remove packages and don't clear orphans            |
+| `rey`, `remove-only-yes`     | `<pkg>`   | Remove packages and don't clear orphans (auto-yes) |
 
 ##### Search & info
 
-| Command                                    | Arguments | Description                                |
-| ------------------------------------------ | --------- | ------------------------------------------ |
-| `s`, `q`, `search`                         | `<name>`  | Search repository packages                 |
-| `si`, `qi`, `search-installed`             | —         | Search among installed packages            |
-| `sim`, `qim`, `search-installed-manually`  | —         | Search among explicitly installed packages |
-| `info`                                     | `<pkg>`   | Show package information                   |
+| Command                                    | Arguments | Description                              |
+| ------------------------------------------ | --------- | ---------------------------------------- |
+| `s`, `q`, `search`                         | `<name>`  | Search repo packages                     |
+| `si`, `qi`, `search-installed`             | —         | Search among installed packages          |
+| `sim`, `qim`, `search-installed-manually`  | —         | Search among manually installed packages |
+| `info`                                     | `<pkg>`   | Show package info                        |
+
+##### Update & upgrade
+
+| Command                      | Arguments | Description                           |
+| ---------------------------- | --------- | ------------------------------------- |
+| `up`, `update`               | —         | Update repo index                     |
+| `u`, `upgrade`               | —         | Upgrade system                        |
+| `uy`, `upgrade-yes`          | —         | Upgrade system (auto-yes)             |
+| `ux`, `upgrade-xbps`         | —         | Upgrade xbps                          |
+| `uxy`, `upgrade-xbps-yes`    | —         | Upgrade xbps (auto-yes)               |
+| `fu`, `full-upgrade`         | —         | Update + upgrade + verbose            |
+| `fuy`, `full-upgrade-yes`    | —         | Update + upgrade + verbose (auto-yes) |
 
 ##### Reconfigure
 
-| Command                    | Arguments | Description              |
-| -------------------------- | --------- | ------------------------ |
-| `rec`, `reconfigure`       | `<pkgs>`  | Reconfigure a package    |
-| `reca`, `reconfigure-all`  | —         | Reconfigure all packages |
+| Command                     | Arguments | Description                                      |
+| --------------------------- | --------- | ------------------------------------------------ |
+| `rec`, `reconfigure`        | `<pkg>`   | Reconfigure a package                            |
+| `reca`, `reconfigure-all`   | `<pkg>`   | Reconfigure all packages (and rebuild initramfs) |
 
 ##### Orphans
 
-| Command                      | Arguments | Description                         |
-| ---------------------------- | --------- | ----------------------------------- |
-| `o`, `orphans`               | —         | List orphaned packages              |
-| `ro`, `remove-orphans`       | —         | Remove orphaned packages            |
-| `roy`, `remove-orphans-yes`  | —         | Remove orphaned packages (auto-yes) |
+| Command                       | Arguments | Description                         |
+| ----------------------------- | --------- | ----------------------------------- |
+| `o`, `orphans`                | —         | List orphaned packages              |
+| `ro`, `remove-orphans`        | —         | Remove orphaned packages            |
+| `roy`, `remove-orphans-yes`   | —         | Remove orphaned packages (auto-yes) |
 
 ##### Conversion
 
-| Command                                         | Arguments | Description                                             |
-| ----------------------------------------------- | --------- | ------------------------------------------------------- |
-| `ta`, `to-automatic`, `td`, `to-deps`           | `<pkgs>`  | Mark packages as dependencies (automatically installed) |
-| `tm`, `to-manual`                               | `<pkgs>`  | Mark packages as manually installed                     |
+| Command                                  | Arguments | Description                                             |
+| ---------------------------------------- | --------- | ------------------------------------------------------- |
+| `ta`, `to-automatic`, `td`, `to-deps`    | `<pkg>`   | Mark packages as dependencies (automatically installed) |
+| `tm`, `to-manual`                        | `<pkg>`   | Mark packages as manually installed                     |
+
+##### Hold / pin
+
+| Command              | Arguments | Description                       |
+| -------------------- | --------- | --------------------------------- |
+| `h`, `hold`          | `<pkg>`   | Pin package(s) at current version |
+| `uh`, `unhold`       | `<pkg>`   | Unpin package(s)                  |
+| `lh`, `held`         | —         | List held/pinned packages         |
+
+##### Version
+
+| Command          | Arguments | Description                       |
+| ---------------- | --------- | --------------------------------- |
+| `v`, `ver`       | `<pkg>`   | Show installed version of package |
 
 ##### Dependencies
 
-| Command         | Arguments | Description               |
-| --------------- | --------- | ------------------------- |
-| `d`, `deps`     | `<pkg>`   | Show dependencies         |
-| `rd`, `rdeps`   | `<pkg>`   | Show reverse dependencies |
+| Command           | Arguments | Description               |
+| ----------------- | --------- | ------------------------- |
+| `d`, `deps`       | `<pkg>`   | Show dependencies         |
+| `rd`, `rdeps`     | `<pkg>`   | Show reverse dependencies |
 
 ##### File ownership
 
-| Command         | Arguments | Description             |
-| --------------- | --------- | ----------------------- |
-| `fl`, `files`   | `<pkg>`   | List files of a package |
+| Command           | Arguments | Description                   |
+| ----------------- | --------- | ----------------------------- |
+| `f`, `owns`       | `<file>`  | Which package owns this file? |
+| `fl`, `files`     | `<pkg>`   | List files of a package       |
 
 ##### Repository management
 
-| Command              | Arguments | Description       |
-| -------------------- | --------- | ----------------- |
-| `rl`, `rep-list`     | —         | List repositories |
-| `ra`, `rep-add`      | `<repo>`  | Add repository    |
-| `rr`, `rep-remove`   | `<repo>`  | Remove repository |
+| Command                | Arguments          | Description                               |
+| ---------------------- | ------------------ | ----------------------------------------- |
+| `rl`, `rep-list`       | —                  | List repositories                         |
+| `ra`, `rep-add`        | `<url>`            | Add repository (writes to /etc/xbps.d/)   |
+| `rr`, `rep-remove`     | `<url\|substring>` | Remove repository config matching pattern |
 
 ##### Updates
 
-| Command              | Arguments | Description            |
-| -------------------- | --------- | ---------------------- |
-| `od`, `outdated`     | —         | Show outdated packages |
+| Command                | Arguments | Description                                       |
+| ---------------------- | --------- | ------------------------------------------------- |
+| `od`, `outdated`       | —         | Show outdated packages (that needs to be updated) |
 
 ---
 
@@ -425,6 +448,6 @@ Alternatively, you can also use `efibootmgr`. The complete command is in `script
     ```
 6. Exit the chroot, and reboot your computer. In the GRUB menu, the other OSs should be listed.
 
-### `xbps` cannot grab the packages because the mirror is out
+### `xbps` cannot grab the packages because the mirror is out, or it's very slow
 
 This is a normal and kind of frequent outage. Please try again in a few minutes.

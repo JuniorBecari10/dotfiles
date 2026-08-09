@@ -120,8 +120,8 @@ Some packages had to be pinned because the latest version breaks something in th
 Note that this list only includes packages I noticed myself, so there may be others I didn't see.
 
 **Package**|**Version**|**What broke**
----|---
-`volctl`|`0.9.3_4`|The current version is rewritten in Rust and drops XEmbed support for SNI, which i3 doesn't support.
+---|---|---
+`volctl`|`0.9.3_4`|The current version is rewritten in Rust and drops XEmbed support for SNI, which i3 doesn't support. The old Python version still supports XEmbed.
 
 ### Extra commands and aliases
 

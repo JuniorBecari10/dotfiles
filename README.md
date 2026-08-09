@@ -33,7 +33,7 @@ such as timezone cannot be configured without manually editing the scripts.
 This repository is meant to be kept in your home (`~`) folder even after the installation is complete, because you may want to make changes to it,
 and it's already there for you to sync your configurations.
 
-A clean installation made using this script should install roughly `590` packages without any optional installations. <br>
+A clean installation made using this script should install roughly `600` packages without any optional installations. <br>
 I'm still making efforts to lower this number, while keeping the same experience.
 If you know of some change that keeps the same experience while reducing the number of packages, please tell me.
 

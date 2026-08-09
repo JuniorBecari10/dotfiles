@@ -18,14 +18,13 @@ pavucontrol
 network-manager-applet
 firefox
 maim swappy
-feh
+feh xtools-minimal
 xfce4-clipman-plugin
 NetworkManager
 xcompmgr rustup
 python3 tree
 go ripgrep
-github-cli 7zip
-volctl numlockx
+github-cli 7zip numlockx
 xorg-minimal xf86-input-libinput setxkbmap
 xinit fontconfig mesa-dri
 yad polkit dunst

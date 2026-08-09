@@ -6,6 +6,9 @@ args = ["--stdio"]
 command = "pyright-langserver"
 args = ["--stdio"]
 
+[language-server.rust-analyzer.config.check]
+  command = "clippy"
+
 [[language]]
 name = "fsharp"
 indent = { tab-width = 4, unit = "    " }

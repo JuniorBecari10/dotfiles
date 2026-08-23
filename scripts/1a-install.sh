@@ -21,7 +21,7 @@ swapon /mnt/swapfile || true
 
 # Perform base system installation
 REPO="https://repo-default.voidlinux.org/current"
-yes | xbps-install -Sy -R "$REPO" -r /mnt base-system linux linux-firmware git vim grub-x86_64-efi efibootmgr base-devel
+yes | xbps-install -Sy -R "$REPO" -r /mnt base-system linux linux-firmware git grub-x86_64-efi efibootmgr base-devel
 
 # Generate fstab
 xgenfstab -U /mnt > /mnt/etc/fstab

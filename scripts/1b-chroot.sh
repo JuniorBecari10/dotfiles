@@ -13,19 +13,19 @@ sed -i 's/^#\(pt_BR.UTF-8 UTF-8\)/\1/' /etc/default/libc-locales
 
 xbps-reconfigure -f glibc-locales
 
-# Set language to Portuguese and keymap to Brazilian ABNT2 keyboard
-echo "LANG=pt_BR.UTF-8" > /etc/locale.conf
+# Set language to English and keymap to Brazilian ABNT2 keyboard
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
 
 # Set up hostname and root password
 echo "$HOSTNAME" > /etc/hostname
 printf "%s\n%s\n" "$ROOT_PASS" "$ROOT_PASS" | passwd
 
-# Set up user and add it to the 'wheel' group
+# Set up user and add it to some nice groups
 useradd -m -g users -G wheel,video,audio,input,plugdev,network -s /bin/bash "$USERNAME"
 printf "%s\n%s\n" "$USER_PASS" "$USER_PASS" | passwd "$USERNAME"
 
-# Enable sudo for wheel
+# Enable sudo for 'wheel' group
 echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/99-wheel
 chmod 440 /etc/sudoers.d/99-wheel
 
@@ -45,7 +45,7 @@ sudo efibootmgr -c -d "/dev/$DISK" -p "$PART" \
   -L "Void Linux" \
   -l '\EFI\BOOT\BOOTX64.EFI'
 
-# Download dotfiles
+# Download dotfiles repo
 git clone "$REPO_URL" "$HOME/dotfiles"
 chown -R "$USERNAME" "$HOME/dotfiles"
 

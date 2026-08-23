@@ -38,8 +38,7 @@ Thunar
 fastfetch
 noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
 flatpak
-htop
-curl
+htop curl
 dracut
 dbus elogind
 wget chrony
@@ -62,16 +61,4 @@ unzip -o "$CACHE_DIR/JetBrainsMono.zip" -d "$FONT_DIR"
 fc-cache -fv
 
 # Install latest .NET SDK LTS
-DOTNET_DIR="/usr/share/dotnet"
-DOTNET_BIN="/usr/bin/dotnet"
-
-curl -L https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
-chmod +x dotnet-install.sh
-
-./dotnet-install.sh --channel LTS --install-dir "$DOTNET_DIR"
-
-ln -sf "$DOTNET_DIR/dotnet" "$DOTNET_BIN"
-rm dotnet-install.sh
-
-# Install Bun
-curl -fsSL https://bun.sh/install | bash
+"$HOME/dotfiles/scripts/1ca-dotnet.sh"

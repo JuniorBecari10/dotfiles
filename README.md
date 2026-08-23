@@ -175,10 +175,9 @@ All of these aliases and utilities are defined in `.bashrc`.
 
 ### Externally installed programs
 
-> To remove these programs, you may need a dedicated uninstaller for each one of them.
+> To remove these programs, you can use the provided uninstallers in this repository.
 
-- .NET;
-- Bun.
+- .NET.
 
 ### Custom utilities
 

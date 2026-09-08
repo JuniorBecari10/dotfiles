@@ -235,10 +235,10 @@ bindsym $mod+Return exec kitty
 bindsym $mod+q kill
 
 # PrintScr: maim
-bindsym Print exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
+bindsym Print exec --no-startup-id maim -su | xclip -selection clipboard -t image/png
 
 # Shift + PrintScr: maim + swappy
-bindsym Shift+Print exec --no-startup-id maim -s /tmp/shot.png && swappy -f /tmp/shot.png -o - | xclip -selection clipboard -t image/png
+bindsym Shift+Print exec --no-startup-id maim -su /tmp/shot.png && swappy -f /tmp/shot.png -o - | xclip -selection clipboard -t image/png
 
 # Mod + N: Lock Screen
 bindsym $mod+n exec --no-startup-id i3lock

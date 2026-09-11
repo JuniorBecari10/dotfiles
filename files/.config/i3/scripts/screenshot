@@ -1,0 +1,21 @@
+#!/usr/bin/sh
+
+choice=$(printf "Selection\nSelection (edit)\nWindow\nWindow (edit)" | rofi -dmenu -p "Screenshot" -i)
+
+case "$choice" in
+    "Selection")
+        maim -su | xclip -selection clipboard -t image/png
+        ;;
+    "Selection (edit)")
+        maim -su /tmp/shot.png && swappy -f /tmp/shot.png -o - | xclip -selection clipboard -t image/png
+        ;;
+    "Window")
+        maim -ui "$(xdotool selectwindow)" | xclip -selection clipboard -t image/png
+        ;;
+    "Window (edit)")
+        maim -ui "$(xdotool selectwindow)" /tmp/shot.png && swappy -f /tmp/shot.png -o - | xclip -selection clipboard -t image/png
+        ;;
+    *)
+        exit 0
+        ;;
+esac

@@ -13,7 +13,7 @@ kitty xterm
 helix yazi
 rofi rofi-calc
 redshift
-git
+git xdotool
 pavucontrol
 network-manager-applet
 firefox

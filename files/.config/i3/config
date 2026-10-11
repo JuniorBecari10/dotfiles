@@ -256,7 +256,7 @@ bindsym $mod+p exec ~/.config/i3/scripts/power
 bindsym $mod+y exec ~/.config/i3/scripts/wininfo
 
 # Mod + O: Pavucontrol
-bindsym $mod+o exec pavucontrol
+bindsym $mod+o exec GTK_THEME=Adwaita:dark pavucontrol
 
 # Mod + B: Clipman history
 bindsym $mod+b exec xfce4-clipman-history

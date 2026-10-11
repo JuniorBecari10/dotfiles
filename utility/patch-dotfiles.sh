@@ -3,4 +3,4 @@
 set -e
 
 USERNAME="$USER"
-~/dotfiles/scripts/1ff-patch.sh
+~/dotfiles/scripts/1ga-patch.sh

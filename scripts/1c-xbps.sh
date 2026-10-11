@@ -9,8 +9,7 @@ HOME="/home/$USERNAME"
 # List of packages to install
 PACKAGES="
 i3 i3blocks i3lock
-kitty xterm
-helix yazi
+kitty helix yazi
 rofi rofi-calc
 redshift
 git xdotool
@@ -30,11 +29,9 @@ xinit fontconfig mesa-dri
 yad polkit dunst
 lightdm lightdm-gtk-greeter
 zip unzip
-xrandr
-arandr
+xrandr arandr
 pipewire alsa-pipewire
-xclip
-Thunar
+xclip Thunar
 fastfetch
 noto-fonts-ttf noto-fonts-cjk noto-fonts-emoji
 flatpak
@@ -60,5 +57,8 @@ unzip -o "$CACHE_DIR/JetBrainsMono.zip" -d "$FONT_DIR"
 
 fc-cache -fv
 
-# Install latest .NET SDK LTS
+# Install Bun
+curl -fsSL https://bun.sh/install | bash
+
+# Install .NET SDK LTS
 "$HOME/dotfiles/scripts/1ca-dotnet.sh"

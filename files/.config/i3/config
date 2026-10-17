@@ -214,7 +214,7 @@ exec --no-startup-id redshift
 
 # If you're in a laptop you may consider flipping those options' workspaces.
 # for_window [class="kitty"] move to workspace $ws2 # This option messes up more than helps.
-for_window [class="Firefox"] move to workspace $ws1
+for_window [class="firefox"] move to workspace $ws1
 for_window [class="Yad"] floating enable
 for_window [class="Xfce4-clipman-history"] floating enable, resize set 500 600, move position center
 for_window [class="Thunar"] floating enable, resize set 1180 700, move position center

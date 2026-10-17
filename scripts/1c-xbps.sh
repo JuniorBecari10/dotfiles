@@ -11,7 +11,7 @@ PACKAGES="
 i3 i3blocks i3lock
 kitty helix yazi
 rofi rofi-calc
-redshift
+redshift xprop
 git xdotool
 pavucontrol
 network-manager-applet

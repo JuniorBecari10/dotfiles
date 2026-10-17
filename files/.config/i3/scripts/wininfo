@@ -1,5 +1,16 @@
 #!/bin/sh
 
+if ! command -v xprop >/dev/null 2>&1; then
+    msg="xprop not found."
+    if command -v dunstify >/dev/null 2>&1; then
+        dunstify -u critical "wininfo" "$msg"
+    else
+        echo "wininfo: $msg" >&2
+    fi
+
+    exit 127
+fi
+
 info=$(xprop 2>/dev/null)
 
 if [ $? -ne 0 ] || [ -z "$info" ]; then

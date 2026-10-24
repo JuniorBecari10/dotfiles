@@ -43,22 +43,32 @@ auto-format = false
 [[language]]
 name = "vue"
 indent = { tab-width = 4, unit = "    " }
+formatter = { command = "prettier", args = ["--parser", "typescript", "--tab-width", "4"] }
+auto-format = true
 language-servers = ["vue-language-server", "emmet-ls"]
 
 [[language]]
 name = "typescript"
 indent = { tab-width = 4, unit = "    " }
+formatter = { command = "prettier", args = ["--parser", "typescript", "--tab-width", "4"] }
+auto-format = true
 
 [[language]]
 name = "tsx"
 indent = { tab-width = 4, unit = "    " }
+formatter = { command = "prettier", args = ["--parser", "typescript", "--tab-width", "4"] }
+auto-format = true
 language-servers = ["typescript-language-server", "emmet-ls"]
 
 [[language]]
 name = "javascript"
 indent = { tab-width = 4, unit = "    " }
+formatter = { command = "prettier", args = ["--parser", "typescript", "--tab-width", "4"] }
+auto-format = true
 
 [[language]]
 name = "jsx"
 indent = { tab-width = 4, unit = "    " }
+formatter = { command = "prettier", args = ["--parser", "typescript", "--tab-width", "4"] }
+auto-format = true
 language-servers = ["typescript-language-server", "emmet-ls"]
